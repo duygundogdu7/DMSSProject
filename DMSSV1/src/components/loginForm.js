@@ -40,10 +40,13 @@ class LoginForm extends Component {
                           email: this.state.email,
                           password: this.state.password,
                       }
-                  }).then(response => {this.setState({
-                    loginResponse: response.data
-                })}
-                  )
+                  }).then((response) => response.json())
+      .then((responseJson) => {
+         console.log(responseJson);
+         this.setState({
+            loginResponse: responseJson
+         })
+      })
                   }}
                 color='#E87B79' title='Giriş Yap' />
                   </View>
