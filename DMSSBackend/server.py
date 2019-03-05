@@ -19,21 +19,22 @@ class User(Resource):
     def __init__(self):
         self.users = db.Users
 
-    def get(self):
-        us = []
-        for doc in self.users.find({}):
-            us.append(json_util.dumps(doc))
-
-        return (jsonify(users=us))
-        #print(self.users.find_one({"_id": user_id}))
+    def get(self,user_id):
+        user = self.users.find_one({"_id": user_id})
+        return (jsonify(user=user))
 
     def post(self):
         data = request.get_json()
-        print(data)
-        user = {"name": data["name"]}
-        #, "age": data["age"]
+        user = self.users.find_one({"email": data["email"], "password": data["password"]})
+        print(user)
+        '''
+        user = {}
+        for key in data.keys():
+            user[key] = data[key]
+        print("user inserted")
         print(user)
         self.users.insert(user)
+        '''
       
     def delete(self, user_id):
         self.users.delete_one({"_id": user_id})
