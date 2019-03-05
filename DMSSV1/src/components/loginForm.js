@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text,Button, StyleSheet } from 'react-native';
 import {Input} from './common';
+import axios from 'axios';
 
 class LoginForm extends Component {
     state ={
@@ -11,7 +12,7 @@ class LoginForm extends Component {
         return (
           <View>
               <View>
-                  <Input text='Email' inputPlaceHolder='Enter Email'
+                  <Input text='Email' inputPlaceHolder='Emailinizi giriniz'
                   onChangeText={(text) => {
                         this.setState({
                             email: text
@@ -19,7 +20,7 @@ class LoginForm extends Component {
                   }}
                   value={this.state.email}/>
               </View>
-              <View><Input text='Password' inputPlaceHolder='Enter Password'
+              <View><Input text='Şifreniz' inputPlaceHolder='Şifrenizi giriniz'
                   onChangeText={(text) => {
                         this.setState({
                             password: text
@@ -29,7 +30,20 @@ class LoginForm extends Component {
                   value={this.state.password}/>
                   </View>
               <View style={styles.buttonWrapper}>
-                <Button color='#E87B79' title='giris'/>
+                <Button 
+                onPress={() => {
+                    axios({
+                      method: 'post',
+                      url: 'http://192.168.43.165:8086/user',
+                      data: {
+                          email: this.state.email,
+                          password: this.state.password,
+                      }
+                  }).then(obj => {
+                      console.log(obj.data);
+                  })
+                  }}
+                color='#E87B79' title='giris' />
                   </View>
 
 

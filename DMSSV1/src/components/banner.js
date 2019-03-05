@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   bannerContainer: {
     width: 'auto',
     height: 370,
-    backgroundColor: '#E87B79',
+    backgroundColor: '#0A4D21',
     justifyContent: 'center',
     alignItems: 'center'
   },

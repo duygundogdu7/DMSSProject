@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     return (
       <View>
-        <Banner text='Login Form'/>
+        <Banner text='HOŞGELDİNİZ'/>
         <LoginForm/>
       </View>
     )
