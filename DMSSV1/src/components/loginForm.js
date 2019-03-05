@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text,Button, StyleSheet } from 'react-native';
 import {Input} from './common';
+
 class LoginForm extends Component {
     state ={
         email:'',
@@ -10,7 +11,7 @@ class LoginForm extends Component {
         return (
           <View>
               <View>
-                  <Input text='Email' inputPlaceHolder='Enter Email' 
+                  <Input text='Email' inputPlaceHolder='Enter Email'
                   onChangeText={(text) => {
                         this.setState({
                             email: text
@@ -18,7 +19,7 @@ class LoginForm extends Component {
                   }}
                   value={this.state.email}/>
               </View>
-              <View><Input text='Password' inputPlaceHolder='Enter Password' 
+              <View><Input text='Password' inputPlaceHolder='Enter Password'
                   onChangeText={(text) => {
                         this.setState({
                             password: text
@@ -27,17 +28,30 @@ class LoginForm extends Component {
                   secureTextEntry
                   value={this.state.password}/>
                   </View>
-              <View>
-                  <Button title='giris'/>
-                  </View>   
-              
+              <View style={styles.buttonWrapper}>
+                <Button color='#E87B79' title='giris'/>
+                  </View>
+
 
           </View>
         );
       }
-  
-
-  
 }
 
+const styles = StyleSheet.create({
+  buttonWrapper: {
+     marginTop: 20,
+     height: 49,
+     borderRadius: 10,
+     justifyContent: 'center',
+     fontSize: 18,
+     backgroundColor: '#fff'
+   },
+   errorText: {
+     color: 'red',
+     fontSize: 20,
+     paddingTop: 5,
+     alignSelf: 'center'
+   }
+})
 export default LoginForm;

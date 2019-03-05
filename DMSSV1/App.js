@@ -4,11 +4,11 @@ import { StyleSheet, Text, View} from 'react-native';
 import Banner from './src/components/banner';
 import LoginForm from './src/components/loginForm';
 
+
 class App extends Component {
   render() {
     return (
-      <View >
-
+      <View>
         <Banner text='Login Form'/>
         <LoginForm/>
       </View>
