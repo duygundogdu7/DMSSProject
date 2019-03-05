@@ -6,7 +6,8 @@ import axios from 'axios';
 class LoginForm extends Component {
     state ={
         email:'',
-        password:''
+        password:'',
+        loginResponse:''
     }
     render() {
         return (
@@ -39,13 +40,14 @@ class LoginForm extends Component {
                           email: this.state.email,
                           password: this.state.password,
                       }
-                  }).then(obj => {
-                      console.log(obj.data);
-                  })
+                  }).then(response => {this.setState({
+                    loginResponse: response.data
+                })}
+                  )
                   }}
-                color='#E87B79' title='giris' />
+                color='#E87B79' title='Giriş Yap' />
                   </View>
-
+             <Text>{this.state.loginResponse}</Text>
 
           </View>
         );
