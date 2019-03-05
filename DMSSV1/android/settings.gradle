@@ -1,0 +1,3 @@
+rootProject.name = 'DMSSV1'
+
+include ':app'
