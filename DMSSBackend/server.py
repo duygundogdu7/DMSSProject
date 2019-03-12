@@ -27,8 +27,8 @@ class User(Resource):
         data = request.get_json()
         user = self.users.find_one({"email": data["email"], "password": data["password"]})
         if user is None:
-            return (jsonify(data=0))
-        return (jsonify(data=1))
+            return (jsonify(data="0"))
+        return (jsonify(data="1"))
         '''
         user = {}
         for key in data.keys():
