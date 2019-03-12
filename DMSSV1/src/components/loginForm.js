@@ -45,7 +45,7 @@ class LoginForm extends Component {
       .then((responseJson) => {
          console.log(responseJson);
          this.setState({
-            loginResponse: responseJson
+            loginResponse: responseJson.data
          })
 
          if(this.state.loginResponse == 1)
