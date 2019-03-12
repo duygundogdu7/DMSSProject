@@ -1,59 +1,62 @@
+import { View } from 'react-native';
+import React, { Component } from 'react';
 import BottomNavigation, {
-    FullTab
-  } from 'react-native-material-bottom-navigation';
-  import React, { Component } from 'react';
-
-
-  class ButtomNav extends Component {
-    tabs = [
-      {
-        key: 'games',
-        icon: 'gamepad-variant',
-        label: 'Games',
-        barColor: '#388E3C',
-        pressColor: 'rgba(255, 255, 255, 0.16)'
-      },
-      {
-        key: 'movies-tv',
-        icon: 'movie',
-        label: 'Movies & TV',
-        barColor: '#B71C1C',
-        pressColor: 'rgba(255, 255, 255, 0.16)'
-      },
-      {
-        key: 'music',
-        icon: 'music-note',
-        label: 'Music',
-        barColor: '#E64A19',
-        pressColor: 'rgba(255, 255, 255, 0.16)'
-      }
-    ]
-   
-    renderIcon = icon => ({ isActive }) => (
-      <Icon size={24} color="white" name={icon} />
+  FullTab
+} from 'react-native-material-bottom-navigation';
+class ButtomNav extends React.Component  {
+  tabs = [
+    {
+      key: 'task',
+      icon: 'gamepad-variant',
+      label: 'Task',
+      barColor: '#388E3C',
+      pressColor: 'rgba(255, 255, 255, 0.16)'
+    },
+    {
+      key: 'score-table',
+      icon: 'movie',
+      label: 'Score Table',
+      barColor: '#B71C1C',
+      pressColor: 'rgba(255, 255, 255, 0.16)'
+    },
+    {
+      key: 'profile',
+      icon: 'music-note',
+      label: 'Profile',
+      barColor: '#E64A19',
+      pressColor: 'rgba(255, 255, 255, 0.16)'
+    },
+    {
+      key: 'portfolio',
+      icon: 'music-note',
+      label: 'Portfolio',
+      barColor: '#E64D45',
+      pressColor: 'rgba(255, 255, 255, 0.16)'
+    }
+  ]
+  render() {
+    return (
+      <View>
+        <BottomNavigation
+          renderTab={this.renderTab}
+          tabs={this.tabs}
+        />
+      </View>
     )
-   
-    renderTab = ({ tab, isActive }) => (
+  }
+  renderTab = ({ tab, isActive }) => {
+    return (
       <FullTab
-        isActive={isActive}
         key={tab.key}
+        isActive={isActive}
         label={tab.label}
-        renderIcon={this.renderIcon(tab.icon)}
+        renderIcon={this.renderIcon}
       />
     )
-   
-    render() {
-      return (
-        <View style={{ flex: 1 }}>
-          <View style={{ flex: 1 }}>
-            {/* Your screen contents depending on current tab. */}
-          </View>
-          <BottomNavigation
-            onTabPress={newTab => this.setState({ activeTab: newTab.key })}
-            renderTab={this.renderTab}
-            tabs={this.tabs}
-          />
-        </View>
-      )
-    }
   }
+
+  renderIcon = ({ isActive }) => {
+    return <View />
+  }
+}
+export default ButtomNav;

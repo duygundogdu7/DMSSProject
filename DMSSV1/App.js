@@ -8,11 +8,16 @@ import ButtomNav from './src/components/buttomNav';
 class App extends Component {
   render() {
     return (
+    <View>
       <View>
         <Banner text='HOŞGELDİNİZ'/>
         <LoginForm/>
+        
+      </View>
+      <View>
         <ButtomNav/>
       </View>
+    </View>
     )
   }
 }
