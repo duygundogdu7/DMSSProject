@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text,Button, StyleSheet } from 'react-native';
 import {Input} from './common';
+import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
 
 class LoginForm extends Component {
@@ -31,7 +32,7 @@ class LoginForm extends Component {
                   value={this.state.password}/>
                   </View>
               <View style={styles.buttonWrapper}>
-                <Button 
+                <Button
                 onPress={() => {
                     axios({
                       method: 'post',
@@ -46,12 +47,14 @@ class LoginForm extends Component {
          this.setState({
             loginResponse: responseJson
          })
+
+         if(this.state.loginResponse == 1)
+            Actions.main()
       })
                   }}
                 color='#E87B79' title='Giriş Yap' />
                   </View>
              <Text>{this.state.loginResponse}</Text>
-
           </View>
         );
       }

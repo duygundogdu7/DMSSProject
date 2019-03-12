@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     shadowColor:'#000000',
     shadowOffset:{width:0, height:2},
     shadowOpacity:0.3,
-
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
