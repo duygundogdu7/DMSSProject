@@ -6,12 +6,11 @@ import Task from './components/task';
 const RouterComp = () => {
   return (
     <Router titleStyle={{color: '#E87B79'}}>
-      <Scene key='root' hideNavBar={true}>
+      <Scene key='root' >
         <Scene key='auth'>
           <Scene key='login'
                  component={LoginForm}
                  title='Login'
-                 hideNavBar={true}
                  />
         </Scene>
         <Scene key='main'>
