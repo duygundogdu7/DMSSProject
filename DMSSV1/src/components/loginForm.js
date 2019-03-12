@@ -31,7 +31,7 @@ class LoginForm extends Component {
                   value={this.state.password}/>
                   </View>
               <View style={styles.buttonWrapper}>
-                <Button 
+                <Button
                 onPress={() => {
                     axios({
                       method: 'post',
@@ -51,7 +51,6 @@ class LoginForm extends Component {
                 color='#E87B79' title='Giriş Yap' />
                   </View>
              <Text>{this.state.loginResponse}</Text>
-
           </View>
         );
       }
