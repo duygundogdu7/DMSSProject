@@ -36,12 +36,12 @@ class LoginForm extends Component {
                 onPress={() => {
                     axios({
                       method: 'post',
-                      url: 'http://192.168.43.165:8086/user',
+                      url: 'http://172.20.10.9:8086/user',
                       data: {
                           email: this.state.email,
                           password: this.state.password,
                       }
-                  }).then((response) => response.json())
+                  }).then((response) => response.json)
       .then((responseJson) => {
          console.log(responseJson);
          this.setState({
