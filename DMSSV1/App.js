@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View} from 'react-native';
 import Banner from './src/components/banner';
 import LoginForm from './src/components/loginForm';
-
+import ButtomNav from './src/components/buttomNav';
 
 class App extends Component {
   render() {
@@ -11,6 +11,7 @@ class App extends Component {
       <View>
         <Banner text='HOŞGELDİNİZ'/>
         <LoginForm/>
+        <ButtomNav/>
       </View>
     )
   }
