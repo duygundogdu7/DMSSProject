@@ -41,6 +41,7 @@ class LoginForm extends Component {
                           email: this.state.email,
                           password: this.state.password,
                       }
+<<<<<<< HEAD
                   }).then((response) => response.json)
       .then((responseJson) => {
          console.log(responseJson);
@@ -48,9 +49,16 @@ class LoginForm extends Component {
             loginResponse: responseJson.data
          })
 
+=======
+                  }).then((response) => 
+         {this.setState({
+            loginResponse: response.data
+         })})
+         
+>>>>>>> 6f61f4d6ff20ec4df8cf5cb5e827d9baab1fb628
          if(this.state.loginResponse == 1)
             Actions.main()
-      })
+    
                   }}
                 color='#E87B79' title='Giriş Yap' />
                   </View>
