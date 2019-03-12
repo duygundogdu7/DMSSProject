@@ -1,0 +1,3 @@
+npm install --save react-redux
+npm install --save redux
+npm install react-native-material-bottom-navigation
