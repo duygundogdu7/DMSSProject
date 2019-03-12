@@ -46,13 +46,12 @@ class LoginForm extends Component {
             loginResponse: response.data
          })})
          
-         if(this.state.loginResponse == 1)
+         if(this.state.loginResponse== 1)
             Actions.main()
     
                   }}
                 color='#E87B79' title='Giriş Yap' />
                   </View>
-             <Text>{this.state.loginResponse}</Text>
           </View>
         );
       }
