@@ -41,14 +41,14 @@ class LoginForm extends Component {
                         email: this.state.email,
                         password: this.state.password,
                     }
-                }).then((response) =>
+                }).then((response) => 
        {this.setState({
           loginResponse: response.data
        })})
-
+       
        if(this.state.loginResponse== 1)
           Actions.main()
-
+  
                 }}
               color='#E87B79' title='Giriş Yap' />
                 </View>
