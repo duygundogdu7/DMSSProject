@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
 import { FlatList, Text, View} from 'react-native';
 import {connect} from 'react-redux';
-
+import TaskItem from './taskItem';
 class TaskList extends Component {
-    
+  renderItem = ({item}) => {
+    return (
+      <TaskItem task={item}/>
+    );
+  }
+
     render() {
       console.log(this.props)
       const {tasks} = this.props;
@@ -11,7 +16,7 @@ class TaskList extends Component {
           <View>
          <FlatList
           data={tasks}
-          renderItem={({item}) => <Text>{item}</Text>}
+          renderItem={this.renderItem}
             />
           </View>
        

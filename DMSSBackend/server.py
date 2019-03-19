@@ -19,26 +19,18 @@ class TaskList(Resource):
         self.tasks = db.Tasks
 
     def get(self,user_id):
-
         task = self.tasks.find({"user_id": user_id})
+        print(task)
         return (jsonify(task=task))
 
     def post(self):
-       pass
-        '''
-        user = {}
-        for key in data.keys():
-            user[key] = data[key]
-        print("user inserted")
-        print(user)
-        self.users.insert(user)
-        '''
+        pass
       
     def delete(self, user_id):
         pass
 
       
-api.add_resource(TaskList,  '/task/<user_id>',  methods=['GET', 'POST'])
+api.add_resource(TaskList,  '/task/<user_id>',  methods=['GET'])
 
 
 class User(Resource):

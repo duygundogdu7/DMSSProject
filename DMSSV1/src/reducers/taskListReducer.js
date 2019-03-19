@@ -1,23 +1,18 @@
 import axios from 'axios';
 
 
-export default () => result("1234")
+export default () => ["duygu","naber"]
 
 
 
-const result = id => {
-    //var res = "";
+/*const result = id => {
+   
     return (axios({
-        method: 'post',
-        url: 'http://192.168.43.165:8086/user',
+        method: 'get',
+        url: 'http://192.168.43.165:8086/task',
         data: {
             user_id: id,
         }
-    }).then(function(response){
-        return response // ex.: { user: 'Your User'}
-      }))
-
-    /*console.log(res)
-    asd = ["asd"]
-    return(asd)*/
+    }).then((response) => {return (response)}))
 }
+*/

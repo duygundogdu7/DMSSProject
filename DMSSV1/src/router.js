@@ -13,6 +13,7 @@ const RouterComp = () => {
                  component={LoginForm}
                  title='Login'
                  hideNavBar={true}
+                 initial
                  />
         </Scene>
         <Scene key='main'>
