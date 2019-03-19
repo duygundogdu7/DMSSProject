@@ -36,7 +36,7 @@ class LoginForm extends Component {
               onPress={() => {
                   axios({
                     method: 'post',
-                    url: 'http://192.168.0.12:8086/user',
+                    url: 'http://192.168.43.165:8086/user',
                     data: {
                         email: this.state.email,
                         password: this.state.password,
@@ -48,7 +48,7 @@ class LoginForm extends Component {
        console.log(this.state.loginResponse);
        if(this.state.loginResponse== 1)
        Actions.main();
-       
+
                 }}
               color='#E87B79' title='Giriş Yap' />
                 </View>
