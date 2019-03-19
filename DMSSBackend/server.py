@@ -14,6 +14,37 @@ db = client['DMSS']
 
 parser = reqparse.RequestParser()
 
+class TaskList(Resource):
+    def __init__(self):
+        self.tasks = db.Tasks
+
+    def get(self,user_id):
+
+        task = self.tasks.find({"user_id": user_id})
+        return (jsonify(task=task))
+
+    def post(self):
+       pass
+        '''
+        user = {}
+        for key in data.keys():
+            user[key] = data[key]
+        print("user inserted")
+        print(user)
+        self.users.insert(user)
+        '''
+      
+    def delete(self, user_id):
+        pass
+
+
+        
+api.add_resource(TaskList,  '/task/<user_id>',  methods=['GET', 'POST'])
+
+
+
+
+
 
 class User(Resource):
     def __init__(self):
