@@ -37,13 +37,8 @@ class TaskList(Resource):
     def delete(self, user_id):
         pass
 
-
-        
+      
 api.add_resource(TaskList,  '/task/<user_id>',  methods=['GET', 'POST'])
-
-
-
-
 
 
 class User(Resource):
