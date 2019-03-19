@@ -1,7 +1,7 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
 import LoginForm from './components/loginForm';
-import Task from './components/task';
+import TaskList from './components/taskList';
 
 
 const RouterComp = () => {
@@ -17,7 +17,7 @@ const RouterComp = () => {
         </Scene>
         <Scene key='main'>
           <Scene key='tasks'
-                 component={Task}
+                 component={TaskList}
                  title='Tasks'
                  />
         </Scene>
