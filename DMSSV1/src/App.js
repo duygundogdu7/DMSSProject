@@ -5,6 +5,7 @@ import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import Router from './router';
 
+
 export default class App extends Component {
   render() {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
