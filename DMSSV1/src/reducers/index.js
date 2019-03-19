@@ -1,4 +1,6 @@
-import {combineReducer} from 'redux';
-export default combineReducer({
-    books:() => []
+import { combineReducers } from 'redux';
+import TaskListReducer from './taskListReducer';
+
+export default combineReducers({
+  taskList: TaskListReducer
 });
