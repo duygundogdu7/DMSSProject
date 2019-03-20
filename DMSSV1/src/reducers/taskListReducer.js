@@ -1,18 +1,31 @@
-import axios from 'axios';
-
-
-export default () => ["duygu","naber"]
-
-
-
-/*const result = id => {
-   
-    return (axios({
-        method: 'get',
-        url: 'http://192.168.43.165:8086/task',
-        data: {
-            user_id: id,
+/*export default () => {
+    axios.get('http://192.168.0.12:8086/task', {
+        params: {
+            user_id: '1234'
         }
-    }).then((response) => {return (response)}))
+      })
+    .then((response) => {
+        console.log(response);
+      return response.data["title"].toString();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+}*/
+
+import FETCH_TASKS from '../actions';
+
+const INITIAL_STATE = {};
+
+export default (state = [], action) => {
+  console.log("taskReducer");
+  console.log(action)
+  switch (action.type) {
+    case FETCH_TASKS:
+    console.log("payload")
+    console.log(action.payload)
+      return {...state, tasks:action.payload};
+    default:
+      return INITIAL_STATE;
+  }
 }
-*/

@@ -18,10 +18,11 @@ class TaskList(Resource):
     def __init__(self):
         self.tasks = db.Tasks
 
-    def get(self,user_id):
-        task = self.tasks.find({"user_id": user_id})
-        print(task)
-        return (jsonify(task=task))
+    def get(self):
+        user_id = request.args.get('user_id')
+        tasks_of_user = self.tasks.find({"user_id": user_id})
+        return  (jsonify(title=tasks_of_user[0]["title"]))
+           
 
     def post(self):
         pass
@@ -30,14 +31,15 @@ class TaskList(Resource):
         pass
 
       
-api.add_resource(TaskList,  '/task/<user_id>',  methods=['GET'])
+api.add_resource(TaskList,  '/task',  methods=['GET'])
 
 
 class User(Resource):
     def __init__(self):
         self.users = db.Users
 
-    def get(self,user_id):
+    def get(self):
+        user_id = request.args.get('user_id')
         user = self.users.find_one({"_id": user_id})
         return (jsonify(user=user))
 

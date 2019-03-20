@@ -7,7 +7,7 @@ class TaskItem extends Component {
         const {task} = this.props;
         return (
             <Card>
-              <Text style={styles.titleStyle}>{task}</Text>
+              <Text style={styles.titleStyle}>{task.title}</Text>
             </Card>
         );
     }
