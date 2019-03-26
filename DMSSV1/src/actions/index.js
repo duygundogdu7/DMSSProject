@@ -1,8 +1,8 @@
 import axios from 'axios';
-export const FETCH_TASKS = 'FETCH_TASKS';
+export const FETCH_TASKS = 'fetch_tasks';
 
 
-const apiUrl = 'http://192.168.0.12:8086/task';
+const apiUrl = 'http://192.168.43.165:8086/task';
 
 
 
@@ -21,7 +21,7 @@ export const fetchAllTasks = () => {
         console.log(response)
         dispatch({
           type: FETCH_TASKS,
-          payload: tasks
+          payload: response
         })
       })
       .catch(error => {
