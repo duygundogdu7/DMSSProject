@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text,Button, StyleSheet } from 'react-native';
-import {Input} from './common';
+import {Input, Spinner} from './common';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
 
@@ -8,9 +8,66 @@ class LoginForm extends Component {
   state ={
       email:'',
       password:'',
-      loginResponse:''
+      loginResponse:'',
+      loading: false,
+      error: ''
   }
+
+  onButtonClicked(){
+    const {email, password} = this.state;
+    this.setState({
+      error: '',
+      loading: true
+    })
+    axios({
+      method: 'post',
+      url: 'http://192.168.43.165:8086/user',
+      data: {
+          email: this.state.email,
+          password: this.state.password,
+      }
+     }).then((response) => 
+    {this.setState({
+    loginResponse: response.data["res"]
+  })})
+    console.log(this.state.loginResponse);
+    if(this.state.loginResponse== 1)
+    Actions.main();
+    else{
+      this.setState({
+        error: 'Authentication failed',
+        loading: false
+      })
+     
+    }
+    
+  }
+
+onRegisterClicked(){
+  Actions.main4()
+}
   render() {
+
+      const { error,loading} = this.state;
+
+      const errorMsg = error ? (
+        <Text>
+          {error}
+        </Text>
+      ) : null;
+
+      const loginButton = loading ? (
+        <Spinner /> ): (
+          <View style={styles.buttonWrapper}>
+              <Button
+              onPress={this.onButtonClicked.bind(this)}
+              color='#E87B79' title='Giriş Yap' />
+              <Button title="Üye ol" onPress={this.onRegisterClicked.bind(this)}/>
+                </View>
+        );
+
+      
+
       return (
         <View>
             <View>
@@ -31,26 +88,9 @@ class LoginForm extends Component {
                 secureTextEntry
                 value={this.state.password}/>
                 </View>
+                {errorMsg}
             <View style={styles.buttonWrapper}>
-              <Button
-              onPress={() => {
-                  axios({
-                    method: 'post',
-                    url: 'http://192.168.43.165:8086/user',
-                    data: {
-                        email: this.state.email,
-                        password: this.state.password,
-                    }
-                }).then((response) => 
-       {this.setState({
-          loginResponse: response.data["res"]
-       })})
-       console.log(this.state.loginResponse);
-       if(this.state.loginResponse== 1)
-       Actions.main();
-
-                }}
-              color='#E87B79' title='Giriş Yap' />
+             {loginButton}
                 </View>
         </View>
       );
