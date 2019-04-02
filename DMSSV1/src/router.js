@@ -1,16 +1,12 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
 import LoginForm from './components/loginForm';
-import ScoreTable from './components/scoreTable';
-import Profile from './components/profile';
 import Register from './components/register';
 import ManagerConfirm from './components/managerConfirm';
-import Portfolio from './components/portfolio';
 import TaskListMain from './components/mains/taskListMain';
 import ScoreTableMain from './components/mains/scoreTableMain';
 import ProfileMain from './components/mains/profileMain';
 import PortfolioMain from './components/mains/portfolioMain';
-import ManagerConfirmMain from './components/mains/managerConfirmMain';
 
 
 const RouterComp = () => {
@@ -53,6 +49,12 @@ const RouterComp = () => {
           <Scene key='ManagerConfirmMain'
                  component={ManagerConfirm}
                  title='ManagerConfirmMain'
+                 />
+        </Scene>
+        <Scene key='main6'>
+          <Scene key='Register'
+                 component={Register}
+                 title='Register'
                  />
         </Scene>
       </Scene>

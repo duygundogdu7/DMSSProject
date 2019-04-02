@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text,Button, StyleSheet } from 'react-native';
-import {Input} from './common';
+import {Input, Spinner} from './common';
 import axios from 'axios';
+import { Actions } from 'react-native-router-flux';
+
 
 class Register extends Component {
   state ={
-      ad:'',
+      name:'',
       email:'',
       password:'',
       registerResponse:'',
@@ -14,11 +16,12 @@ class Register extends Component {
   }
 
   onButtonClicked(){
+    this.setState({error: '', loading:true})
     axios({
       method: 'post',
       url: 'http://192.168.43.165:8086/register',
       data: {
-          ad: this.state.ad,
+          name: this.state.name,
           email: this.state.email,
           password: this.state.password,
       }
@@ -27,7 +30,7 @@ class Register extends Component {
     registerResponse: response.data["res"]
   })})
     console.log(this.state.registerResponse);
-    if(this.state.registerResponse == 1)
+    if(this.state.registerResponse == "1")
       Actions.auth();
     else{
       this.setState({
@@ -62,10 +65,10 @@ class Register extends Component {
                 <Input text='Adınız' inputPlaceHolder='Adinizi giriniz'
                 onChangeText={(text) => {
                       this.setState({
-                          ad: text
+                          name: text
                       })
                 }}
-                value={this.state.ad}/>
+                value={this.state.name}/>
             </View>
             <View>
                 <Input text='Emailiniz' inputPlaceHolder='Emailinizi giriniz'

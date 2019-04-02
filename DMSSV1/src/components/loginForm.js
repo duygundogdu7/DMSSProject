@@ -44,7 +44,7 @@ class LoginForm extends Component {
   }
 
 onRegisterClicked(){
-  Actions.main4()
+  Actions.main6()
 }
   render() {
 

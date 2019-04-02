@@ -40,14 +40,15 @@ class Register(Resource):
         try:
             data = request.get_json()
             user = {
-                "_id": "1235",
                 "name": data['name'],
                 "email": data['email'],
                 "password": data['password']
             }
             db.Users.insert_one(user)
+            print(user)
             return (jsonify(res="1")) 
-        except Exception:
+        except Exception as e:
+            print(e)
             return (jsonify(res="0"))
 
 api.add_resource(Register,  '/register',  methods=['POST'])
