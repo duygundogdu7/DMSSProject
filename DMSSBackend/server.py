@@ -33,6 +33,19 @@ class TaskList(Resource):
       
 api.add_resource(TaskList,  '/task',  methods=['GET'])
 
+class Profile(Resource):
+    def __init__(self):
+        self.members = db.Team
+        self.users = db.User
+    def get(self):
+        user_id = request.args.get('user_id')
+        user = self.members.find_one({"user_id": user_id})
+  #      friends = self.members.find({"_id":user.id})
+        profile = self.members.find_one({"_id": user_id})
+        return (jsonify(score=user['score'], email=profile["email"],password=profile["password"],name=profile["name"],surname=profile["surname"]))
+
+api.add_resource(Profile,  '/profile/<user_id>' ,  methods=['GET'])
+
 class Register(Resource):
     def __init__(self):
         self.users = db.Users
