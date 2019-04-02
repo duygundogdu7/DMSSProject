@@ -33,6 +33,24 @@ class TaskList(Resource):
       
 api.add_resource(TaskList,  '/task',  methods=['GET'])
 
+class Register(Resource):
+    def __init__(self):
+        self.users = db.Users
+    def post(self):
+        try:
+            data = request.get_json()
+            user = {
+                "_id": "1235",
+                "name": data['name'],
+                "email": data['email'],
+                "password": data['password']
+            }
+            db.Users.insert_one(user)
+            return (jsonify(res="1")) 
+        except Exception:
+            return (jsonify(res="0"))
+
+api.add_resource(Register,  '/register',  methods=['POST'])
 
 class User(Resource):
     def __init__(self):
