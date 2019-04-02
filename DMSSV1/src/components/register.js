@@ -1,15 +1,61 @@
 import React, { Component } from 'react';
 import { View, Text,Button, StyleSheet } from 'react-native';
 import {Input} from './common';
+import axios from 'axios';
 
 class Register extends Component {
   state ={
       ad:'',
       email:'',
       password:'',
-      loginResponse:''
+      registerResponse:'',
+      error: '',
+      loading:false
   }
+
+  onButtonClicked(){
+    axios({
+      method: 'post',
+      url: 'http://192.168.43.165:8086/register',
+      data: {
+          ad: this.state.ad,
+          email: this.state.email,
+          password: this.state.password,
+      }
+     }).then((response) => 
+    {this.setState({
+    registerResponse: response.data["res"]
+  })})
+    console.log(this.state.registerResponse);
+    if(this.state.registerResponse == 1)
+      Actions.auth();
+    else{
+      this.setState({
+        error: 'Register failed',
+        loading: false
+      })
+     
+    }
+    
+  }
+
   render() {
+    const { error,loading} = this.state;
+
+      const errorMsg = error ? (
+        <Text>
+          {error}
+        </Text>
+      ) : null;
+
+      const registerButton = loading ? (
+        <Spinner /> ): (
+          <View style={styles.buttonWrapper}>
+              <Button
+              onPress={this.onButtonClicked.bind(this)}
+              color='#E87B79' title='Kaydol' />
+                </View>
+        );
       return (
         <View>
             <View>
@@ -29,6 +75,7 @@ class Register extends Component {
                       })
                 }}
                 value={this.state.email}/>
+                
             </View>
             <View><Input text='Şifreniz' inputPlaceHolder='Şifrenizi giriniz'
                 onChangeText={(text) => {
@@ -39,8 +86,9 @@ class Register extends Component {
                 secureTextEntry
                 value={this.state.password}/>
                 </View>
+                {errorMsg}
             <View style={styles.buttonWrapper}>
-              <Button color='#E87B79' title='Kaydol' />
+                {registerButton}
                 </View>
         </View>
       );

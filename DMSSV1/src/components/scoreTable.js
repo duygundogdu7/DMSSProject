@@ -4,19 +4,42 @@ import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
 
 
-export default  class ScoreTable extends Component {
+class ScoreTable extends Component {
  
-    
+    renderItem = ({ item }) => (
+        <ListItem
+          title={item.name}
+          subtitle={item.subtitle}
+          leftAvatar={{
+            source: item.avatar_url && { uri: item.avatar_url },
+            title: item.name[0]
+          }}
+        />
+      )
+
   render() {
+      const { scoreMembers } = this.props;
     return(
         <View>
-           <Text>score-table</Text>
+            
+            <FlatList
+            data={scoreMembers}
+             renderItem={this.renderItem}
+            />     
+             
       </View>
     
     )
   }
 }
 
+const mapStateToProps = state => {
+    return {
+        scoreMembers: state.scoreMembers
+    }
+}
+
+export default connect(mapStateToProps)(ScoreTable);
 
 
 

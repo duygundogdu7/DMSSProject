@@ -41,7 +41,7 @@ const RouterComp = () => {
         <Scene key='main4'>
           <Scene key='register'
                  component={Register}
-                 title='register'
+                 title='Üye ol'
                  />
         </Scene>
       </Scene>
