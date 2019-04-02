@@ -33,19 +33,19 @@ const RouterComp = () => {
         </Scene>
         <Scene key='main2'>
           <Scene key='scoreTableMain'
-                 component={ScoreTable}
+                 component={ScoreTableMain}
                  title='scoreTableMain'
                  />
         </Scene>
         <Scene key='main3'>
           <Scene key='profileMain'
-                 component={Profile}
+                 component={ProfileMain}
                  title='profileMain'
                  />
         </Scene>
         <Scene key='main4'>
           <Scene key='PortfolioMain'
-                 component={Portfolio}
+                 component={PortfolioMain}
                  title='PortfolioMain'
                  />
         </Scene>
