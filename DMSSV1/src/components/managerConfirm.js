@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
+import { View, Text, Button, FlatList } from 'react-native';
 
- class managerConfirm extends Component {
+ class ManagerConfirm extends Component {
   render() {
     return (
-      <div>
-        
-      </div>
+      <View></View>
     )
   }
 }
-export default managerConfirm;
+export default ManagerConfirm;

@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-
- class portfolio extends Component {
+import { View, Text, Button, FlatList } from 'react-native';
+ class Portfolio extends Component {
   render() {
     return (
-      <div>
-        
-      </div>
+     <View></View>
     )
   }
 }
-export default portfolio;
+export default Portfolio;
