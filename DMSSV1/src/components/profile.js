@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import BottomNavigation, { Tab } from 'react-native-material-bottom-navigation';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { View, Text, Button, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -8,7 +6,6 @@ class Profile extends Component {
  
   render() {
       const { members } = this.props;
-      console.log("priofile")
     return(
         <View>
             <Text>Team Leader: </Text>

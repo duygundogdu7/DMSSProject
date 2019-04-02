@@ -4,42 +4,20 @@ import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
 
 
-class ScoreTable extends Component {
+export default  class ScoreTable extends Component {
  
-    renderItem = ({ item }) => (
-        <ListItem
-          title={item.name}
-          subtitle={item.subtitle}
-          leftAvatar={{
-            source: item.avatar_url && { uri: item.avatar_url },
-            title: item.name[0]
-          }}
-        />
-      )
-
+    
   render() {
-      const { scoreMembers } = this.props;
     return(
         <View>
-            
-            <FlatList
-            data={scoreMembers}
-             renderItem={this.renderItem}
-            />     
-             
+           <Text>score-table</Text>
       </View>
     
     )
   }
 }
 
-const mapStateToProps = state => {
-    return {
-        scoreMembers: state.scoreMembers
-    }
-}
 
-export default connect(mapStateToProps)(ScoreTable);
 
 
 //Team Members databaseden bir list olarak gelecek. 

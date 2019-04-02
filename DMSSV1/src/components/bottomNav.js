@@ -3,7 +3,11 @@ import React, { Component } from 'react';
 import BottomNavigation, {
   FullTab
 } from 'react-native-material-bottom-navigation';
-class ButtomNav extends React.Component  {
+import { Actions } from 'react-native-router-flux';
+class BottomNav extends React.Component  {
+  state = {
+    activeTab: 'task'
+  }
   tabs = [
     {
       key: 'task',
@@ -34,11 +38,29 @@ class ButtomNav extends React.Component  {
       pressColor: 'rgba(255, 255, 255, 0.16)'
     }
   ]
+  handleTabPress = (newTab) => {
+    console.log(newTab.key)
+    switch (newTab.key) {
+      case "task":
+        Actions.main();
+        break;
+      case "score-table":
+        Actions.main2();
+        break;
+      case "profile":
+        Actions.main3();
+        break;
+      case "portfolio":
+        Actions.main4();
+        break;
+   }
+  }
   render() {
     return (
       <View>
         <BottomNavigation
           renderTab={this.renderTab}
+          onTabPress={this.handleTabPress}
           tabs={this.tabs}
         />
       </View>
@@ -59,4 +81,4 @@ class ButtomNav extends React.Component  {
     return <View />
   }
 }
-export default ButtomNav;
+export default BottomNav;

@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import Router from './router';
-import Profile from './components/profile';
+
 
 
 export default class App extends Component {
@@ -13,9 +13,7 @@ export default class App extends Component {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return (
       <Provider store={store}>
-         <View>
-        <Profile/>
-      </View>
+        <Router/>
       </Provider>
      
     );
