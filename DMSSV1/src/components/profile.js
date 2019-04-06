@@ -1,34 +1,57 @@
+import _ from 'lodash';
 import React, { Component } from 'react'
 import { View, Text, Button, FlatList } from 'react-native';
 import { connect } from 'react-redux';
+import {getProfile} from '../actions'
+import ProfileItem from './profileItem';
+
 
 class Profile extends Component {
- 
+  componentDidMount(){
+    this.props.getProfile();
+  }
+
+  renderItem = ({item}) => {
+    return (
+      <ProfileItem profile={item}/>
+    );
+  }
+
   render() {
-      const { members } = this.props;
+      const { profile } = this.props;
+      console.log("okeyiz");
+      console.log(profile);
     return(
         <View>
-            <Text>Team Leader: </Text>
-            <Text>Gözde Özçelik</Text>
-            <Text>Team Members:</Text>
-            <FlatList
-            data={members}
-             renderItem={({item}) => <Text>{item.title}</Text>}
-            />     
-             <Button title="Logout" color="#841584"/>  
+          <FlatList
+          data={profile}
+          renderItem={this.renderItem}
+            />
+             
       </View>
     
     )
   }
 }
 
+
 const mapStateToProps = state => {
-    return {
-        members: state.members
-    }
+  console.log("msp")
+  const profile = _.map(state.profile, (val) => {
+    return { ...val}
+  });
+  
+  console.log(profile)
+  return {
+    profile
+  }
+  
 }
 
-export default connect(mapStateToProps)(Profile);
+
+export default connect(mapStateToProps, {
+  getProfile
+})(Profile);
 
 
 //Team Members databaseden bir list olarak gelecek. 

@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
 import TaskListReducer from './taskListReducer';
-import MemberReducer from './profileReducer';
-import ScoreReducer from './scoreReducer';
+import ProfileReducer from './profileReducer';
 
 
 export default combineReducers({
     tasks: TaskListReducer,
-    members: MemberReducer,
-    scoreMembers: ScoreReducer
+    profile: ProfileReducer,
 });
