@@ -38,7 +38,7 @@ export const getProfile = () => {
     try {
       const response = await axios.get(profileURL, {
         params: {
-          user_id: '5ca32fa9e16f2972d7e68121'
+          user_id: '12345'
         }
       });
       console.log("action resp");

@@ -34,12 +34,10 @@ class TaskList extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("msp")
-  const tasks = _.map(state.tasks, (val) => {
-    return { ...val}
-  });
-  
-  console.log(tasks)
+  var tasks = []
+  for (var property in state.tasks.data) {
+    tasks = state.tasks.data[property]
+  }
   return {
     tasks
   }

@@ -19,14 +19,11 @@ class Profile extends Component {
 
   render() {
       const { profile } = this.props;
-      console.log("okeyiz");
       console.log(profile);
     return(
         <View>
-          <FlatList
-          data={profile}
-          renderItem={this.renderItem}
-            />
+          <Text >SCORE</Text>
+          <Text >{profile.friends}</Text>
              
       </View>
     
@@ -36,16 +33,13 @@ class Profile extends Component {
 
 
 const mapStateToProps = state => {
-  console.log("msp")
-  const profile = _.map(state.profile, (val) => {
-    return { ...val}
-  });
-  
-  console.log(profile)
+  var profile = []
+  for (var property in state.profile.data) {
+    profile[property] = state.profile.data[property]
+  }
   return {
     profile
   }
-  
 }
 
 

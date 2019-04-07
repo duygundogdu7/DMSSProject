@@ -32,12 +32,10 @@ class ScoreTable extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("msp")
-  const scoreTable = _.map(state.scoreTable, (val) => {
-    return { ...val}
-  });
-  
-  console.log(scoreTable)
+  var scoreTable = []
+  for (var property in state.scoreTable.data) {
+    scoreTable = state.scoreTable.data[property]
+  }
   return {
     scoreTable
   }

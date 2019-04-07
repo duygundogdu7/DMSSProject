@@ -5,9 +5,12 @@ import {Card} from './common';
 class TaskItem extends Component {
     render(){
         const {task} = this.props;
+        console.log("single");
+        console.log(task);
         return (
             <Card>
               <Text style={styles.titleStyle}>{task.title}</Text>
+              <Text style={styles.titleStyle}>{task.user_id}</Text>
             </Card>
         );
     }

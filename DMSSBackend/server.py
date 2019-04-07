@@ -23,16 +23,11 @@ class TaskList(Resource):
     def get(self):
         user_id = request.args.get('user_id')
         tasks_of_user = self.tasks.find({"user_id": user_id})
-        return  (jsonify(title=tasks_of_user[0]["title"]))
+        results = list(tasks_of_user)
+        for res in results:
+            del res["_id"]
+        return  (jsonify(tasks=results))
            
-
-    def post(self):
-        pass
-      
-    def delete(self, user_id):
-        pass
-
-      
 api.add_resource(TaskList,  '/task',  methods=['GET'])
 
 class ScoreTable(Resource):
