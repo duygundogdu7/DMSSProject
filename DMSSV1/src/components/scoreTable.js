@@ -1,47 +1,52 @@
+import _ from 'lodash';
 import React, { Component } from 'react'
 import { View, Text, Button, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
-
+import {fetchScoreTable} from '../actions'
 
 class ScoreTable extends Component {
- 
+  componentDidMount(){
+    this.props.fetchScoreTable();
+  }
     renderItem = ({ item }) => (
         <ListItem
-          title={item.name}
-          subtitle={item.subtitle}
-          leftAvatar={{
-            source: item.avatar_url && { uri: item.avatar_url },
-            title: item.name[0]
-          }}
+          title={item.scoreTable}
         />
       )
 
-  render() {
-      const { scoreMembers } = this.props;
-    return(
-        <View>
-            
-            <FlatList
-            data={scoreMembers}
-             renderItem={this.renderItem}
-            />     
-             
-      </View>
-    
-    )
-  }
+      render() {
+        console.log("scoreTable render")
+        console.log(this.props)
+        const {scoreTable} = this.props;
+          return (
+            <View>
+           <FlatList
+            data={scoreTable}
+            renderItem={this.renderItem}
+              />
+            </View>
+         
+          );
+        }
 }
 
 const mapStateToProps = state => {
-    return {
-        scoreMembers: state.scoreMembers
-    }
+  console.log("msp")
+  const scoreTable = _.map(state.scoreTable, (val) => {
+    return { ...val}
+  });
+  
+  console.log(scoreTable)
+  return {
+    scoreTable
+  }
 }
 
-export default connect(mapStateToProps)(ScoreTable);
 
-
+export default connect(mapStateToProps, {
+  fetchScoreTable
+})(ScoreTable);
 
 //Team Members databaseden bir list olarak gelecek. 
 //Team Leader da aynı şekilde

@@ -5,6 +5,8 @@ from pymongo import MongoClient
 from pprint import pprint
 import urllib
 from bson import json_util, ObjectId
+import operator
+
 
 
 app = Flask(__name__)
@@ -32,6 +34,18 @@ class TaskList(Resource):
 
       
 api.add_resource(TaskList,  '/task',  methods=['GET'])
+
+class ScoreTable(Resource):
+    def __init__(self):
+        self.team = db.Team
+
+    def get(self):
+        teams = self.team.find({})
+        newlist = sorted(teams, key=lambda k: k['score'], reverse=True) 
+        print(newlist)
+        return (jsonify(scoreTable=newlist[0]["score"]))
+      
+api.add_resource(ScoreTable,  '/scoreTable',  methods=['GET'])
 
 class Profile(Resource):
     def __init__(self):

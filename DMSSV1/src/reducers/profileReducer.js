@@ -7,8 +7,6 @@ export default (state = INITIAL_STATE, action) => {
   console.log(action)
   switch (action.type) {
     case GET_PROFILE:
-    console.log("payload getprof")
-    console.log(action.profile)
       return action.payload;
     default:
       return state;
