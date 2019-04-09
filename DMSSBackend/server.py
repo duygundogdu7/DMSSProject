@@ -7,9 +7,7 @@ import urllib
 from bson import json_util, ObjectId
 import operator
 import random
-
-
-
+import uuid
 
 
 app = Flask(__name__)
@@ -28,53 +26,47 @@ class CreateTeams(Resource):
 
     def get(self):
         userss = self.users.find({})
-        atanan=0
-teams = []
-members = []
-userss = list(userss)
-user_count = userss.__len__()
-team_count = int(user_count/min_user)
-while True:
-    user_count = userss.__len__()
-    if user_count == 0:
-        break
-    if user_count <= 2:
-        r = 0
-    else:
-        r = random.randint(0,user_count-1)
-    
-    print(r)
-    if user_count < min_user and atanan == 0 : 
-        print("ilk if" , user_count)
-        if team_count <= 2:
-            print("tr=0, " , user_count)
-            tr = 0
-        else:
-            tr = random.randint(0,team_count-1)
-            print("random tr geldi:, " , tr)
-        teams[tr].append(userss[r])
-        print(teams[tr])
-        userss.pop(r)
-    elif  members.__len__() <= min_user:
-        print("ikinci if" , user_count)
-        members.append(userss[r])
-        userss.pop(r)
-        atanan=atanan+1
-        if members.__len__() == min_user:
-            print("members")
-            print(members)
-            teams.append(members)
-            members = []
-            atanan=0
-print("MAL")
-for team in teams:
-    print("team")
-    print(team)
-print("kaç takım var:")
-print(teams.__len__())
-      
-
-
+        atanan = 0
+        teams = []
+        members = []
+        userss = list(userss)
+        user_count = userss.__len__()
+        team_count = int(user_count/min_user)
+        while True:
+            user_count = userss.__len__()
+            if user_count == 0:
+                break
+            if user_count <= 2:
+                r = 0
+            else:
+                r = random.randint(0,user_count-1)
+            if user_count < min_user and atanan == 0 : 
+                if team_count <= 2:
+                    tr = 0
+                else:
+                    tr = random.randint(0,team_count-1)
+                teams[tr].append(userss[r])
+                print(teams[tr])
+                userss.pop(r)
+            elif  members.__len__() <= min_user:
+                members.append(userss[r])
+                userss.pop(r)
+                atanan=atanan+1
+                if members.__len__() == min_user:
+                    teams.append(members)
+                    members = []
+                    atanan=0
+        for team in teams:
+            tid = uuid.uuid4()
+            tr = random.randint(0,team.__len__())
+            manager = team[tr]
+            while manager["is_manager"]:
+                tr = random.randint(0,team.__len__())
+                manager = team[tr]
+            team.pop(tr)
+            for member in team:
+                db.Users.update_one({"_id": member["_id"]},{"$set": {"team_id":tid,"is_manager":False,"manager_id": manager["_id"]}})
+            db.Users.update_one({"_id": manager["_id"]},{"$set": {"team_id":tid ,"is_manager":True,"manager_id": ""}})
 
 api.add_resource(CreateTeams,  '/create',  methods=['GET'])
 
@@ -118,7 +110,7 @@ class Profile(Resource):
         friends = list(friends)
         for friend in friends:
             del friend["_id"]
-        return (jsonify(score=user['score'], friends=friends, manager=manager))
+        return (jsonify(score=user['score'], friends=friends, manager=manager, name=user['name'], id=user["_id"]))
 
 api.add_resource(Profile,  '/profile' ,  methods=['GET'])
 
