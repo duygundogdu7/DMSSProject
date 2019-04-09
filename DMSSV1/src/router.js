@@ -24,31 +24,31 @@ const RouterComp = () => {
         <Scene key='main'>
           <Scene key='taskListMain'
                  component={TaskListMain}
-                 title='taskListMain'
+                 title='Görev Listesi'
                  />
         </Scene>
         <Scene key='main2'>
           <Scene key='scoreTableMain'
                  component={ScoreTableMain}
-                 title='scoreTableMain'
+                 title='Puan Tablosu'
                  />
         </Scene>
         <Scene key='main3'>
           <Scene key='profileMain'
                  component={ProfileMain}
-                 title='profileMain'
+                 title='Benim Sayfam'
                  />
         </Scene>
         <Scene key='main4'>
           <Scene key='PortfolioMain'
                  component={PortfolioMain}
-                 title='PortfolioMain'
+                 title='Portföy Hesaplama'
                  />
         </Scene>
         <Scene key='main5'>
           <Scene key='ManagerConfirmMain'
                  component={ManagerConfirm}
-                 title='ManagerConfirmMain'
+                 title='Takımım'
                  />
         </Scene>
         <Scene key='main6'>
