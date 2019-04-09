@@ -5,9 +5,11 @@ import BottomNav from '../bottomNav'
 export default class ScoreTableMain extends Component {
   render() {
     return (
-        <View>
-           <ScoreTable/>
-           <BottomNav/>
+        <View style={{ flex: 1 }}>
+          <View style={{ flex: 1 }}>
+            <ScoreTable/>
+          </View>
+          <BottomNav/>
         </View>
     )
   }

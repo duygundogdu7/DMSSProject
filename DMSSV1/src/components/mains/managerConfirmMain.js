@@ -5,10 +5,12 @@ import BottomNav from '../bottomNav'
 export default class ManagerConfirmMain extends Component {
   render() {
     return (
-        <View>
-        <ManagerConfirm/>
-        <BottomNav/>
- </View>
+      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
+          <ManagerConfirm/>
+      </View>
+      <BottomNav/>
+    </View>
     )
   }
 }

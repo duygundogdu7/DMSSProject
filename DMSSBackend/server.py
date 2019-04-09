@@ -7,7 +7,7 @@ import urllib
 from bson import json_util, ObjectId
 import operator
 import random
-
+import uuid
 
 
 app = Flask(__name__)
@@ -26,6 +26,7 @@ class CreateTeams(Resource):
 
     def get(self):
         userss = self.users.find({})
+        atanan = 0
         teams = []
         members = []
         userss = list(userss)
@@ -39,9 +40,7 @@ class CreateTeams(Resource):
                 r = 0
             else:
                 r = random.randint(0,user_count-1)
-            
-            print(r)
-            if user_count < min_user : 
+            if user_count < min_user and atanan == 0 : 
                 if team_count <= 2:
                     tr = 0
                 else:
@@ -52,39 +51,22 @@ class CreateTeams(Resource):
             elif  members.__len__() <= min_user:
                 members.append(userss[r])
                 userss.pop(r)
+                atanan=atanan+1
                 if members.__len__() == min_user:
-                    print("members")
-                    print(members)
                     teams.append(members)
                     members = []
-
-        print("MAL")
+                    atanan=0
         for team in teams:
-            print("team")
-            print(team)
-
-        '''
-        for user in userss:
-            members.append(user)
-            count = count+1                
-            if count == min_user:
-                count = 0
-                team_count = team_count +1
-                members = []
-                teams.append(members)
-                member_count = member_count + min_user
-        remain = user_count -member_count
-        remaing = userss[-remain:]
-        for rem in remaing:
-            r = random.randint(0,team_count-1)
-            teams[r].append(rem)
-
-        for team in teams:
-            print("team")
-            print(team)
-        '''
-
-
+            tid = uuid.uuid4()
+            tr = random.randint(0,team.__len__())
+            manager = team[tr]
+            while manager["is_manager"]:
+                tr = random.randint(0,team.__len__())
+                manager = team[tr]
+            team.pop(tr)
+            for member in team:
+                db.Users.update_one({"_id": member["_id"]},{"$set": {"team_id":tid,"is_manager":False,"manager_id": manager["_id"]}})
+            db.Users.update_one({"_id": manager["_id"]},{"$set": {"team_id":tid ,"is_manager":True,"manager_id": ""}})
 
 api.add_resource(CreateTeams,  '/create',  methods=['GET'])
 
@@ -108,10 +90,13 @@ class ScoreTable(Resource):
 
     def get(self):
         users = self.users.find({})
-        newlist = sorted(users, key=lambda k: k['score'], reverse=True) 
-        for res in newlist:
+        newList = sorted(users, key=lambda k: k['score'], reverse=True) 
+        for res in newList:
             del res["_id"]
-        return (jsonify(scoreTable=newlist))
+            if res["is_manager"]:
+                newList.remove(res)
+
+        return (jsonify(scoreTable=newList))
       
 api.add_resource(ScoreTable,  '/scoreTable',  methods=['GET'])
 
@@ -128,7 +113,9 @@ class Profile(Resource):
         friends = list(friends)
         for friend in friends:
             del friend["_id"]
-        return (jsonify(score=user['score'], friends=friends, manager=manager))
+            if friend["is_manager"]:
+                friends.remove(friend)
+        return (jsonify(score=user['score'], friends=friends, manager=manager, name=user['name'], id=user["_id"]))
 
 api.add_resource(Profile,  '/profile' ,  methods=['GET'])
 

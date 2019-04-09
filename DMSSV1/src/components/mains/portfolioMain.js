@@ -5,10 +5,12 @@ import BottomNav from '../bottomNav'
 export default class PortfolioMain extends Component {
   render() {
     return (
-        <View>
-            <Portfolio/>
-            <BottomNav/>
-     </View>
+      <View style={{ flex: 1 }}>
+          <View style={{ flex: 1 }}>
+              <Portfolio/>
+          </View>
+          <BottomNav/>
+        </View>
     )
   }
 }
