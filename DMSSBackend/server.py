@@ -90,10 +90,13 @@ class ScoreTable(Resource):
 
     def get(self):
         users = self.users.find({})
-        newlist = sorted(users, key=lambda k: k['score'], reverse=True) 
-        for res in newlist:
+        newList = sorted(users, key=lambda k: k['score'], reverse=True) 
+        for res in newList:
             del res["_id"]
-        return (jsonify(scoreTable=newlist))
+            if res["is_manager"]:
+                newList.remove(res)
+
+        return (jsonify(scoreTable=newList))
       
 api.add_resource(ScoreTable,  '/scoreTable',  methods=['GET'])
 
@@ -110,6 +113,8 @@ class Profile(Resource):
         friends = list(friends)
         for friend in friends:
             del friend["_id"]
+            if friend["is_manager"]:
+                friends.remove(friend)
         return (jsonify(score=user['score'], friends=friends, manager=manager, name=user['name'], id=user["_id"]))
 
 api.add_resource(Profile,  '/profile' ,  methods=['GET'])
