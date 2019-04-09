@@ -8,11 +8,12 @@ export default class TaskListMain extends Component {
   render() {
       console.log("tlm render")
     return(
-        <View>
-           <TaskList/>
-           <BottomNav/>
+        <View style={{ flex: 1 }}>
+             <View style={{ flex: 1 }}>
+                  <TaskList/>
+              </View>
+              <BottomNav/>
         </View>
-    
     );
   }
 }
