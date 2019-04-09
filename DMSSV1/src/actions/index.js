@@ -5,9 +5,9 @@ export const FETCH_SCORE_TABLE = 'fetch_score_table';
 
 
 
-const taskURL = 'http://192.168.0.12:8086/task';
-const profileURL = 'http://192.168.0.12:8086/profile';
-const scoreTableURL = 'http://192.168.0.12:8086/scoreTable';
+const taskURL = 'http://192.168.43.165:8086/task';
+const profileURL = 'http://192.168.43.165:8086/profile';
+const scoreTableURL = 'http://192.168.43.165:8086/scoreTable';
 
 
 export const fetchScoreTable = () => {
@@ -38,7 +38,7 @@ export const getProfile = () => {
     try {
       const response = await axios.get(profileURL, {
         params: {
-          user_id: '12345'
+          user_id: '1235'
         }
       });
       console.log("action resp");
@@ -63,7 +63,7 @@ export const fetchAllTasks = () => {
     try {
       const response = await axios.get(taskURL, {
         params: {
-          user_id: '12345'
+          user_id: '1235'
         }
       });
       console.log("action resp");

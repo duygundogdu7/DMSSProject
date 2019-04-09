@@ -1,9 +1,9 @@
-import _ from 'lodash';
 import React, { Component } from 'react'
 import { View, Text, Button, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import {getProfile} from '../actions'
-import ProfileItem from './profileItem';
+import { ListItem } from 'react-native-elements';
+
 
 
 class Profile extends Component {
@@ -11,11 +11,12 @@ class Profile extends Component {
     this.props.getProfile();
   }
 
-  renderItem = ({item}) => {
-    return (
-      <ProfileItem profile={item}/>
-    );
-  }
+  renderItem = ({ item }) => (
+    <ListItem
+      title={item.name}
+      subtitle={item.score}
+    />
+  )
 
   render() {
       const { profile } = this.props;
@@ -23,8 +24,13 @@ class Profile extends Component {
     return(
         <View>
           <Text >SCORE</Text>
-          <Text >{profile.friends}</Text>
-             
+          <Text >{profile.score}</Text>
+          <FlatList
+            data={profile.friends}
+            renderItem={this.renderItem}
+              />
+          <Text >manager</Text>
+          <Text >{profile.manager}</Text>
       </View>
     
     )

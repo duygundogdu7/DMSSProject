@@ -6,6 +6,7 @@ from pprint import pprint
 import urllib
 from bson import json_util, ObjectId
 import operator
+import random
 
 
 
@@ -15,6 +16,77 @@ client = MongoClient('localhost', 27017)
 db = client['DMSS']
 
 parser = reqparse.RequestParser()
+
+
+min_user = 3
+
+class CreateTeams(Resource):
+    def __init__(self):
+        self.users = db.Users
+
+    def get(self):
+        userss = self.users.find({})
+        teams = []
+        members = []
+        userss = list(userss)
+        user_count = userss.__len__()
+        team_count = int(user_count/min_user)
+        while True:
+            user_count = userss.__len__()
+            if user_count == 0:
+                break
+            if user_count <= 2:
+                r = 0
+            else:
+                r = random.randint(0,user_count-1)
+            
+            print(r)
+            if user_count < min_user : 
+                if team_count <= 2:
+                    tr = 0
+                else:
+                    tr = random.randint(0,team_count-1)
+                teams[tr].append(userss[r])
+                print(teams[tr])
+                userss.pop(r)
+            elif  members.__len__() <= min_user:
+                members.append(userss[r])
+                userss.pop(r)
+                if members.__len__() == min_user:
+                    print("members")
+                    print(members)
+                    teams.append(members)
+                    members = []
+
+        print("MAL")
+        for team in teams:
+            print("team")
+            print(team)
+
+        '''
+        for user in userss:
+            members.append(user)
+            count = count+1                
+            if count == min_user:
+                count = 0
+                team_count = team_count +1
+                members = []
+                teams.append(members)
+                member_count = member_count + min_user
+        remain = user_count -member_count
+        remaing = userss[-remain:]
+        for rem in remaing:
+            r = random.randint(0,team_count-1)
+            teams[r].append(rem)
+
+        for team in teams:
+            print("team")
+            print(team)
+        '''
+
+
+
+api.add_resource(CreateTeams,  '/create',  methods=['GET'])
 
 class TaskList(Resource):
     def __init__(self):
@@ -32,31 +104,31 @@ api.add_resource(TaskList,  '/task',  methods=['GET'])
 
 class ScoreTable(Resource):
     def __init__(self):
-        self.team = db.Team
+        self.users = db.Users
 
     def get(self):
-        teams = self.team.find({})
-        newlist = sorted(teams, key=lambda k: k['score'], reverse=True) 
-        print(newlist)
-        return (jsonify(scoreTable=newlist[0]["score"]))
+        users = self.users.find({})
+        newlist = sorted(users, key=lambda k: k['score'], reverse=True) 
+        for res in newlist:
+            del res["_id"]
+        return (jsonify(scoreTable=newlist))
       
 api.add_resource(ScoreTable,  '/scoreTable',  methods=['GET'])
 
 class Profile(Resource):
     def __init__(self):
-        self.teams = db.Team
         self.users = db.Users
 
     def get(self):
         user_id = request.args.get('user_id')
-        print("userid",user_id)
-        user = self.teams.find_one({"team_member_id": user_id})
-        print("user",user)
-        friends = self.teams.find({"_id": user["_id"]})
-        print(friends)
-        #profile = self.users.find_one({"_id": user_id})
-        #print("profile",profile)
-        return (jsonify(score=user['score'], friends=friends[0]["team_id"]))
+        user = self.users.find_one({"_id": user_id})
+        manager = self.users.find_one({"_id": user["manager_id"]})
+        manager = manager["name"]
+        friends = self.users.find({"team_id": user["team_id"]})
+        friends = list(friends)
+        for friend in friends:
+            del friend["_id"]
+        return (jsonify(score=user['score'], friends=friends, manager=manager))
 
 api.add_resource(Profile,  '/profile' ,  methods=['GET'])
 
@@ -95,14 +167,6 @@ class User(Resource):
         if user is None:
             return (jsonify(res="0"))
         return (jsonify(res="1"))
-        '''
-        user = {}
-        for key in data.keys():
-            user[key] = data[key]
-        print("user inserted")
-        print(user)
-        self.users.insert(user)
-        '''
       
     def delete(self, user_id):
         self.users.delete_one({"_id": user_id})
@@ -113,3 +177,7 @@ api.add_resource(User,  '/user/<user_id>' ,'/user', '/',  methods=['GET', 'POST'
 
 if __name__ == '__main__':
      app.run(host='0.0.0.0', port='8086')
+
+
+
+

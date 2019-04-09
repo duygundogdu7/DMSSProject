@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { Component } from 'react'
 import { View, Text, Button, FlatList } from 'react-native';
 import { connect } from 'react-redux';
@@ -11,7 +10,8 @@ class ScoreTable extends Component {
   }
     renderItem = ({ item }) => (
         <ListItem
-          title={item.scoreTable}
+          title={item.score}
+          subtitle={item.name}
         />
       )
 
@@ -33,8 +33,12 @@ class ScoreTable extends Component {
 
 const mapStateToProps = state => {
   var scoreTable = []
+  console.log("state.scoreTable.data");
+  console.log(state.scoreTable.data);
   for (var property in state.scoreTable.data) {
     scoreTable = state.scoreTable.data[property]
+    console.log("scoreTable");
+  console.log(scoreTable);
   }
   return {
     scoreTable
