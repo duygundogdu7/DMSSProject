@@ -10,6 +10,7 @@ import { View, Text, Button, FlatList } from 'react-native';
        <Input></Input>
        <Text>Fiyat:</Text>
        <Input></Input>
+       <Text>Example</Text>
      </View>
     )
   }
