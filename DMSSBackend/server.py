@@ -10,6 +10,8 @@ import random
 
 
 
+
+
 app = Flask(__name__)
 api = Api(app)
 client = MongoClient('localhost', 27017)
@@ -26,63 +28,51 @@ class CreateTeams(Resource):
 
     def get(self):
         userss = self.users.find({})
-        teams = []
-        members = []
-        userss = list(userss)
-        user_count = userss.__len__()
-        team_count = int(user_count/min_user)
-        while True:
-            user_count = userss.__len__()
-            if user_count == 0:
-                break
-            if user_count <= 2:
-                r = 0
-            else:
-                r = random.randint(0,user_count-1)
-            
-            print(r)
-            if user_count < min_user : 
-                if team_count <= 2:
-                    tr = 0
-                else:
-                    tr = random.randint(0,team_count-1)
-                teams[tr].append(userss[r])
-                print(teams[tr])
-                userss.pop(r)
-            elif  members.__len__() <= min_user:
-                members.append(userss[r])
-                userss.pop(r)
-                if members.__len__() == min_user:
-                    print("members")
-                    print(members)
-                    teams.append(members)
-                    members = []
-
-        print("MAL")
-        for team in teams:
-            print("team")
-            print(team)
-
-        '''
-        for user in userss:
-            members.append(user)
-            count = count+1                
-            if count == min_user:
-                count = 0
-                team_count = team_count +1
-                members = []
-                teams.append(members)
-                member_count = member_count + min_user
-        remain = user_count -member_count
-        remaing = userss[-remain:]
-        for rem in remaing:
-            r = random.randint(0,team_count-1)
-            teams[r].append(rem)
-
-        for team in teams:
-            print("team")
-            print(team)
-        '''
+        atanan=0
+teams = []
+members = []
+userss = list(userss)
+user_count = userss.__len__()
+team_count = int(user_count/min_user)
+while True:
+    user_count = userss.__len__()
+    if user_count == 0:
+        break
+    if user_count <= 2:
+        r = 0
+    else:
+        r = random.randint(0,user_count-1)
+    
+    print(r)
+    if user_count < min_user and atanan == 0 : 
+        print("ilk if" , user_count)
+        if team_count <= 2:
+            print("tr=0, " , user_count)
+            tr = 0
+        else:
+            tr = random.randint(0,team_count-1)
+            print("random tr geldi:, " , tr)
+        teams[tr].append(userss[r])
+        print(teams[tr])
+        userss.pop(r)
+    elif  members.__len__() <= min_user:
+        print("ikinci if" , user_count)
+        members.append(userss[r])
+        userss.pop(r)
+        atanan=atanan+1
+        if members.__len__() == min_user:
+            print("members")
+            print(members)
+            teams.append(members)
+            members = []
+            atanan=0
+print("MAL")
+for team in teams:
+    print("team")
+    print(team)
+print("kaç takım var:")
+print(teams.__len__())
+      
 
 
 
