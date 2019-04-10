@@ -12,30 +12,30 @@ class BottomNav extends React.Component  {
     {
       key: 'task',
       icon: 'gamepad-variant',
-      label: 'Task',
-      barColor: '#388E3C',
-      pressColor: 'rgba(255, 255, 255, 0.16)'
+      label: 'Görevler',
+      barColor: '#c90202',
+      pressColor: '#c90202'
     },
     {
       key: 'score-table',
       icon: 'movie',
-      label: 'Score Table',
-      barColor: '#B71C1C',
-      pressColor: 'rgba(255, 255, 255, 0.16)'
+      label: 'Puan Tablosu',
+      barColor: '#c90202',
+      pressColor: '#c90202'
     },
     {
       key: 'profile',
       icon: 'music-note',
-      label: 'Profile',
-      barColor: '#E64A19',
-      pressColor: 'rgba(255, 255, 255, 0.16)'
+      label: 'Sayfam',
+      barColor: '#c90202',
+      pressColor: '#c90202'
     },
     {
       key: 'portfolio',
       icon: 'music-note',
-      label: 'Portfolio',
-      barColor: '#E64D45',
-      pressColor: 'rgba(255, 255, 255, 0.16)'
+      label: 'Potfolyo Hesaplama',
+      barColor: '#c90202',
+      pressColor: '#c90202'
     }
   ]
   handleTabPress = (newTab) => {
