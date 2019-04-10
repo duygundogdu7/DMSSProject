@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text,Button, StyleSheet } from 'react-native';
+import { View, Text,Button, StyleSheet, Image } from 'react-native';
 import {Input, Spinner} from './common';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
@@ -38,9 +38,7 @@ class LoginForm extends Component {
         error: 'Authentication failed',
         loading: false
       })
-     
     }
-    
   }
 
 onRegisterClicked(){
@@ -70,7 +68,10 @@ onRegisterClicked(){
 
       return (
         <View>
-            <View>
+          <View style={styles.imageWrapper}>
+          <Image source={require('../images/kw.png')} />
+          </View>
+            <View style={this.emailWrapper}>
                 <Input text='Email' inputPlaceHolder='Emailinizi giriniz'
                 onChangeText={(text) => {
                       this.setState({
@@ -98,6 +99,12 @@ onRegisterClicked(){
 }
 
 const styles = StyleSheet.create({
+  emailWrapper: {
+    marginTop: 30
+  },
+  imageWrapper:{
+    marginTop: 30
+  },
   buttonWrapper: {
      marginTop: 20,
      height: 49,

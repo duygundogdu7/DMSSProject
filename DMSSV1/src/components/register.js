@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text,Button, StyleSheet } from 'react-native';
+import { View, Text,Button, StyleSheet, Image } from 'react-native';
 import {Input, Spinner} from './common';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
@@ -8,11 +8,13 @@ import { Actions } from 'react-native-router-flux';
 class Register extends Component {
   state ={
       name:'',
+      surname:'',
       email:'',
       password:'',
       registerResponse:'',
       error: '',
-      loading:false
+      loading:false,
+      
   }
 
   onButtonClicked(){
@@ -61,6 +63,9 @@ class Register extends Component {
         );
       return (
         <View>
+          <View style={styles.imageWrapper}>
+          <Image source={require('../images/kw.png')} />
+          </View>
             <View>
                 <Input text='Adınız' inputPlaceHolder='Adinizi giriniz'
                 onChangeText={(text) => {
@@ -69,6 +74,15 @@ class Register extends Component {
                       })
                 }}
                 value={this.state.name}/>
+            </View>
+            <View>
+                <Input text='Soyadınız' inputPlaceHolder='Soyadinizi giriniz'
+                onChangeText={(text) => {
+                      this.setState({
+                          surname: text
+                      })
+                }}
+                value={this.state.surname}/>
             </View>
             <View>
                 <Input text='Emailiniz' inputPlaceHolder='Emailinizi giriniz'
@@ -99,6 +113,9 @@ class Register extends Component {
 }
 
 const styles = StyleSheet.create({
+  imageWrapper:{
+    marginTop: 30
+  },
   buttonWrapper: {
      marginTop: 20,
      height: 49,
