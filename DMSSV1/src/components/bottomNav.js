@@ -48,7 +48,7 @@ class BottomNav extends React.Component  {
         Actions.main2();
         break;
       case "profile":
-        Actions.main3();
+        Actions.main3({userID: '1235'});
         break;
       case "portfolio":
         Actions.main4();

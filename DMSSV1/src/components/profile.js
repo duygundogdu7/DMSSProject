@@ -8,7 +8,7 @@ import { ListItem } from 'react-native-elements';
 
 class Profile extends Component {
   componentDidMount(){
-    this.props.getProfile();
+    this.props.getProfile(this.props.userID);
   }
 
   renderItem = ({ item }) => (
