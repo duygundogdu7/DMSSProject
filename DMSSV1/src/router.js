@@ -7,6 +7,8 @@ import TaskListMain from './components/mains/taskListMain';
 import ScoreTableMain from './components/mains/scoreTableMain';
 import ProfileMain from './components/mains/profileMain';
 import PortfolioMain from './components/mains/portfolioMain';
+import UpdateTask from './components/updateTask';
+import AddTask from './components/addTask';
 
 
 const RouterComp = () => {
@@ -55,6 +57,18 @@ const RouterComp = () => {
           <Scene key='Register'
                  component={Register}
                  title='Register'
+                 />
+        </Scene>
+        <Scene key='main7'>
+          <Scene key='UpdateTask'
+                 component={UpdateTask}
+                 title='UpdateTask'
+                 />
+        </Scene>
+        <Scene key='main8'>
+          <Scene key='AddTask'
+                 component={AddTask}
+                 title='AddTask'
                  />
         </Scene>
       </Scene>
