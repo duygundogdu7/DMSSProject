@@ -19,7 +19,7 @@ class TaskList extends Component {
       <TaskItem task={item}/>
     );
   }
-  onRegisterClicked(){
+  onPlusClicked(){
     Actions.main8()
   }
     render() {
@@ -32,7 +32,7 @@ class TaskList extends Component {
           data={tasks}
           renderItem={this.renderItem}
             />
-            <Button title="+" onPress={this.onRegisterClicked.bind(this)}/>
+            <Button title="+" onPress={this.onPlusClicked.bind(this)}/>
           </View>
 
         );

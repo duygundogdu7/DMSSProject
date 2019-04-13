@@ -2,14 +2,40 @@ import axios from 'axios';
 export const FETCH_TASKS = 'fetch_tasks';
 export const GET_PROFILE = 'get_profile';
 export const FETCH_SCORE_TABLE = 'fetch_score_table';
-export const ADD_TASK = 'add_task';
+export const CHANGE_TASK = 'change_task';
 
 
 
-const taskURL = 'http://192.168.0.12:8086/task';
+const updateTaskURL = 'http://192.168.0.12:8086/updateTask';
 const taskListURL = 'http://192.168.0.12:8086/taskList';
 const profileURL = 'http://192.168.0.12:8086/profile';
 const scoreTableURL = 'http://192.168.0.12:8086/scoreTable';
+
+
+
+export const changeTask = (task) => {
+  console.log("changeTask throwed")
+  return async (dispatch) => {
+    try {
+      console.log("actiona gelen");
+      console.log(task);
+      const response = await axios.post(updateTaskURL, 
+        {
+          id: task.id,
+          title: task.title
+      });
+      console.log("action resp");
+      console.log(response);
+      dispatch({
+        type: CHANGE_TASK,
+        payload: response
+      });
+    }
+    catch (error) {
+      throw (error);
+    }
+  };
+};
 
 
 export const fetchScoreTable = () => {

@@ -79,11 +79,28 @@ class TaskList(Resource):
         tasks_of_user = self.tasks.find({"user_id": user_id})
         results = list(tasks_of_user)
         for res in results:
+            res["id"] = str(res["_id"])
             del res["_id"]
         return  (jsonify(tasks=results))
            
 api.add_resource(TaskList,  '/taskList',  methods=['GET'])
 
+class UpdateTask(Resource):
+    def __init__(self):
+        pass
+
+    def post(self):
+        try:
+            data = request.get_json()
+            print(data)
+            db.Tasks.update_one({"_id": ObjectId(data['id'])},{"$set": {"title":data['title']}})
+            return (jsonify(res="1")) 
+        except Exception as e:
+            print(e)
+            return (jsonify(res="0"))
+
+           
+api.add_resource(UpdateTask,  '/updateTask',  methods=['POST'])
 
 class Task(Resource):
     def __init__(self):
