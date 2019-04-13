@@ -1,9 +1,12 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
-import { FlatList, View} from 'react-native';
+import { FlatList, View, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 import TaskItem from './taskItem';
 import {fetchAllTasks} from '../actions'
+import { Button } from 'react-native-elements';
+import { Actions } from 'react-native-router-flux';
+
 
 class TaskList extends Component {
 
@@ -16,7 +19,9 @@ class TaskList extends Component {
       <TaskItem task={item}/>
     );
   }
-
+  onRegisterClicked(){
+    Actions.main8()
+  }
     render() {
       console.log("tasklist render")
       console.log(this.props)
@@ -27,8 +32,9 @@ class TaskList extends Component {
           data={tasks}
           renderItem={this.renderItem}
             />
+            <Button title="+" onPress={this.onRegisterClicked.bind(this)}/>
           </View>
-       
+
         );
       }
 }
