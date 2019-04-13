@@ -5,9 +5,6 @@ const Card = (props) => {
   return (
     <View style={styles.cardWrapper}>
       {props.children}
-      <View style={styles.buttonWrapper}>
-         <Button color='#E87B79' title='tamamlandı' />
-        </View>
     </View>
   )
 }
