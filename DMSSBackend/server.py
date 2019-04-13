@@ -82,7 +82,36 @@ class TaskList(Resource):
             del res["_id"]
         return  (jsonify(tasks=results))
            
-api.add_resource(TaskList,  '/task',  methods=['GET'])
+api.add_resource(TaskList,  '/taskList',  methods=['GET'])
+
+
+class Task(Resource):
+    def __init__(self):
+        self.tasks = db.Tasks
+
+    def get(self):
+        id = request.args.get('id')
+        task = self.tasks.find({"_id": id})
+        del task["_id"]
+        return  (jsonify(tasks=task))
+
+    def post(self):
+        try:
+            data = request.get_json()
+            task = {
+                #TODO: add the more properties of task
+                "user_id": data['user_id'],
+                "title": data['title']
+            }
+            db.Tasks.insert_one(task)
+            print(task)
+            return (jsonify(res="1")) 
+        except Exception as e:
+            print(e)
+            return (jsonify(res="0"))
+
+           
+api.add_resource(Task,  '/task',  methods=['GET','POST'])
 
 class ScoreTable(Resource):
     def __init__(self):
