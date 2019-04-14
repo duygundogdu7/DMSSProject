@@ -7,7 +7,7 @@ export default class ProfileMain extends Component {
     return (
       <View style={{ flex: 1 }}>
           <View style={{ flex: 1 }}>
-              <Profile/>
+              <Profile userID={this.props.userID}/>
           </View>
           <BottomNav/>
      </View>

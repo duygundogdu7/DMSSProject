@@ -1,21 +1,18 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, TouchableHighlight, StyleSheet } from 'react-native';
-import { Input,Button } from 'react-native-elements';
-
+import { View, Text, Button, FlatList } from 'react-native';
+import {Input} from 'react-native-elements';
  class Portfolio extends Component {
   render() {
     return (
-     <View style={styles.portfolioStyle}>
-       <Input placeholder='Konum'/>
-       <Input placeholder='Bölüm'/>
-       <Input placeholder='Fiyat'/>
-       <View style={styles.highlight}>
-       <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]}>
-          <Text style={styles.loginText}>Hesapla</Text>
-        </TouchableHighlight>
-       </View>
-       
-       </View>
+     <View>
+       <Text>Konum:</Text>
+       <Input placeholder = "EXAMPLE"/>
+       <Text>Bölüm:</Text>
+       <Input placeholder = "EXAMPLE"/>
+       <Text>Fiyat:</Text>
+       <Input placeholder = "EXAMPLE"/>
+       <Text>Example</Text>
+     </View>
     )
   }
 }

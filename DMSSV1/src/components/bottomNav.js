@@ -12,30 +12,30 @@ class BottomNav extends React.Component  {
     {
       key: 'task',
       icon: 'gamepad-variant',
-      label: 'Task',
-      barColor: '#00b5ec',
-      pressColor: '#00b5ec'
+      label: 'Görevler',
+      barColor: '#c90202',
+      pressColor: '#c90202'
     },
     {
       key: 'score-table',
       icon: 'movie',
-      label: 'Score Table',
-      barColor: '#00b5ec',
-      pressColor: '#00b5ec'
+      label: 'Puan Tablosu',
+      barColor: '#c90202',
+      pressColor: '#c90202'
     },
     {
       key: 'profile',
       icon: 'music-note',
-      label: 'Profile',
-      barColor: '#00b5ec',
-      pressColor: '#00b5ec'
+      label: 'Sayfam',
+      barColor: '#c90202',
+      pressColor: '#c90202'
     },
     {
       key: 'portfolio',
       icon: 'music-note',
-      label: 'Portfolio',
-      barColor: '#00b5ec',
-      pressColor: '#00b5ec'
+      label: 'Potfolyo Hesaplama',
+      barColor: '#c90202',
+      pressColor: '#c90202'
     }
   ]
   handleTabPress = (newTab) => {
@@ -48,7 +48,7 @@ class BottomNav extends React.Component  {
         Actions.main2();
         break;
       case "profile":
-        Actions.main3();
+        Actions.main3({userID: '1235'});
         break;
       case "portfolio":
         Actions.main4();

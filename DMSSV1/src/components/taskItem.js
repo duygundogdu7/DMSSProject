@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text,TouchableOpacity} from 'react-native';
 import {Card} from './common';
+import { Actions } from 'react-native-router-flux';
 
 class TaskItem extends Component {
     render(){
@@ -8,10 +9,17 @@ class TaskItem extends Component {
         console.log("single");
         console.log(task);
         return (
+          <TouchableOpacity key={task.id}
+                            onPress={()=>{
+                              Actions.main7({
+                                task: task
+                              })
+                            }}>
             <Card>
               <Text style={styles.titleStyle}>{task.title}</Text>
               <Text style={styles.titleStyle}>{task.user_id}</Text>
             </Card>
+            </TouchableOpacity>
         );
     }
 }

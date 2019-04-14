@@ -7,6 +7,8 @@ import TaskListMain from './components/mains/taskListMain';
 import ScoreTableMain from './components/mains/scoreTableMain';
 import ProfileMain from './components/mains/profileMain';
 import PortfolioMain from './components/mains/portfolioMain';
+import UpdateTask from './components/updateTask';
+import AddTask from './components/addTask';
 
 
 const RouterComp = () => {
@@ -24,36 +26,31 @@ const RouterComp = () => {
         <Scene key='main'>
           <Scene key='taskListMain'
                  component={TaskListMain}
-                 title='taskListMain'
-                 hideNavBar={true}
+                 title='Görev Listesi'
                  />
         </Scene>
         <Scene key='main2'>
           <Scene key='scoreTableMain'
                  component={ScoreTableMain}
-                 title='scoreTableMain'
-                 hideNavBar={true}
+                 title='Puan Tablosu'
                  />
         </Scene>
         <Scene key='main3'>
           <Scene key='profileMain'
                  component={ProfileMain}
-                 title='profileMain'
-                 hideNavBar={true}
+                 title='Benim Sayfam'
                  />
         </Scene>
         <Scene key='main4'>
           <Scene key='PortfolioMain'
                  component={PortfolioMain}
-                 title='PortfolioMain'
-                 hideNavBar={true}
+                 title='Portföy Hesaplama'
                  />
         </Scene>
         <Scene key='main5'>
           <Scene key='ManagerConfirmMain'
                  component={ManagerConfirm}
-                 title='ManagerConfirmMain'
-                 hideNavBar={true}
+                 title='Takımım'
                  />
         </Scene>
         <Scene key='main6'>
@@ -61,6 +58,18 @@ const RouterComp = () => {
                  component={Register}
                  title='Register'
                  hideNavBar={true}/>
+        </Scene>
+        <Scene key='main7'>
+          <Scene key='UpdateTask'
+                 component={UpdateTask}
+                 title='UpdateTask'
+                 />
+        </Scene>
+        <Scene key='main8'>
+          <Scene key='AddTask'
+                 component={AddTask}
+                 title='AddTask'
+                 />
         </Scene>
       </Scene>
       
