@@ -6,6 +6,8 @@ import { View, Text, Button, FlatList,
 import { connect, Provider } from 'react-redux';
 import { ListItem } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
+import {fetchAllTasks} from '../actions'
+
 
 
 class Task extends Component {
@@ -20,13 +22,17 @@ class Task extends Component {
   onNewTaskClicked(){
     Actions.NewTask();
   }
+  componentDidMount(){
+    this.props.fetchAllTasks();
+  }
+
 
     renderItem = ({ item }) => (
       <TouchableOpacity onPress={() => this._onItemClicked(item)}>
         <ListItem
           title={item.title}
           subtitle={item.date}
-          leftAvatar={{ source: {uri: item.source}}}
+          leftAvatar={{ source: {uri: "https://img.icons8.com/dusk/64/000000/task.png"}}}
           rightElement={item.id}
         />
         </TouchableOpacity>
@@ -54,9 +60,15 @@ class Task extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        tasks: state.tasks
-    }
+  var tasks = []
+  for (var property in state.tasks.data) {
+    tasks = state.tasks.data[property]
+  }
+
+  return {
+    tasks  
+  }
+
 }
 
 const styles = StyleSheet.create({
@@ -89,10 +101,9 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(mapStateToProps)(Task);
+export default connect(mapStateToProps, {
+  fetchAllTasks
+})(Task)
 
-
-//Team Members databaseden bir list olarak gelecek. 
-//Team Leader da aynı şekilde
 
 

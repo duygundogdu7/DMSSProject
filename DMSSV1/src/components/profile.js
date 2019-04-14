@@ -2,6 +2,8 @@ import { Button, FlatList, ScrollView } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import {getProfile} from '../actions'	
+
 import {
   StyleSheet,
   Text,
@@ -12,20 +14,23 @@ import {
 } from 'react-native';
 
 class Profile extends Component {
- 
+  componentDidMount(){
+    this.props.getProfile(this.props.userID);
+  }
+
   onButtonClicked(){
   }
 
   renderItem = ({ item }) => (
     <ListItem
-      title={item.title}
-      subtitle={item.subtitle}
-      rightElement = {item.isbn}
+      title={item.name}
+      subtitle={item.isbn}
+      rightElement = {item.score}
     />
   )
 
   render() {
-    const { members } = this.props;
+    const { profile } = this.props;
     return(
 
       <View>
@@ -35,8 +40,8 @@ class Profile extends Component {
           <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
           <View style={styles.body}>
             <View style={styles.bodyContent}>
-              <Text style={styles.name}>John Doe</Text>
-              <Text style={styles.info}>Keller Williams Consultant</Text>
+              <Text style={styles.name}>{profile.name}</Text>
+              <Text style={styles.info}>Takım Liderin: {profile.manager}</Text>
               <Text style={styles.description}>BU HAFTAKİ TAKIMIM</Text>
               </View>
           </View>
@@ -44,7 +49,7 @@ class Profile extends Component {
         
         <View style={styles.flatlistStyle}>      
           <FlatList
-          data={members}
+          data={profile.friends}
           renderItem={this.renderItem}
         />     
         </View>
@@ -58,9 +63,13 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        members: state.members
-    }
+  var profile = []
+  for (var property in state.profile.data) {
+    profile[property] = state.profile.data[property]
+  }
+  return {
+    profile
+  }
 }
 
 const styles = StyleSheet.create({
@@ -153,5 +162,5 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, {getProfile})(Profile);
 

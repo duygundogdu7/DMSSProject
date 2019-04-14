@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { BottomNavigation, Text } from 'react-native-paper';
 import reducers from './src/reducers';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';	
+import ReduxThunk from 'redux-thunk';	
 import { Provider } from 'react-redux';
 import Main from './src/Main';
 import {
@@ -14,7 +15,7 @@ export default class MyComponent extends React.Component {
 
 
   render() {
-    const store = createStore(reducers)
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
     return (
       <Provider store={store}>

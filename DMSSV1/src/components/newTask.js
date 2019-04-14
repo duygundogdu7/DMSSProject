@@ -1,17 +1,48 @@
 import React, { Component } from 'react';
 import { Input,Button } from 'react-native-elements';
-import { Text, StyleSheet, View, TouchableHighlight } from 'react-native';
+import { Text, StyleSheet, View, TouchableHighlight ,TextInput} from 'react-native';
+import axios from 'axios';
+
 
 export default class NewTask extends Component {
-  
-  onButtonClicked(){
+  state ={
+    title: '',
+    addResponse:'',
+    error: '',
+    loading:false
+}
+
+onButtonClicked(){
+  this.setState({error: '', loading:true})
+  axios({
+    method: 'post',
+    url: 'http://192.168.0.12:8086/task',
+    data: {
+        title: this.state.title,
+        user_id: '1235'
+    }
+   }).then((response) => 
+  {this.setState({
+  addResponse: response.data["res"]
+})})
+  console.log(this.state.addResponse);
+  if(this.state.addResponse == "1")
+    Actions.Task();
+  else{
+    this.setState({
+      error: 'Görev eklenirken hata oluştu.',
+      loading: false
+    })
+   
   }
+  
+}
 
   render() {
     return (
       <View>
-      <Input placeholder={this.props.title} />
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onButtonClicked.bind(this)}>
+        <TextInput onChangeText={(title) => this.setState({title})}/>       
+         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onButtonClicked.bind(this)}>
             <Text style={styles.loginText}>Görev ekle</Text>
           </TouchableHighlight>
         

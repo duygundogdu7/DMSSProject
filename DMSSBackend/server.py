@@ -153,6 +153,7 @@ class Profile(Resource):
     def get(self):
         user_id = request.args.get('user_id')
         user = self.users.find_one({"_id": user_id})
+        print(user)
         manager = self.users.find_one({"_id": user["manager_id"]})
         manager = manager["name"]
         friends = self.users.find({"team_id": user["team_id"]})

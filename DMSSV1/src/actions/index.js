@@ -60,13 +60,13 @@ export const fetchScoreTable = () => {
   };
 };
 
-export const getProfile = (user_id) => {
+export const getProfile = () => {
   console.log("getProfile throwed")
   return async (dispatch) => {
     try {
       const response = await axios.get(profileURL, {
         params: {
-          user_id: user_id
+          user_id: '1235'
         }
       });
       console.log("action resp");

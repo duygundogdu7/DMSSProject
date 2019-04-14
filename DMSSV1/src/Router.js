@@ -5,6 +5,8 @@ import MyComponent from './components/mycomponent';
 import TaskDetail from './components/taskDetail';
 import Register from './components/register';
 import NewTask from './components/newTask';
+import Task from './components/task';
+
 
 const ReactRouter = () => {
     return(
@@ -15,6 +17,7 @@ const ReactRouter = () => {
                 <Scene key="MyComponent" component={MyComponent} hideNavBar={true} panHandlers={null} ></Scene>  
                 <Scene key="TaskDetail" title="Görev Detayları" component={TaskDetail} hideNavBar={false} panHandlers={null} ></Scene>
                 <Scene key="NewTask" title="Yeni Görev" component={NewTask} hideNavBar={false} panHandlers={null} ></Scene>
+                <Scene key="Task" title="Görevlerim" component={Task} hideNavBar={false} panHandlers={null} ></Scene>
             </Scene>
         </Router>
     );

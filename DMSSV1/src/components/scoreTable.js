@@ -2,26 +2,32 @@ import React, { Component } from 'react'
 import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
 import { connect, Provider } from 'react-redux';
 import { ListItem } from 'react-native-elements';
+import {fetchScoreTable} from '../actions'
 
 class ScoreRoute extends Component {
- 
+  componentDidMount(){	
+    this.props.fetchScoreTable();	
+ }
+
     renderItem = ({ item }) => (
         <ListItem
-          title={item.title}
+          title={item.name}
           subtitle={item.artist}
           leftAvatar={{ source: {uri: item.source}}}
-          rightElement={item.id}
+          rightElement={item.score}
 
         />
       )
 
   render() {
-      const { scores } = this.props;
+    console.log("st render")
+    console.log(this.props)
+      const { scoreTable } = this.props;
     return(
         <View>
           <Text style={styles.textWrapper}>HAFTALIK PUAN TABLOSU</Text>
             <FlatList
-            data={scores}
+            data={scoreTable}
              renderItem={this.renderItem}
             />          
         </View>
@@ -30,10 +36,16 @@ class ScoreRoute extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        scores: state.scores
-    }
+  var scoreTable = []
+  for (var property in state.scoreTable.data) {
+    scoreTable = state.scoreTable.data[property]
+  }	
+  return {
+    scoreTable
+  }
 }
+
+
 const styles = StyleSheet.create({
   textWrapper: {
      marginTop: 20,
@@ -44,8 +56,7 @@ const styles = StyleSheet.create({
    },
 })
 
-export default connect(mapStateToProps)(ScoreRoute);
-
+export default connect(mapStateToProps, {fetchScoreTable})(ScoreRoute);
 
 //Team Members databaseden bir list olarak gelecek. 
 //Team Leader da aynı şekilde
