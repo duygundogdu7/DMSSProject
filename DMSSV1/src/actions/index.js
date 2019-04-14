@@ -3,9 +3,12 @@ export const FETCH_TASKS = 'fetch_tasks';
 export const GET_PROFILE = 'get_profile';
 export const FETCH_SCORE_TABLE = 'fetch_score_table';
 export const CHANGE_TASK = 'change_task';
+export const DELETE_TASK = 'delete_task';
 
 
 
+
+const completeTaskUrl = 'http://192.168.0.12:8086/completeTask';
 const updateTaskURL = 'http://192.168.0.12:8086/updateTask';
 const taskListURL = 'http://192.168.0.12:8086/taskList';
 const profileURL = 'http://192.168.0.12:8086/profile';
@@ -37,6 +40,48 @@ export const changeTask = (task) => {
   };
 };
 
+export const deleteTask = (task) => {
+  console.log("deleteTask throwed")
+  return async (dispatch) => {
+    try {
+      console.log("actiona gelen");
+      console.log(task);
+      const response = await  axios.delete(updateTaskURL, { data: {  id: task.id } });
+      console.log("action resp");
+      console.log(response);
+      dispatch({
+        type: DELETE_TASK,
+        payload: response
+      });
+    }
+    catch (error) {
+      throw (error);
+    }
+  };
+};
+
+export const completeTask = (task) => {
+  console.log("completeTask throwed")
+  return async (dispatch) => {
+    try {
+      console.log("actiona gelen");
+      console.log(task);
+      const response = await axios.post(completeTaskUrl, 
+        {
+          id: task.id      
+      });
+      console.log("action resp");
+      console.log(response);
+      dispatch({
+        type: DELETE_TASK,
+        payload: response
+      });
+    }
+    catch (error) {
+      throw (error);
+    }
+  };
+};
 
 export const fetchScoreTable = () => {
   console.log("fetchScoreTable throwed")

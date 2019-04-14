@@ -1,20 +1,51 @@
 import React, { Component } from 'react';
 import { Input,Button } from 'react-native-elements';
 import { Text, StyleSheet, View, TouchableHighlight } from 'react-native';
+import { connect } from 'react-redux';
+import {changeTask,deleteTask,completeTask} from '../actions'
 
-export default class TaskDetail extends Component {
-  
-  onButtonClicked(){
-  }
+
+
+class TaskDetail extends Component {
+    state ={
+      title:'',
+      id:''
+    }
+    onDeleteClicked(){
+      this.props.deleteTask(task={id: this.state.id })
+    }
+    onSaveClicked(){
+      this.props.changeTask(task={title: this.state.title,id: this.state.id })
+    }
+    onCompleteClicked(){
+      this.props.completeTask(task={id: this.state.id })
+    }
+    componentWillMount(){
+      const {task} = this.props;
+      this.state.title = task.title;
+      this.state.id = task.id;
+    }
 
   render() {
+    console.log("this.state");
+    console.log(this.state);
     return (
       <View>
-      <Input placeholder={this.props.title} />
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onButtonClicked.bind(this)}>
+       
+      <Input text='Görev'
+                onChangeText={(text) => {
+                      this.setState({
+                          title: text
+                      })
+                }}
+                value={this.state.title}/>
+        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onSaveClicked.bind(this)}>
             <Text style={styles.loginText}>Görevi güncelle</Text>
           </TouchableHighlight>
-        <TouchableHighlight style={[styles.buttonContainer2, styles.loginButton2]} onPress={this.onButtonClicked.bind(this)}>
+          <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onCompleteClicked.bind(this)}>
+            <Text style={styles.loginText}>Tamamla</Text>
+          </TouchableHighlight>
+        <TouchableHighlight style={[styles.buttonContainer2, styles.loginButton2]} onPress={this.onDeleteClicked.bind(this)}>
           <Text style={styles.loginText2}>Bu görevi sil</Text>
        </TouchableHighlight> 
       </View>
@@ -69,3 +100,13 @@ const styles = StyleSheet.create({
     color: 'white',
   }
 })
+
+const mapStateToProps = state => {
+  return{
+  }
+}
+
+
+export default connect(mapStateToProps, {
+  changeTask,deleteTask,completeTask
+})(TaskDetail);

@@ -3,7 +3,7 @@ import { View, Text, Button, FlatList,
         StyleSheet, TouchableHighlight,
         TouchableWithoutFeedback,
         TouchableOpacity } from 'react-native';
-import { connect, Provider } from 'react-redux';
+import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import {fetchAllTasks} from '../actions'
@@ -12,11 +12,15 @@ import {fetchAllTasks} from '../actions'
 
 class Task extends Component {
   _onItemClicked = (item) =>{
-    Actions.TaskDetail({title:item.title});
+    Actions.TaskDetail({
+      task: item
+    });
   }
 
   onButtonClicked(){
-    Actions.TaskDetail();
+    Actions.TaskDetail({
+      task: item
+    });
     }
   
   onNewTaskClicked(){

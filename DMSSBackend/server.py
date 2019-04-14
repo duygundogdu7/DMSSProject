@@ -76,7 +76,7 @@ class TaskList(Resource):
 
     def get(self):
         user_id = request.args.get('user_id')
-        tasks_of_user = self.tasks.find({"user_id": user_id})
+        tasks_of_user = self.tasks.find({"user_id": user_id, "is_complete":False})
         results = list(tasks_of_user)
         for res in results:
             res["id"] = str(res["_id"])
@@ -84,6 +84,22 @@ class TaskList(Resource):
         return  (jsonify(tasks=results))
            
 api.add_resource(TaskList,  '/taskList',  methods=['GET'])
+
+
+class ManagerTaskList(Resource):
+    def __init__(self):
+        self.tasks = db.Tasks
+
+    def get(self):
+        user_id = request.args.get('user_id')
+        tasks_of_user = self.tasks.find({"manager_id": user_id, "is_complete":True, "is_approved":False})
+        results = list(tasks_of_user)
+        for res in results:
+            res["id"] = str(res["_id"])
+            del res["_id"]
+        return  (jsonify(tasks=results))
+           
+api.add_resource(ManagerTaskList,  '/taskList',  methods=['GET'])
 
 class UpdateTask(Resource):
     def __init__(self):
@@ -99,8 +115,52 @@ class UpdateTask(Resource):
             print(e)
             return (jsonify(res="0"))
 
+    def delete(self):
+        try:
+            data = request.get_json()
+            print(data)
+            db.Tasks.delete_one({"_id": ObjectId(data['id'])})
+            return (jsonify(res="1")) 
+        except Exception as e:
+            print(e)
+            return (jsonify(res="0"))
+
            
-api.add_resource(UpdateTask,  '/updateTask',  methods=['POST'])
+api.add_resource(UpdateTask,  '/updateTask',  methods=['POST','DELETE'])
+
+class CompleteTask(Resource):
+    def __init__(self):
+        pass
+
+    def post(self):
+        try:
+            data = request.get_json()
+            print(data)
+            db.Tasks.update_one({"_id": ObjectId(data['id'])},{"$set": {"is_complete":True}})
+            return (jsonify(res="1")) 
+        except Exception as e:
+            print(e)
+            return (jsonify(res="0"))
+
+           
+api.add_resource(CompleteTask,  '/completeTask',  methods=['POST'])
+
+class ApproveTask(Resource):
+    def __init__(self):
+        pass
+
+    def post(self):
+        try:
+            data = request.get_json()
+            print(data)
+            db.Tasks.update_one({"_id": ObjectId(data['id'])},{"$set": {"is_approved":True}})
+            return (jsonify(res="1")) 
+        except Exception as e:
+            print(e)
+            return (jsonify(res="0"))
+
+           
+api.add_resource(ApproveTask,  '/approveTask',  methods=['POST'])
 
 class Task(Resource):
     def __init__(self):
@@ -118,7 +178,9 @@ class Task(Resource):
             task = {
                 #TODO: add the more properties of task
                 "user_id": data['user_id'],
-                "title": data['title']
+                "title": data['title'],
+                "is_complete":False,
+                "is_approved":False
             }
             db.Tasks.insert_one(task)
             print(task)
