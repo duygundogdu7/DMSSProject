@@ -1,64 +1,67 @@
-import React, { Component } from 'react'
-import { View, Text, Button, FlatList,StyleSheet,Image, ScrollView } from 'react-native';
-import { connect } from 'react-redux';
-import {getProfile} from '../actions'
+import { Button, FlatList, ScrollView } from 'react-native';
 import { ListItem } from 'react-native-elements';
-
-
+import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  TouchableHighlight
+} from 'react-native';
 
 class Profile extends Component {
-  componentDidMount(){
-    this.props.getProfile(this.props.userID);
+ 
+  onButtonClicked(){
   }
 
   renderItem = ({ item }) => (
     <ListItem
-      title={item.name}
-      subtitle={item.score}
+      title={item.title}
+      subtitle={item.subtitle}
+      rightElement = {item.isbn}
     />
   )
 
   render() {
-      const { profile } = this.props;
-      console.log(profile);
+    const { members } = this.props;
     return(
+
       <View>
-      <View style={styles.container}>
-        <View style={styles.header}></View>
-        <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
-        <View style={styles.body}>
-          <View style={styles.bodyContent}>
-            <Text style={styles.name}>{profile.name}</Text>
-            <Text style={styles.info}>Keller Williams Consultant</Text>
-            <Text style={styles.description}></Text>
-            </View>
+          <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.header}></View>
+          <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
+          <View style={styles.body}>
+            <View style={styles.bodyContent}>
+              <Text style={styles.name}>John Doe</Text>
+              <Text style={styles.info}>Keller Williams Consultant</Text>
+              <Text style={styles.description}>BU HAFTAKİ TAKIMIM</Text>
+              </View>
+          </View>
         </View>
-      </View>
-      <ScrollView>
+        
         <View style={styles.flatlistStyle}>      
           <FlatList
-          data={profile.friends}
+          data={members}
           renderItem={this.renderItem}
         />     
         </View>
-      </ScrollView>
-    </View>  
-    
-    )
+        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onButtonClicked.bind(this)}>
+          <Text style={styles.loginText}>Çıkış yap</Text>
+        </TouchableHighlight>
+        </ScrollView>
+      </View>  
+  )
   }
 }
-
 
 const mapStateToProps = state => {
-  var profile = []
-  for (var property in state.profile.data) {
-    profile[property] = state.profile.data[property]
-  }
-  return {
-    profile
-  }
+    return {
+        members: state.members
+    }
 }
-
 
 const styles = StyleSheet.create({
   textWrapper: {
@@ -67,7 +70,7 @@ const styles = StyleSheet.create({
      marginLeft: 15
    },
    flatlistStyle:{
-     marginTop: 50,
+     
    },
    errorText: {
      color: 'red',
@@ -76,7 +79,7 @@ const styles = StyleSheet.create({
      alignSelf: 'center'
    },
    header:{
-    backgroundColor: "#c90202",
+    backgroundColor: "#00b5ec",
     height:200,
   },
   avatar: {
@@ -110,17 +113,18 @@ const styles = StyleSheet.create({
   },
   info:{
     fontSize:16,
-    color: "#c90202",
+    color: "#00b5ec",
     marginTop:10
   },
   description:{
-    fontSize:16,
+    fontSize:20,
     color: "#696969",
-    marginTop:10,
-    textAlign: 'center'
+    marginTop:20,
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
   buttonContainer: {
-    marginTop:10,
+    marginTop:40,
     height:45,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -129,27 +133,25 @@ const styles = StyleSheet.create({
     width:250,
     borderRadius:30,
     backgroundColor: "#00BFFF",
+  },
+  buttonContainer: {
+    marginTop: 20,
+    height:45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:20,
+    width:250,
+    borderRadius:30,
+    marginLeft: 80
+  },
+  loginButton: {
+    backgroundColor: "#00b5ec",
+  },
+  loginText: {
+    color: 'white',
   }
 })
 
-export default connect(mapStateToProps, {
-  getProfile
-})(Profile);
+export default connect(mapStateToProps)(Profile);
 
-
-//Team Members databaseden bir list olarak gelecek. 
-//Team Leader da aynı şekilde
-
-/*<List>
-<FlatList
-data={this.state.data}
-renderItem={({ item }) => (
-<ListItem
-    roundAvatar
-    title={'${item.name.first} ${item.name.last}'}
-    subtitle={item.email}
-     avatar={{ uri: item.picture.thumbnail }}
-/>
-)}
-/>
-</List>*/

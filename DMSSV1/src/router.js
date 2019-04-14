@@ -1,80 +1,23 @@
 import React from 'react';
-import { Scene, Router } from 'react-native-router-flux';
-import LoginForm from './components/loginForm';
+import {Scene,Router,Stack} from 'react-native-router-flux';
+import LoginView from './components/loginForm';
+import MyComponent from './components/mycomponent';
+import TaskDetail from './components/taskDetail';
 import Register from './components/register';
-import ManagerConfirm from './components/managerConfirm';
-import TaskListMain from './components/mains/taskListMain';
-import ScoreTableMain from './components/mains/scoreTableMain';
-import ProfileMain from './components/mains/profileMain';
-import PortfolioMain from './components/mains/portfolioMain';
-import UpdateTask from './components/updateTask';
-import AddTask from './components/addTask';
+import NewTask from './components/newTask';
 
-
-const RouterComp = () => {
-  return (
-    <Router>
-      <Scene key='root' hideNavBar={true}>
-        <Scene key='auth'>
-          <Scene key='login'
-                 component={LoginForm}
-                 title='Login'
-                 hideNavBar={true}
-                 initial
-                 />
-        </Scene>
-        <Scene key='main'>
-          <Scene key='taskListMain'
-                 component={TaskListMain}
-                 title='Görev Listesi'
-                 />
-        </Scene>
-        <Scene key='main2'>
-          <Scene key='scoreTableMain'
-                 component={ScoreTableMain}
-                 title='Puan Tablosu'
-                 />
-        </Scene>
-        <Scene key='main3'>
-          <Scene key='profileMain'
-                 component={ProfileMain}
-                 title='Benim Sayfam'
-                 />
-        </Scene>
-        <Scene key='main4'>
-          <Scene key='PortfolioMain'
-                 component={PortfolioMain}
-                 title='Portföy Hesaplama'
-                 />
-        </Scene>
-        <Scene key='main5'>
-          <Scene key='ManagerConfirmMain'
-                 component={ManagerConfirm}
-                 title='Takımım'
-                 />
-        </Scene>
-        <Scene key='main6'>
-          <Scene key='Register'
-                 component={Register}
-                 title='Register'
-                 hideNavBar={true}/>
-        </Scene>
-        <Scene key='main7'>
-          <Scene key='UpdateTask'
-                 component={UpdateTask}
-                 title='UpdateTask'
-                 />
-        </Scene>
-        <Scene key='main8'>
-          <Scene key='AddTask'
-                 component={AddTask}
-                 title='AddTask'
-                 />
-        </Scene>
-      </Scene>
-      
-    </Router>
-  )
+const ReactRouter = () => {
+    return(
+        <Router>
+            <Scene key="Pages">
+                <Scene key="Login" component={LoginView} hideNavBar={true} panHandlers={null} ></Scene>  
+                <Scene key="Register" component={Register} hideNavBar={true} panHandlers={null} ></Scene> 
+                <Scene key="MyComponent" component={MyComponent} hideNavBar={true} panHandlers={null} ></Scene>  
+                <Scene key="TaskDetail" title="Görev Detayları" component={TaskDetail} hideNavBar={false} panHandlers={null} ></Scene>
+                <Scene key="NewTask" title="Yeni Görev" component={NewTask} hideNavBar={false} panHandlers={null} ></Scene>
+            </Scene>
+        </Router>
+    );
 }
 
-export default RouterComp;
+export default ReactRouter;

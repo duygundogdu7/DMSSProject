@@ -1,68 +1,53 @@
 import React, { Component } from 'react'
-import { View, Text, Button, FlatList } from 'react-native';
-import { connect } from 'react-redux';
+import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
+import { connect, Provider } from 'react-redux';
 import { ListItem } from 'react-native-elements';
-import {fetchScoreTable} from '../actions'
 
-class ScoreTable extends Component {
-  componentDidMount(){
-    this.props.fetchScoreTable();
-  }
+class ScoreRoute extends Component {
+ 
     renderItem = ({ item }) => (
         <ListItem
-          title={item.score}
-          subtitle={item.name}
+          title={item.title}
+          subtitle={item.artist}
+          leftAvatar={{ source: {uri: item.source}}}
+          rightElement={item.id}
+
         />
       )
 
-      render() {
-        console.log("scoreTable render")
-        console.log(this.props)
-        const {scoreTable} = this.props;
-          return (
-            <View>
-           <FlatList
-            data={scoreTable}
-            renderItem={this.renderItem}
-              />
-            </View>
-         
-          );
-        }
+  render() {
+      const { scores } = this.props;
+    return(
+        <View>
+          <Text style={styles.textWrapper}>HAFTALIK PUAN TABLOSU</Text>
+            <FlatList
+            data={scores}
+             renderItem={this.renderItem}
+            />          
+        </View>
+    )
+  }
 }
 
 const mapStateToProps = state => {
-  var scoreTable = []
-  console.log("state.scoreTable.data");
-  console.log(state.scoreTable.data);
-  for (var property in state.scoreTable.data) {
-    scoreTable = state.scoreTable.data[property]
-    console.log("scoreTable");
-  console.log(scoreTable);
-  }
-  return {
-    scoreTable
-  }
+    return {
+        scores: state.scores
+    }
 }
+const styles = StyleSheet.create({
+  textWrapper: {
+     marginTop: 20,
+     marginBottom: 20,
+     fontSize: 20,
+     textAlign: 'center',
+     fontWeight: 'bold'
+   },
+})
 
+export default connect(mapStateToProps)(ScoreRoute);
 
-export default connect(mapStateToProps, {
-  fetchScoreTable
-})(ScoreTable);
 
 //Team Members databaseden bir list olarak gelecek. 
 //Team Leader da aynı şekilde
 
-/*<List>
-<FlatList
-data={this.state.data}
-renderItem={({ item }) => (
-<ListItem
-    roundAvatar
-    title={'${item.name.first} ${item.name.last}'}
-    subtitle={item.email}
-     avatar={{ uri: item.picture.thumbnail }}
-/>
-)}
-/>
-</List>*/
+

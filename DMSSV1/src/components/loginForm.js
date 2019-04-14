@@ -1,123 +1,118 @@
 import React, { Component } from 'react';
-import { View, Text,Button, StyleSheet, Image } from 'react-native';
-import {Input, Spinner} from './common';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  TouchableHighlight,
+  Image,
+  Alert
+} from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import axios from 'axios';
 
-class LoginForm extends Component {
-  state ={
-      email:'',
-      password:'',
-      loginResponse:'',
-      loading: false,
-      error: ''
+export default class LoginView extends Component {
+
+  constructor(props) {
+    super(props);
+    state = {
+      email   : '',
+      password: '',
+    }
   }
 
   onButtonClicked(){
-    const {email, password} = this.state;
-    this.setState({
-      error: '',
-      loading: true
-    })
-    axios({
-      method: 'post',
-      url: 'http://192.168.0.12:8086/user',
-      data: {
-          email: this.state.email,
-          password: this.state.password,
-      }
-     }).then((response) => 
-    {this.setState({
-    loginResponse: response.data["res"]
-  })})
-    console.log(this.state.loginResponse);
-    if(this.state.loginResponse== 1)
-    Actions.main();
-    else{
-      this.setState({
-        error: 'Authentication failed',
-        loading: false
-      })
-    }
+    Actions.MyComponent();
   }
 
-onRegisterClicked(){
-  Actions.main6()
-}
+  onClickListener = (viewId) => {
+    Alert.alert("Alert", "Button pressed "+viewId);
+  }
+
+  onRegisterClicked(){
+    Actions.Register();
+  }
+
   render() {
-
-      const { error,loading} = this.state;
-
-      const errorMsg = error ? (
-        <Text>
-          {error}
-        </Text>
-      ) : null;
-
-      const loginButton = loading ? (
-        <Spinner /> ): (
-          <View style={styles.buttonWrapper}>
-              <Button
-              onPress={this.onButtonClicked.bind(this)}
-              color='#E87B79' title='Giriş Yap' />
-              <Button title="Üye ol" onPress={this.onRegisterClicked.bind(this)}/>
-                </View>
-        );
-
-      
-
-      return (
-        <View>
-          <View style={styles.imageWrapper}>
-          <Image source={require('../images/kw.png')} />
-          </View>
-            <View style={this.emailWrapper}>
-                <Input text='Email' inputPlaceHolder='Emailinizi giriniz'
-                onChangeText={(text) => {
-                      this.setState({
-                          email: text
-                      })
-                }}
-                value={this.state.email}/>
-            </View>
-            <View><Input text='Şifreniz' inputPlaceHolder='Şifrenizi giriniz'
-                onChangeText={(text) => {
-                      this.setState({
-                          password: text
-                      })
-                }}
-                secureTextEntry
-                value={this.state.password}/>
-                </View>
-                {errorMsg}
-            <View style={styles.buttonWrapper}>
-             {loginButton}
-                </View>
+    return (
+      <View style={styles.container}>
+        <View style={styles.inputContainer}>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
+          <TextInput style={styles.inputs}
+              placeholder="Emailiniz"
+              keyboardType="email-address"
+              underlineColorAndroid='transparent'
+              onChangeText={(email) => this.setState({email})}/>
         </View>
-      );
-    }
+        
+        <View style={styles.inputContainer}>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
+          <TextInput style={styles.inputs}
+              placeholder="Sifreniz"
+              secureTextEntry={true}
+              underlineColorAndroid='transparent'
+              onChangeText={(password) => this.setState({password})}/>
+        </View>
+
+        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onButtonClicked.bind(this)}>
+          <Text style={styles.loginText}>Giris Yap</Text>
+        </TouchableHighlight>
+
+        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('restore_password')}>
+            <Text>Sifrenizi mi unuttunuz?</Text>
+        </TouchableHighlight>
+
+        <TouchableHighlight style={styles.buttonContainer} onPress={this.onRegisterClicked.bind(this)}>
+            <Text>Kaydol</Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-  emailWrapper: {
-    marginTop: 30
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#DCDCDC',
   },
-  imageWrapper:{
-    marginTop: 30
+  inputContainer: {
+      borderBottomColor: '#F5FCFF',
+      backgroundColor: '#FFFFFF',
+      borderRadius:30,
+      borderBottomWidth: 1,
+      width:250,
+      height:45,
+      marginBottom:20,
+      flexDirection: 'row',
+      alignItems:'center'
   },
-  buttonWrapper: {
-     marginTop: 20,
-     height: 49,
-     borderRadius: 10,
-     justifyContent: 'center',
-     fontSize: 18,
-     backgroundColor: '#fff'
-   },
-   errorText: {
-     color: 'red',
-     fontSize: 20,
-     paddingTop: 5,
-     alignSelf: 'center'
-   }
-})
-export default LoginForm;
+  inputs:{
+      height:45,
+      marginLeft:16,
+      borderBottomColor: '#FFFFFF',
+      flex:1,
+  },
+  inputIcon:{
+    width:30,
+    height:30,
+    marginLeft:15,
+    justifyContent: 'center'
+  },
+  buttonContainer: {
+    height:45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:20,
+    width:250,
+    borderRadius:30,
+  },
+  loginButton: {
+    backgroundColor: "#00b5ec",
+  },
+  loginText: {
+    color: 'white',
+  }
+});

@@ -1,135 +1,118 @@
 import React, { Component } from 'react';
-import { View, Text,Button, StyleSheet, Image } from 'react-native';
-import {Input, Spinner} from './common';
-import axios from 'axios';
-import { Actions } from 'react-native-router-flux';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableHighlight,
+  Image,
+  Alert
+} from 'react-native';
 
+export default class LoginView extends Component {
 
-class Register extends Component {
-  state ={
-      name:'',
-      surname:'',
-      email:'',
-      password:'',
-      registerResponse:'',
-      error: '',
-      loading:false,
-      
+  constructor(props) {
+    super(props);
+    state = {
+      email   : '',
+      password: '',
+    }
   }
 
-  onButtonClicked(){
-    this.setState({error: '', loading:true})
-    axios({
-      method: 'post',
-      url: 'http://192.168.0.12:8086/register',
-      data: {
-          name: this.state.name,
-          email: this.state.email,
-          password: this.state.password,
-      }
-     }).then((response) => 
-    {this.setState({
-    registerResponse: response.data["res"]
-  })})
-    console.log(this.state.registerResponse);
-    if(this.state.registerResponse == "1")
-      Actions.auth();
-    else{
-      this.setState({
-        error: 'Register failed',
-        loading: false
-      })
-     
-    }
-    
+  onClickListener = (viewId) => {
+    Alert.alert("Alert", "Button pressed "+viewId);
   }
 
   render() {
-    const { error,loading} = this.state;
-
-      const errorMsg = error ? (
-        <Text>
-          {error}
-        </Text>
-      ) : null;
-
-      const registerButton = loading ? (
-        <Spinner /> ): (
-          <View style={styles.buttonWrapper}>
-              <Button
-              onPress={this.onButtonClicked.bind(this)}
-              color='#E87B79' title='Kaydol' />
-                </View>
-        );
-      return (
-        <View>
-          <View style={styles.imageWrapper}>
-          <Image source={require('../images/kw.png')} />
-          </View>
-            <View>
-                <Input text='Adınız' inputPlaceHolder='Adinizi giriniz'
-                onChangeText={(text) => {
-                      this.setState({
-                          name: text
-                      })
-                }}
-                value={this.state.name}/>
-            </View>
-            <View>
-                <Input text='Soyadınız' inputPlaceHolder='Soyadinizi giriniz'
-                onChangeText={(text) => {
-                      this.setState({
-                          surname: text
-                      })
-                }}
-                value={this.state.surname}/>
-            </View>
-            <View>
-                <Input text='Emailiniz' inputPlaceHolder='Emailinizi giriniz'
-                onChangeText={(text) => {
-                      this.setState({
-                          email: text
-                      })
-                }}
-                value={this.state.email}/>
-                
-            </View>
-            <View><Input text='Şifreniz' inputPlaceHolder='Şifrenizi giriniz'
-                onChangeText={(text) => {
-                      this.setState({
-                          password: text
-                      })
-                }}
-                secureTextEntry
-                value={this.state.password}/>
-                </View>
-                {errorMsg}
-            <View style={styles.buttonWrapper}>
-                {registerButton}
-                </View>
+    return (
+      <View style={styles.container}>
+      <View style={styles.inputContainer}>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
+          <TextInput style={styles.inputs}
+              placeholder="Adiniz"
+              keyboardType="email-address"
+              underlineColorAndroid='transparent'
+              onChangeText={(email) => this.setState({email})}/>
         </View>
-      );
-    }
+      <View style={styles.inputContainer}>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
+          <TextInput style={styles.inputs}
+              placeholder="Soyadiniz"
+              keyboardType="email-address"
+              underlineColorAndroid='transparent'
+              onChangeText={(email) => this.setState({email})}/>
+        </View>
+        <View style={styles.inputContainer}>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
+          <TextInput style={styles.inputs}
+              placeholder="Emailiniz"
+              keyboardType="email-address"
+              underlineColorAndroid='transparent'
+              onChangeText={(email) => this.setState({email})}/>
+        </View>
+        
+        <View style={styles.inputContainer}>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
+          <TextInput style={styles.inputs}
+              placeholder="Sifreniz"
+              secureTextEntry={true}
+              underlineColorAndroid='transparent'
+              onChangeText={(password) => this.setState({password})}/>
+        </View>
+
+        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.onClickListener('login')}>
+          <Text style={styles.loginText}>Kaydol</Text>
+        </TouchableHighlight>
+
+        
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-  imageWrapper:{
-    marginTop: 30
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#DCDCDC',
   },
-  buttonWrapper: {
-     marginTop: 20,
-     height: 49,
-     borderRadius: 10,
-     justifyContent: 'center',
-     fontSize: 18,
-     backgroundColor: '#fff'
-   },
-   errorText: {
-     color: 'red',
-     fontSize: 20,
-     paddingTop: 5,
-     alignSelf: 'center'
-   }
-})
-
-export default Register;
+  inputContainer: {
+      borderBottomColor: '#F5FCFF',
+      backgroundColor: '#FFFFFF',
+      borderRadius:30,
+      borderBottomWidth: 1,
+      width:250,
+      height:45,
+      marginBottom:20,
+      flexDirection: 'row',
+      alignItems:'center'
+  },
+  inputs:{
+      height:45,
+      marginLeft:16,
+      borderBottomColor: '#FFFFFF',
+      flex:1,
+  },
+  inputIcon:{
+    width:30,
+    height:30,
+    marginLeft:15,
+    justifyContent: 'center'
+  },
+  buttonContainer: {
+    height:45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:20,
+    width:250,
+    borderRadius:30,
+  },
+  loginButton: {
+    backgroundColor: "#00b5ec",
+  },
+  loginText: {
+    color: 'white',
+  }
+});
