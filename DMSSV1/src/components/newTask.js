@@ -37,9 +37,7 @@ onButtonClicked(){
       error: 'Görev eklenirken hata oluştu.',
       loading: false
     })
-   
-  }
-  
+}
 }
 
   render() {
