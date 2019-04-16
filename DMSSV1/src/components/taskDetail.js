@@ -3,6 +3,8 @@ import { Input,Button } from 'react-native-elements';
 import { Text, StyleSheet, View, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import {changeTask,deleteTask,completeTask} from '../actions'
+import { Actions } from 'react-native-router-flux';
+
 
 
 
@@ -15,12 +17,17 @@ class TaskDetail extends Component {
     }
     onDeleteClicked(){
       this.props.deleteTask(task={id: this.state.id })
+      Actions.MyComponent();
     }
     onSaveClicked(){
       this.props.changeTask(task={title: this.state.title,id: this.state.id })
+      Actions.MyComponent();
+
     }
     onCompleteClicked(){
       this.props.completeTask(task={id: this.state.id })
+      Actions.MyComponent();
+
     }
     componentWillMount(){
       const {task} = this.props;

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Input,Button } from 'react-native-elements';
 import { Text, StyleSheet, View, TouchableHighlight ,TextInput} from 'react-native';
 import axios from 'axios';
+import { Actions } from 'react-native-router-flux';
+
 
 
 export default class NewTask extends Component {
@@ -31,7 +33,7 @@ onButtonClicked(){
 })})
   console.log(this.state.addResponse);
   if(this.state.addResponse == "1")
-    Actions.Task();
+    Actions.MyComponent();
   else{
     this.setState({
       error: 'Görev eklenirken hata oluştu.',
