@@ -7,6 +7,8 @@ import axios from 'axios';
 export default class NewTask extends Component {
   state ={
     title: '',
+    date:'',
+    type:'',
     addResponse:'',
     error: '',
     loading:false
@@ -19,6 +21,8 @@ onButtonClicked(){
     url: 'http://192.168.43.165:8086/task',
     data: {
         title: this.state.title,
+        date: this.state.date,
+        type: this.state.type,
         user_id: '1235'
     }
    }).then((response) => 
@@ -41,13 +45,13 @@ onButtonClicked(){
   render() {
     return (
       <View>
-        <TextInput onChangeText={(title) => this.setState({title})}/>       
+        <TextInput placeholder="Görev adı" onChangeText={(title) => this.setState({title})}/> 
+        <TextInput placeholder="Görev tarihi" onChangeText={(date) => this.setState({date})}/>  
+        <TextInput placeholder="Görev tipi" onChangeText={(type) => this.setState({type})}/>        
          <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onButtonClicked.bind(this)}>
             <Text style={styles.loginText}>Görev ekle</Text>
           </TouchableHighlight>
-        
       </View>
-      
     );
   }
 }
