@@ -43,6 +43,20 @@ class TaskDetail extends Component {
                       })
                 }}
                 value={this.state.title}/>
+                <Input text='Görev'
+                onChangeText={(text) => {
+                      this.setState({
+                          date: text
+                      })
+                }}
+                value={this.state.date}/>
+                <Input text='Görev'
+                onChangeText={(text) => {
+                      this.setState({
+                          title: type
+                      })
+                }}
+                value={this.state.type}/>
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onSaveClicked.bind(this)}>
             <Text style={styles.loginText}>Görevi güncelle</Text>
           </TouchableHighlight>
