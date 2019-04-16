@@ -24,26 +24,7 @@ export default class LoginView extends Component {
   }
 
   onButtonClicked(){
-    axios({
-      method: 'post',
-      url: 'http://192.168.0.12:8086/user',
-      data: {
-          email: this.state.email,
-          password: this.state.password,
-      }
-     }).then((response) => 
-    {this.setState({
-    loginResponse: response.data["res"]
-  })})
-    console.log(this.state.loginResponse);
-    if(this.state.loginResponse== 1)
     Actions.MyComponent();
-    else{
-      this.setState({
-        error: 'Authentication failed',
-        loading: false
-      })
-    }
   }
 
   onClickListener = (viewId) => {
