@@ -37,7 +37,7 @@ class Task extends Component {
           title={item.title}
           subtitle={item.date}
           leftAvatar={{ source: {uri: "https://img.icons8.com/color/48/000000/christmas-star.png"}}}
-          rightElement={item.score}
+          rightElement={item.score + "puan"}
         />
         </TouchableOpacity>
       )
