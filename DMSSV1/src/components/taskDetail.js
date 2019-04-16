@@ -65,13 +65,13 @@ class TaskDetail extends Component {
                 }}
                 value={this.state.type}/>
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onSaveClicked.bind(this)}>
-            <Text style={styles.loginText}>Görevi güncelle</Text>
+            <Text style={styles.loginText}>Görevi Güncelle</Text>
           </TouchableHighlight>
           <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onCompleteClicked.bind(this)}>
             <Text style={styles.loginText}>Tamamla</Text>
           </TouchableHighlight>
         <TouchableHighlight style={[styles.buttonContainer2, styles.loginButton2]} onPress={this.onDeleteClicked.bind(this)}>
-          <Text style={styles.loginText2}>Bu görevi sil</Text>
+          <Text style={styles.loginText2}>Bu Görevi Sil</Text>
        </TouchableHighlight> 
       </View>
       

@@ -55,7 +55,7 @@ class Task extends Component {
         </View>
         <View style={styles.viewContainer}>
           <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onNewTaskClicked.bind(this)}>
-            <Text style={styles.loginText}>Yeni görev ekle</Text>
+            <Text style={styles.loginText}>YENİ GÖREV EKLE</Text>
           </TouchableHighlight>
         </View>
       </View>
