@@ -8,6 +8,10 @@ import {
   Image,
   Alert
 } from 'react-native';
+import axios from 'axios';
+import { Actions } from 'react-native-router-flux';
+
+
 
 export default class LoginView extends Component {
 
@@ -28,7 +32,7 @@ export default class LoginView extends Component {
     this.setState({error: '', loading:true})
     axios({
       method: 'post',
-      url: 'http://192.168.0.12:8086/register',
+      url: 'http://192.168.43.165:8086/register',
       data: {
           name: this.state.name,
           surname: this.state.surname,
@@ -41,7 +45,7 @@ export default class LoginView extends Component {
   })})
     console.log(this.state.registerResponse);
     if(this.state.registerResponse == "1")
-      Actions.auth();
+      Actions.Login();
     else{
       this.setState({
         error: 'Register failed',
@@ -62,7 +66,7 @@ export default class LoginView extends Component {
               placeholder="Ad"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
-              onChangeText={(email) => this.setState({email})}/>
+              onChangeText={(name) => this.setState({name})}/>
         </View>
       <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
@@ -70,7 +74,7 @@ export default class LoginView extends Component {
               placeholder="Soyad"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
-              onChangeText={(email) => this.setState({email})}/>
+              onChangeText={(surname) => this.setState({surname})}/>
         </View>
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>

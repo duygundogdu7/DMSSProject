@@ -236,10 +236,13 @@ class Register(Resource):
     def post(self):
         try:
             data = request.get_json()
+            print(data)
             user = {
                 "name": data['name'],
+                "surname": data['surname'],
                 "email": data['email'],
-                "password": data['password']
+                "password": data['password'],
+                "score": "0"
             }
             db.Users.insert_one(user)
             print(user)
