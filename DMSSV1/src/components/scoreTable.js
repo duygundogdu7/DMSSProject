@@ -13,8 +13,8 @@ class ScoreRoute extends Component {
         <ListItem
           title={item.name}
           subtitle={item.artist}
-          leftAvatar={{ source: {uri: item.source}}}
-          rightElement={item.score}
+          leftAvatar={{ source: {uri: "https://img.icons8.com/color/48/000000/christmas-star.png"}}}
+          rightElement={item.score + "puan"}
 
         />
       )
