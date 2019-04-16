@@ -109,7 +109,7 @@ class UpdateTask(Resource):
         try:
             data = request.get_json()
             print(data)
-            db.Tasks.update_one({"_id": ObjectId(data['id'])},{"$set": {"title":data['title']}})
+            db.Tasks.update_one({"_id": ObjectId(data['id'])},{"$set": {"title":data['title'],"date":data['date'],"type":data['type']}})
             return (jsonify(res="1")) 
         except Exception as e:
             print(e)

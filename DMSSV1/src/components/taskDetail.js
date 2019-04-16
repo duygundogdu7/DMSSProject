@@ -9,6 +9,8 @@ import {changeTask,deleteTask,completeTask} from '../actions'
 class TaskDetail extends Component {
     state ={
       title:'',
+      date: '',
+      type: '',
       id:''
     }
     onDeleteClicked(){
@@ -24,6 +26,8 @@ class TaskDetail extends Component {
       const {task} = this.props;
       this.state.title = task.title;
       this.state.id = task.id;
+      this.state.date = task.date;
+      this.state.type = task.type;
     }
 
   render() {

@@ -25,7 +25,9 @@ export const changeTask = (task) => {
       const response = await axios.post(updateTaskURL, 
         {
           id: task.id,
-          title: task.title
+          title: task.title,
+          date: task.date,
+          type: task.type
       });
       console.log("action resp");
       console.log(response);
