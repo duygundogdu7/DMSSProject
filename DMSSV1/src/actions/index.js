@@ -8,11 +8,11 @@ export const DELETE_TASK = 'delete_task';
 
 
 
-const completeTaskUrl = 'http://192.168.0.12:8086/completeTask';
-const updateTaskURL = 'http://192.168.0.12:8086/updateTask';
-const taskListURL = 'http://192.168.0.12:8086/taskList';
-const profileURL = 'http://192.168.0.12:8086/profile';
-const scoreTableURL = 'http://192.168.0.12:8086/scoreTable';
+const completeTaskUrl = 'http://192.168.43.165:8086/completeTask';
+const updateTaskURL = 'http://192.168.43.165:8086/updateTask';
+const taskListURL = 'http://192.168.43.165:8086/taskList';
+const profileURL = 'http://192.168.43.165:8086/profile';
+const scoreTableURL = 'http://192.168.43.165:8086/scoreTable';
 
 
 

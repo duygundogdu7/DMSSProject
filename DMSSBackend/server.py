@@ -260,9 +260,10 @@ class User(Resource):
     def post(self):
         data = request.get_json()
         user = self.users.find_one({"email": data["email"], "password": data["password"]})
-        if user is None:
-            return (jsonify(res="0"))
-        return (jsonify(res="1"))
+        if user is not None:
+            user["id"] = str(user["_id"])
+            return (jsonify(res="1",isManager=user["is_manager"],userID=user["_id"]))
+        return (jsonify(res="0"))
       
     def delete(self, user_id):
         self.users.delete_one({"_id": user_id})
