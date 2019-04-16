@@ -54,8 +54,8 @@ export default class LoginView extends Component {
     }
   }
 
-  onClickListener = (viewId) => {
-    Alert.alert("Alert", "Button pressed "+viewId);
+  onClickListener () {
+    Alert.alert("Şifrenizi unuttuysanız yöneticinize başvurunuz.");
   }
 
   onRegisterClicked(){
