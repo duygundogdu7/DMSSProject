@@ -63,7 +63,7 @@ export default class LoginView extends Component {
       <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Adiniz"
+              placeholder="Ad"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
               onChangeText={(name) => this.setState({name})}/>
@@ -71,7 +71,7 @@ export default class LoginView extends Component {
       <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Soyadiniz"
+              placeholder="Soyad"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
               onChangeText={(surname) => this.setState({surname})}/>
@@ -79,7 +79,7 @@ export default class LoginView extends Component {
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Emailiniz"
+              placeholder="Email"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
               onChangeText={(email) => this.setState({email})}/>
@@ -88,7 +88,7 @@ export default class LoginView extends Component {
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Sifreniz"
+              placeholder="Şifre"
               secureTextEntry={true}
               underlineColorAndroid='transparent'
               onChangeText={(password) => this.setState({password})}/>

@@ -54,7 +54,7 @@ class Profile extends Component {
         />     
         </View>
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onButtonClicked.bind(this)}>
-          <Text style={styles.loginText}>Çıkış yap</Text>
+          <Text style={styles.loginText}>Çıkış Yap</Text>
         </TouchableHighlight>
         </ScrollView>
       </View>  
