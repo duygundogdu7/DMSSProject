@@ -18,13 +18,39 @@ export default class LoginView extends Component {
   constructor(props) {
     super(props);
     state = {
-      email   : '',
-      password: '',
+      email:'',
+      password:'',
+      loginResponse:'',
+      loading: false,
+      error: ''
     }
   }
 
-  onButtonClicked(){
+  onLoginClicked(){
+    this.setState({
+      error: '',
+      loading: true
+    })
+    axios({
+      method: 'post',
+      url: 'http://192.168.43.165:8086/user',
+      data: {
+          email: this.state.email,
+          password: this.state.password,
+      }
+     }).then((response) => 
+    {this.setState({
+    loginResponse: response.data["res"]
+  })})
+    console.log(this.state.loginResponse);
+    if(this.state.loginResponse== 1)
     Actions.MyComponent();
+    else{
+      this.setState({
+        error: 'Authentication failed',
+        loading: false
+      })
+    }
   }
 
   onClickListener = (viewId) => {
@@ -56,7 +82,7 @@ export default class LoginView extends Component {
               onChangeText={(password) => this.setState({password})}/>
         </View>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onButtonClicked.bind(this)}>
+        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onLoginClicked.bind(this)}>
           <Text style={styles.loginText}>Giris Yap</Text>
         </TouchableHighlight>
 
