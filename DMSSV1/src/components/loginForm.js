@@ -22,6 +22,8 @@ export default class LoginView extends Component {
       email:'',
       password:'',
       loginResponse:'',
+      userID: '',
+      isManager: '',
       loading: false,
       error: ''
     }
@@ -41,7 +43,9 @@ export default class LoginView extends Component {
       }
      }).then((response) => 
     {this.setState({
-    loginResponse: response.data["res"]
+    loginResponse: response.data["res"],
+    userID: response.data["userID"],
+    isManager: response.data["isManager"]
   })})
     console.log(this.state.loginResponse);
     if(this.state.loginResponse== 1)
