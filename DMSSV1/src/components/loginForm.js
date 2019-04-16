@@ -7,7 +7,8 @@ import {
   Button,
   TouchableHighlight,
   Image,
-  Alert
+  Alert,
+  ScrollView
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
@@ -63,6 +64,7 @@ export default class LoginView extends Component {
 
   render() {
     return (
+      <ScrollView keyboardShouldPersistTaps={true}>
       <View style={styles.container}>
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
@@ -94,6 +96,7 @@ export default class LoginView extends Component {
             <Text>Kaydol</Text>
         </TouchableHighlight>
       </View>
+      </ScrollView>
     );
   }
 }
