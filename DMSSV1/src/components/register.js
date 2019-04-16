@@ -31,6 +31,7 @@ export default class LoginView extends Component {
       url: 'http://192.168.0.12:8086/register',
       data: {
           name: this.state.name,
+          surname: this.state.surname,
           email: this.state.email,
           password: this.state.password,
       }
