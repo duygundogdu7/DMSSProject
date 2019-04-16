@@ -7,6 +7,8 @@ import axios from 'axios';
 export default class NewTask extends Component {
   state ={
     title: '',
+    date: '',
+    type: '',
     addResponse:'',
     error: '',
     loading:false
@@ -19,6 +21,8 @@ onButtonClicked(){
     url: 'http://192.168.43.165:8086/task',
     data: {
         title: this.state.title,
+        date: this.state.date,
+        type: this.state.type,
         user_id: '1235'
     }
    }).then((response) => 

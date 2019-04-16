@@ -179,6 +179,8 @@ class Task(Resource):
                 #TODO: add the more properties of task
                 "user_id": data['user_id'],
                 "title": data['title'],
+                "date": data['date'],
+                "type": data['type'],
                 "is_complete":False,
                 "is_approved":False
             }
