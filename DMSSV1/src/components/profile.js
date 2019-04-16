@@ -3,6 +3,7 @@ import { ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {getProfile} from '../actions'	
+import { Actions } from 'react-native-router-flux';
 
 import {
   StyleSheet,
@@ -19,6 +20,7 @@ class Profile extends Component {
   }
 
   onButtonClicked(){
+    Actions.Login()
   }
 
   renderItem = ({ item }) => (
