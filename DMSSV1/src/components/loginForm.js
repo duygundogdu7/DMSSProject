@@ -10,6 +10,8 @@ import {
   Alert
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import axios from 'axios';
+
 
 export default class LoginView extends Component {
 
