@@ -12,8 +12,8 @@ export default class MyComponent extends React.Component {
     routes: [
       { key: 'gorev', title: 'Görev', icon: 'content-paste' },
       { key: 'puan', title: 'Puan', icon: 'format-list-numbered' },
-      { key: 'sayfam', title: 'Sayfam', icon: 'person' },
       { key: 'portfoy', title: 'Portfoy', icon: 'home' },
+      { key: 'sayfam', title: 'Sayfam', icon: 'person' },
     ],
   };
 
@@ -22,8 +22,8 @@ export default class MyComponent extends React.Component {
   _renderScene = BottomNavigation.SceneMap({
     gorev: Task,
     puan: ScoreRoute,
-    sayfam: Profile,
     portfoy: Portfolio,
+    sayfam: Profile,
   });
 
   render() {
