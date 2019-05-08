@@ -56,10 +56,10 @@ class LoginView extends Component {
       console.log(this.state.isManager);
       this.props.sendManager(this.state.isManager);
       this.props.sendID(this.state.userID);
-      if(this.state.loginResponse == 1 && this.state.isManager == 'false')
+      if(this.state.loginResponse == 1)
         Actions.MyComponent();
-      else if(this.state.loginResponse == 1 && this.setState.isManager == 'true')
-        Actions.MyComponentMan();
+      //else if(this.state.loginResponse == 1 && this.setState.isManager == 'true')
+      //  Actions.MyComponentMan();
       else{
         this.setState({
           error: 'Authentication failed',
