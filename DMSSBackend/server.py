@@ -222,11 +222,12 @@ class Profile(Resource):
         manager = manager["name"]
         friends = self.users.find({"team_id": user["team_id"]})
         friends = list(friends)
-        for friend in friends:
+        newList = sorted(friends, key=lambda k: k['score'], reverse=True) 
+        for friend in newList:
             del friend["_id"]
             if friend["is_manager"]:
-                friends.remove(friend)
-        return (jsonify(score=user['score'], friends=friends, manager=manager, name=user['name'], id=user["_id"]))
+                newList.remove(friend)
+        return (jsonify(score=user['score'], friends=newList, manager=manager, name=user['name'], id=user["_id"]))
 
 api.add_resource(Profile,  '/profile' ,  methods=['GET'])
 
