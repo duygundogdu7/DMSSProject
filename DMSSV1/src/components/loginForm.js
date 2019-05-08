@@ -37,9 +37,7 @@ class LoginView extends Component {
       error: '',
       loading: true
     })
-
-    async function fun() {
-      await axios({
+      axios({
         method: 'post',
         url: 'http://192.168.43.165:8086/user',
         data: {
@@ -66,7 +64,7 @@ class LoginView extends Component {
           loading: false
         })
       }
-    }
+    
     
   }
 
