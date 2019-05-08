@@ -49,11 +49,9 @@ class LoginView extends Component {
       loginResponse: response.data["res"],
       userID: response.data["userID"],
       isManager: response.data["isManager"]
-    })})
-      console.log(this.state.loginResponse);
-      console.log(this.state.isManager);
-      this.props.sendManager(this.state.isManager);
-      this.props.sendID(this.state.userID);
+    })}).then(this.props.sendManager(this.state.isManager))
+    .then(this.props.sendID(this.state.userID))
+    
       if(this.state.loginResponse == 1)
         Actions.MyComponent();
       //else if(this.state.loginResponse == 1 && this.setState.isManager == 'true')
@@ -118,7 +116,7 @@ class LoginView extends Component {
 function mapDispatchToProps(dispatch){
   return{
     sendManager: (text) =>dispatch(sendManager(text)),
-    sendID: (ID) => dispatch(sendID(ID))
+    sendID: (userID) => dispatch(sendID(userID))
   }
 }
 
