@@ -14,7 +14,8 @@ const ReactRouter = () => {
             <Scene key="Pages">
                 <Scene key="Login" component={LoginView} hideNavBar={true} panHandlers={null} ></Scene>  
                 <Scene key="Register" component={Register} hideNavBar={true} panHandlers={null} ></Scene> 
-                <Scene key="MyComponent" component={MyComponent} hideNavBar={true} panHandlers={null} ></Scene>  
+                <Scene key="MyComponent" component={MyComponent} hideNavBar={true} panHandlers={null} ></Scene>
+                <Scene key="MyComponentMan" component={MyComponent} hideNavBar={true} panHandlers={null} ></Scene>  
                 <Scene key="TaskDetail" title="Görev Detayları" component={TaskDetail} hideNavBar={false} panHandlers={null} ></Scene>
                 <Scene key="NewTask" title="Yeni Görev" component={NewTask} hideNavBar={false} panHandlers={null} ></Scene>
                 <Scene key="Task" title="Görevlerim" component={Task} hideNavBar={false} panHandlers={null} ></Scene>

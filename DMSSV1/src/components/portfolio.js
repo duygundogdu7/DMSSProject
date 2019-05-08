@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, FlatList, TouchableHighlight, StyleSheet } from 'react-native';
-import { Input,Button } from 'react-native-elements';
+import { Input } from 'react-native-elements';
 
  class Portfolio extends Component {
   render() {
