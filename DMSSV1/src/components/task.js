@@ -27,7 +27,6 @@ class Task extends Component {
     Actions.NewTask();
   }
   componentDidMount(){
-    console.log(this.props.userID);
     this.props.fetchAllTasks();
   }
 
