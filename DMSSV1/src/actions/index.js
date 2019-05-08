@@ -156,7 +156,7 @@ export const fetchAllTasks = () => {
 };
 
 export function sendManager(text) {
-  console.log(text);
+  console.log("SEND MANAGER ACTION'INA GELDİN.");
   return {
     type: SEND_MANAGER,
     payload: text
@@ -164,6 +164,8 @@ export function sendManager(text) {
 }
 
 export function sendID(ID){
+  console.log("SEND ID ACTION'INA GELDİN.");
+
     console.log(ID);
     return{
       type: SEND_ID,

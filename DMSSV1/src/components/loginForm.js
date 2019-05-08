@@ -51,7 +51,6 @@ class LoginView extends Component {
       isManager: response.data["isManager"]
     })}).then(this.props.sendManager(this.state.isManager))
     .then(this.props.sendID(this.state.userID))
-    
       if(this.state.loginResponse == 1)
         Actions.MyComponent();
       //else if(this.state.loginResponse == 1 && this.setState.isManager == 'true')
