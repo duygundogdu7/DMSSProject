@@ -278,6 +278,17 @@ class User(Resource):
         
 api.add_resource(User,  '/user/<user_id>' ,'/user', '/',  methods=['GET', 'POST'])
 
+class FileUpload(Resource):
+    def post(self):
+        try:
+            data = request.get_json()
+            print(data)
+        except Exception as e:
+            print(e)
+
+        
+api.add_resource(FileUpload,  '/file',  methods=['POST'])
+
 if __name__ == '__main__':
      app.run(host='0.0.0.0', port='8086')
 
