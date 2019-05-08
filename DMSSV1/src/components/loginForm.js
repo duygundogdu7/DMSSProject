@@ -37,33 +37,37 @@ class LoginView extends Component {
       error: '',
       loading: true
     })
-    axios({
-      method: 'post',
-      url: 'http://192.168.43.165:8086/user',
-      data: {
-          email: this.state.email,
-          password: this.state.password,
+
+    async function fun() {
+      await axios({
+        method: 'post',
+        url: 'http://192.168.43.165:8086/user',
+        data: {
+            email: this.state.email,
+            password: this.state.password,
+        }
+       }).then((response) => 
+      {this.setState({
+      loginResponse: response.data["res"],
+      userID: response.data["userID"],
+      isManager: response.data["isManager"]
+    })})
+      console.log(this.state.loginResponse);
+      console.log(this.state.isManager);
+      this.props.sendManager(this.state.isManager);
+      this.props.sendID(this.state.userID);
+      if(this.state.loginResponse == 1 && this.state.isManager == 'false')
+        Actions.MyComponent();
+      else if(this.state.loginResponse == 1 && this.setState.isManager == 'true')
+        Actions.MyComponentMan();
+      else{
+        this.setState({
+          error: 'Authentication failed',
+          loading: false
+        })
       }
-     }).then((response) => 
-    {this.setState({
-    loginResponse: response.data["res"],
-    userID: response.data["userID"],
-    isManager: response.data["isManager"]
-  })})
-    console.log(this.state.loginResponse);
-    console.log(this.state.isManager);
-    this.props.sendManager(this.state.isManager);
-    this.props.sendID(this.state.userID);
-    if(this.state.loginResponse == 1 && this.state.isManager == 'false')
-      Actions.MyComponent();
-    else if(this.state.loginResponse == 1 && this.setState.isManager == 'true')
-      Actions.MyComponentMan();
-    else{
-      this.setState({
-        error: 'Authentication failed',
-        loading: false
-      })
     }
+    
   }
 
   onClickListener () {

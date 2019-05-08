@@ -156,7 +156,6 @@ export const fetchAllTasks = () => {
 };
 
 export function sendManager(text) {
-  console.log("sendManager action'ına geldin.");
   console.log(text);
   return {
     type: SEND_MANAGER,
@@ -165,7 +164,6 @@ export function sendManager(text) {
 }
 
 export function sendID(ID){
-    console.log("sendID actionına geldin.");
     console.log(ID);
     return{
       type: SEND_ID,
