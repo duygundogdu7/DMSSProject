@@ -52,8 +52,8 @@ class LoginView extends Component {
     })})
       console.log(this.state.loginResponse);
       console.log(this.state.isManager);
-      this.props.sendManager(this.state.isManager);
-      this.props.sendID(this.state.userID);
+      //this.props.sendManager(this.state.isManager);
+      //this.props.sendID(this.state.userID);
       if(this.state.loginResponse == 1)
         Actions.MyComponent();
       //else if(this.state.loginResponse == 1 && this.setState.isManager == 'true')
