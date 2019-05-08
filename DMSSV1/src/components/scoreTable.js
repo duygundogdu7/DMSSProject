@@ -7,7 +7,7 @@ import {fetchScoreTable} from '../actions'
 class ScoreRoute extends Component {
   componentDidMount(){	
     console.log("KULLANICININ ID'Si");
-    console.log(this.props.userID);
+    console.log(this.props.id);
 
     this.props.fetchScoreTable();	
  }
@@ -44,7 +44,8 @@ const mapStateToProps = state => {
     scoreTable = state.scoreTable.data[property]
   }	
   return {
-    scoreTable
+    scoreTable,
+    id:state.id
   }
 }
 
