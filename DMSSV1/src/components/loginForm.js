@@ -12,9 +12,12 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import {sendManager} from '../actions';
+import {sendID} from '../actions';
 
 
-export default class LoginView extends Component {
+class LoginView extends Component {
 
   constructor(props) {
     super(props);
@@ -48,8 +51,13 @@ export default class LoginView extends Component {
     isManager: response.data["isManager"]
   })})
     console.log(this.state.loginResponse);
-    if(this.state.loginResponse== 1)
-    Actions.MyComponent();
+    console.log(this.state.isManager);
+    this.props.sendManager(this.state.isManager);
+    this.props.sendID(this.state.userID);
+    if(this.state.loginResponse == 1 && this.state.isManager == 'false')
+      Actions.MyComponent();
+    else if(this.state.loginResponse == 1 && this.setState.isManager == 'true')
+      Actions.MyComponentMan();
     else{
       this.setState({
         error: 'Authentication failed',
@@ -105,6 +113,13 @@ export default class LoginView extends Component {
   }
 }
 
+function mapDispatchToProps(dispatch){
+  return{
+    sendManager: (text) =>dispatch(sendManager(text)),
+    sendID: (ID) => dispatch(sendID(ID))
+  }
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -151,3 +166,5 @@ const styles = StyleSheet.create({
     color: 'white',
   }
 });
+
+export default connect(null, mapDispatchToProps)(LoginView);

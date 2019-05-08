@@ -5,7 +5,8 @@ export const FETCH_SCORE_TABLE = 'fetch_score_table';
 export const CHANGE_TASK = 'change_task';
 export const DELETE_TASK = 'delete_task';
 
-
+export const SEND_MANAGER = 'sendManager';
+export const SEND_ID = 'sendID';
 
 
 const completeTaskUrl = 'http://192.168.43.165:8086/completeTask';
@@ -154,3 +155,20 @@ export const fetchAllTasks = () => {
   };
 };
 
+export function sendManager(text) {
+  console.log("sendManager action'ına geldin.");
+  console.log(text);
+  return {
+    type: SEND_MANAGER,
+    payload: text
+  }
+}
+
+export function sendID(ID){
+    console.log("sendID actionına geldin.");
+    console.log(ID);
+    return{
+      type: SEND_ID,
+      payload: ID
+    }
+}
