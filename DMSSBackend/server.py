@@ -279,15 +279,26 @@ class User(Resource):
 api.add_resource(User,  '/user/<user_id>' ,'/user', '/',  methods=['GET', 'POST'])
 
 class FileUpload(Resource):
+    def __init__(self):
+        self.users = db.Users
+        
+    def get(self):
+        users = self.users.find({})
+        newList = sorted(users, key=lambda k: k['score'], reverse=True) 
+        for res in newList:
+            del res["_id"]
+            if res["is_manager"]:
+                newList.remove(res)
+
+        return (jsonify(user=newList))
     def post(self):
-        try:
-            data = request.get_json()
-            print(data)
-        except Exception as e:
-            print(e)
+        data = request.get_json()
+        print(data)
+        
+
 
         
-api.add_resource(FileUpload,  '/file',  methods=['POST'])
+api.add_resource(FileUpload,  '/file',  methods=['POST','GET'])
 
 if __name__ == '__main__':
      app.run(host='0.0.0.0', port='8086')
