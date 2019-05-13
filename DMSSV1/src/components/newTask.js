@@ -20,7 +20,7 @@ onButtonClicked(){
   this.setState({error: '', loading:true})
   axios({
     method: 'post',
-    url: 'http://192.168.43.165:8086/task',
+    url: 'http://192.168.0.12:8086/task',
     data: {
         title: this.state.title,
         date: this.state.date,
