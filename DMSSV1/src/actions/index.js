@@ -108,13 +108,13 @@ export const fetchScoreTable = () => {
   };
 };
 
-export const getProfile = () => {
+export const getProfile = (id) => {
   console.log("getProfile throwed")
   return async (dispatch) => {
     try {
       const response = await axios.get(profileURL, {
         params: {
-          user_id: '1235'
+          user_id: id
         }
       });
       console.log("action resp");
@@ -133,13 +133,13 @@ export const getProfile = () => {
 
 
 
-export const fetchAllTasks = () => {
+export const fetchAllTasks = (id) => {
   console.log("fetchTask throwed")
   return async (dispatch) => {
     try {
       const response = await axios.get(taskListURL, {
         params: {
-          user_id: '1235'
+          user_id: id
         }
       });
       console.log("action resp");

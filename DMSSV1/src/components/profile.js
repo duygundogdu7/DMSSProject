@@ -16,7 +16,7 @@ import {
 
 class Profile extends Component {
   componentDidMount(){
-    this.props.getProfile(this.props.userID);
+    this.props.getProfile(this.props.id);
   }
 
   onButtonClicked(){
@@ -70,7 +70,8 @@ const mapStateToProps = state => {
     profile[property] = state.profile.data[property]
   }
   return {
-    profile
+    profile,
+    id:state.id
   }
 }
 

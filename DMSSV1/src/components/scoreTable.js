@@ -6,8 +6,8 @@ import {fetchScoreTable} from '../actions'
 
 class ScoreRoute extends Component {
   componentDidMount(){	
-    console.log("KULLANICININ ID'Si");
-    console.log(this.props.id);
+    //console.log("KULLANICININ ID'Si");
+    //console.log(this.props.id);
 
     this.props.fetchScoreTable();	
  }

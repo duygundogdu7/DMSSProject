@@ -27,7 +27,7 @@ class Task extends Component {
     Actions.NewTask();
   }
   componentDidMount(){
-    this.props.fetchAllTasks();
+    this.props.fetchAllTasks(this.props.id);
   }
 
 
@@ -70,7 +70,8 @@ const mapStateToProps = state => {
   }
 
   return {
-    tasks  
+    tasks,
+    id:state.id
   }
 
 }
