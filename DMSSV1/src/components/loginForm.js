@@ -52,13 +52,16 @@ class LoginView extends Component {
        })  
       // Buraya store a atılacak verileri yazacağız.
       this.props.sendID(response.data["userID"])
+      this.props.sendManager(response.data["isManager"])
       })
       //let id = this.state.userID
       //console.log("ID")
       //console.log(id)
       //this.props.sendID(this.state.userID)
-      if(this.state.loginResponse == 1)
+      if(this.state.loginResponse == 1 && this.state.isManager == false)
         Actions.MyComponent();
+      else if(this.state.loginResponse == 1 && this.state.isManager == true)
+        Actions.MyComponentMan();
       //else if(this.state.loginResponse == 1 && this.setState.isManager == 'true')
       //  Actions.MyComponentMan();
       else{
