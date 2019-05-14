@@ -19,16 +19,15 @@ import axios from 'axios';
 
   componentDidMount(){
     //Burada URL farklı olacak.
-    axios.get("http://10.0.2.2:5000/bolgeler", { 
+    axios.get("http://192.168.43.165:8086/regions", { 
       params: {}
     }).then(result =>{
       console.log("Bölgelerimiz")
-      console.log(result.data.bolgeler)
+      console.log(result.data.regions)
       this.setState({
-        bolgeler:result.data.bolgeler
+        bolgeler:result.data.regions
       })
       console.log(this.state.bolgeler)
-      //Beirut yazdı.
     })
   }
   
