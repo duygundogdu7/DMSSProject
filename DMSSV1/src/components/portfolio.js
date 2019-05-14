@@ -18,6 +18,7 @@ import axios from 'axios';
   }
 
   componentDidMount(){
+    //Burada URL farklı olacak.
     axios.get("http://10.0.2.2:5000/bolgeler", { 
       params: {}
     }).then(result =>{
