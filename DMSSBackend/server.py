@@ -243,7 +243,8 @@ class Register(Resource):
                 "surname": data['surname'],
                 "email": data['email'],
                 "password": data['password'],
-                "score": "0"
+                "score": "0",
+                "admin": False
             }
             db.Users.insert_one(user)
             print(user)
@@ -292,13 +293,60 @@ class FileUpload(Resource):
 
         return (jsonify(user=newList))
     def post(self):
+        try:
+            data = request.get_json()
+            print(data)
+            fileInfo = {
+                "region": data['region'],
+                "type": data['type'],
+            }
+            db.FileInfo.insert_one(fileInfo)
+            #TODO: get data["file"] decode and write to db
+            print(fileInfo)
+            return (jsonify(res="1")) 
+        except Exception as e:
+            print(e)
+            return (jsonify(res="0"))
+        
+api.add_resource(FileUpload,  '/file',  methods=['POST','GET'])
+
+class AnalysisResults(Resource):
+    def __init__(self):
+        self.results = db.Results
+        
+    def get(self):
+        results = self.results.find({})
+        results = list(results)
+        for res in results:
+            del res["_id"]
+        print(results)
+        return (jsonify(results=results))
+
+    def post(self):
         data = request.get_json()
         print(data)
         
 
+api.add_resource(AnalysisResults,  '/results',  methods=['GET'])
 
+class Regions(Resource):
+    def __init__(self):
+        self.regions = db.Regions
         
-api.add_resource(FileUpload,  '/file',  methods=['POST','GET'])
+    def get(self):
+        regions = self.regions.find({})
+        regions = list(regions)
+        for res in regions:
+            del res["_id"]
+        print(regions)
+        return (jsonify(regions=regions))
+
+    def post(self):
+        data = request.get_json()
+        print(data)
+        
+
+api.add_resource(Regions,  '/regions',  methods=['GET'])
 
 if __name__ == '__main__':
      app.run(host='0.0.0.0', port='8086')
