@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux';
 
 
 
-export default class NewTask extends Component {
+class NewTask extends Component {
   state ={
     title: '',
     date:'',
