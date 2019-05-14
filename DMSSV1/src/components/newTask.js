@@ -26,7 +26,7 @@ onButtonClicked(){
         title: this.state.title,
         date: this.state.date,
         type: this.state.type,
-        user_id: '1235'
+        user_id: this.props.id
     }
    }).then((response) => 
   {this.setState({
