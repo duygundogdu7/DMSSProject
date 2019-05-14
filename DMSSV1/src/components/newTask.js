@@ -64,6 +64,7 @@ onButtonClicked(){
 
 const mapStateToProps = state => {
   return{
+    id:state.id,
     manager: state.manager
   }
 }
