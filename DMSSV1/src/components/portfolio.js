@@ -13,7 +13,8 @@ import axios from 'axios';
       esyali: '',
       userTypes: [{userType: 'admin', userName: 'Admin User'}, {userType: 'employee', userName: 'Employee User'}, {userType: 'dev', userName: 'Developer User'}],
       selectedUserType: '',
-      bolgeler: []
+      bolgeler: [],
+      type: ''
     }
   }
 
@@ -40,7 +41,13 @@ import axios from 'axios';
 
   loadRegions(){
     return this.state.bolgeler.map(bolge => (
-      <Picker.Item label={bolge.label} value={bolge.value}/>
+      <Picker.Item label={bolge.region} value={bolge.region}/>
+    ))
+  }
+
+  loadTypes(){
+    return this.state.bolgeler.map(bolge => (
+      <Picker.Item label={bolge.type} value={bolge.type}/>
     ))
   }
 
@@ -59,9 +66,17 @@ import axios from 'axios';
               }}>
 
               {this.loadRegions()}
-
               </Picker>
+              <Text style={styles.textStyle}>Durum:</Text>
+              <Picker
+              selectedValue={this.state.type}
+              style={{height: 70, width: 200}}
+              onValueChange={(itemValue, itemIndex) =>  {
+                this.setState({selectedUserType: itemValue})
+              }}>
 
+              {this.loadTypes()}
+              </Picker>
               <Text style={styles.textStyle}>Yapılı:</Text>
               <Picker
               selectedValue={this.state.yapili}

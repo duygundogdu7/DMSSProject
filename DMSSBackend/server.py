@@ -331,7 +331,7 @@ api.add_resource(AnalysisResults,  '/results',  methods=['GET'])
 
 class Regions(Resource):
     def __init__(self):
-        self.regions = db.Regions
+        self.regions = db.FileInfo
         
     def get(self):
         regions = self.regions.find({})
