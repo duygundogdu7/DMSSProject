@@ -33,8 +33,10 @@ onButtonClicked(){
   addResponse: response.data["res"]
 })})
   console.log(this.state.addResponse);
-  if(this.state.addResponse == "1")
+  if(this.state.addResponse == "1" && this.props.manager == false)
     Actions.MyComponent();
+  else if (this.state.addResponse == "1" && this.props.manager == true)
+  Actions.MyComponentMan();
   else{
     this.setState({
       error: 'Görev eklenirken hata oluştu.',
