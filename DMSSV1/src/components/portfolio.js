@@ -1,21 +1,103 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, TouchableHighlight, StyleSheet } from 'react-native';
-import { Input } from 'react-native-elements';
+import { View, Text, Picker, FlatList, TouchableHighlight,ScrollView, StyleSheet } from 'react-native';
+import { Input,Button } from 'react-native-elements';
+import axios from 'axios';
 
  class Portfolio extends Component {
+  
+  constructor(){
+    super();
+    this.state = {
+      bolge: '',
+      yapili: '',
+      esyali: '',
+      userTypes: [{userType: 'admin', userName: 'Admin User'}, {userType: 'employee', userName: 'Employee User'}, {userType: 'dev', userName: 'Developer User'}],
+      selectedUserType: '',
+      bolgeler: []
+    }
+  }
+
+  componentDidMount(){
+    axios.get("http://10.0.2.2:5000/bolgeler", { 
+      params: {}
+    }).then(result =>{
+      console.log("Bölgelerimiz")
+      console.log(result.data.bolgeler)
+      this.setState({
+        bolgeler:result.data.bolgeler
+      })
+      console.log(this.state.bolgeler)
+      //Beirut yazdı.
+    })
+  }
+  
+
+  loadUserTypes() {
+    return this.state.userTypes.map(user => (
+       <Picker.Item label={user.userName} value={user.userType} />
+    ))
+  }
+
+  loadRegions(){
+    return this.state.bolgeler.map(bolge => (
+      <Picker.Item label={bolge.label} value={bolge.value}/>
+    ))
+  }
+
   render() {
     return (
-     <View style={styles.portfolioStyle}>
-       <Input placeholder='Konum'/>
-       <Input placeholder='Bölüm'/>
-       <Input placeholder='Fiyat'/>
-       <View style={styles.highlight}>
-       <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]}>
-          <Text style={styles.loginText}>Hesapla</Text>
-        </TouchableHighlight>
-       </View>
-       
-       </View>
+      <View>
+        <ScrollView>
+          <View style={styles.portfolioStyle}>
+            <View style={styles.portfolioStyle}>
+              <Text style={styles.textStyle}>Bölge:</Text>
+              <Picker
+              selectedValue={this.state.bolge}
+              style={{height: 70, width: 200}}
+              onValueChange={(itemValue, itemIndex) =>  {
+                this.setState({selectedUserType: itemValue})
+              }}>
+
+              {this.loadRegions()}
+
+              </Picker>
+
+              <Text style={styles.textStyle}>Yapılı:</Text>
+              <Picker
+              selectedValue={this.state.yapili}
+              style={{height: 70, width: 200}}
+              onValueChange={(itemValue, itemIndex) =>  this.setState({yapili: itemValue})}>
+              <Picker.Item label="Evet" value="evet" />
+              <Picker.Item label="Hayır" value="hayir" />
+              <Picker.Item label="Boş" value="bos" />
+              </Picker>
+
+              <Text style={styles.textStyle}>Eşyalı:</Text>
+              <Picker
+              selectedValue={this.state.esyali}
+              style={{height: 70, width: 200}}
+              onValueChange={(itemValue, itemIndex) =>  this.setState({esyali: itemValue})}>
+              <Picker.Item label="Evet" value="evet" />
+              <Picker.Item label="Hayır" value="hayir" />
+              <Picker.Item label="Boş" value="bos" />
+              </Picker>
+
+              <Input placeholder="m2"/>
+              <Input placeholder="Kat Sayısı"/>
+              <Input placeholder="Bulunan Kat"/>
+              <Input placeholder="Aidat"/>
+
+              
+
+              <View style={styles.highlight}>
+                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]}>
+                  <Text style={styles.loginText}>Hesapla</Text>
+                </TouchableHighlight>
+              </View>
+            </View>
+          </View>
+       </ScrollView>
+    </View>
     )
   }
 }
@@ -42,6 +124,9 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: 'white',
+  },
+  textStyle: {
+    fontSize: 20
   }
 });
 
