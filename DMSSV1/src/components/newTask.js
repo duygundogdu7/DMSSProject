@@ -43,6 +43,8 @@ onButtonClicked(){
 }
 
   render() {
+    console.log("Manager mı?")
+    console.log(this.props.manager)
     return (
       <View>
         <TextInput placeholder="Görev adı" onChangeText={(title) => this.setState({title})}/> 
@@ -53,6 +55,12 @@ onButtonClicked(){
           </TouchableHighlight>
       </View>
     );
+  }
+}
+
+const mapStateToProps = state => {
+  return{
+    manager: state.manager
   }
 }
 
@@ -86,3 +94,5 @@ const styles = StyleSheet.create({
     color: 'white',
   }
 })
+
+export default connect(mapStateToProps(NewTask));
