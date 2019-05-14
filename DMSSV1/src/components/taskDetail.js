@@ -17,6 +17,7 @@ class TaskDetail extends Component {
     }
     onDeleteClicked(){
       this.props.deleteTask(task={id: this.state.id })
+      
       Actions.MyComponent();
     }
     onSaveClicked(){
@@ -40,6 +41,8 @@ class TaskDetail extends Component {
   render() {
     console.log("this.state");
     console.log(this.state);
+    console.log("Manager mı")
+    console.log(this.props.manager)
     return (
       <View>
        
@@ -128,6 +131,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return{
+    manager: state.manager
   }
 }
 
