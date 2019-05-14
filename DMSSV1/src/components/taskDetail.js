@@ -17,18 +17,25 @@ class TaskDetail extends Component {
     }
     onDeleteClicked(){
       this.props.deleteTask(task={id: this.state.id })
-      
-      Actions.MyComponent();
+      if(this.props.manager == false)
+        Actions.MyComponent();
+      else  if(this.props.manager == true)
+        Actions.MyComponentMan();
     }
     onSaveClicked(){
       this.props.changeTask(task={title: this.state.title,id: this.state.id })
-      Actions.MyComponent();
+      if(this.props.manager == false)
+        Actions.MyComponent();
+      else  if(this.props.manager == true)
+        Actions.MyComponentMan();
 
     }
     onCompleteClicked(){
       this.props.completeTask(task={id: this.state.id })
-      Actions.MyComponent();
-
+      if(this.props.manager == false)
+        Actions.MyComponent();
+      else  if(this.props.manager == true)
+        Actions.MyComponentMan();
     }
     componentWillMount(){
       const {task} = this.props;
