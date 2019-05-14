@@ -19,6 +19,7 @@ class NewTask extends Component {
 
 onButtonClicked(){
   this.setState({error: '', loading:true})
+  let id = this.props.id
   axios({
     method: 'post',
     url: 'http://192.168.43.165:8086/task',
@@ -26,7 +27,7 @@ onButtonClicked(){
         title: this.state.title,
         date: this.state.date,
         type: this.state.type,
-        user_id: this.props.id
+        user_id: id
     }
    }).then((response) => 
   {this.setState({
