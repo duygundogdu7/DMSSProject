@@ -33,6 +33,7 @@ class LoginView extends Component {
   }
 
   onLoginClicked(){
+    console.log("On Login clicked.");
     this.setState({
       error: '',
       loading: true
