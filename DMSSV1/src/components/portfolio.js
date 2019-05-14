@@ -62,7 +62,7 @@ import axios from 'axios';
               selectedValue={this.state.bolge}
               style={{height: 70, width: 200}}
               onValueChange={(itemValue, itemIndex) =>  {
-                this.setState({selectedUserType: itemValue})
+                this.setState({bolge: itemValue})
               }}>
 
               {this.loadRegions()}
@@ -72,7 +72,7 @@ import axios from 'axios';
               selectedValue={this.state.type}
               style={{height: 70, width: 200}}
               onValueChange={(itemValue, itemIndex) =>  {
-                this.setState({selectedUserType: itemValue})
+                this.setState({type: itemValue})
               }}>
 
               {this.loadTypes()}
