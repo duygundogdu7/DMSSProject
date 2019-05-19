@@ -14,7 +14,11 @@ import axios from 'axios';
       userTypes: [{userType: 'admin', userName: 'Admin User'}, {userType: 'employee', userName: 'Employee User'}, {userType: 'dev', userName: 'Developer User'}],
       selectedUserType: '',
       bolgeler: [],
-      type: ''
+      type: '',
+      m2: '',
+      katSayisi: '',
+      bulunanKat: '',
+      aidat: ''
     }
   }
 
@@ -49,6 +53,10 @@ import axios from 'axios';
     return this.state.bolgeler.map(bolge => (
       <Picker.Item label={bolge.type} value={bolge.type}/>
     ))
+  }
+
+  hesapla(){
+    console.log(this.state.m2)
   }
 
   render() {
@@ -97,15 +105,40 @@ import axios from 'axios';
               <Picker.Item label="Boş" value="bos" />
               </Picker>
 
-              <Input placeholder="m2"/>
-              <Input placeholder="Kat Sayısı"/>
-              <Input placeholder="Bulunan Kat"/>
-              <Input placeholder="Aidat"/>
+              <TextInput 
+              style={styles.textInput}
+              placeholder="m2"
+              keyboardType="email-address"
+              underlineColorAndroid='transparent'
+              onChangeText={(m2) => this.setState({m2})}/>
+
+              <TextInput 
+              style={styles.textInput}
+              placeholder="Kat Sayısı"
+              keyboardType="email-address"
+              underlineColorAndroid='transparent'
+              onChangeText={(katSayisi) => this.setState({katSayisi})}/>
+
+              <TextInput 
+              style={styles.textInput}
+              placeholder="Bulunan Kat"
+              keyboardType="email-address"
+              underlineColorAndroid='transparent'
+              onChangeText={(bulunanKat) => this.setState({bulunanKat})}/>
+
+              <TextInput 
+              style={styles.textInput}
+              placeholder="Aidat"
+              keyboardType="email-address"
+              underlineColorAndroid='transparent'
+              onChangeText={(aidat) => this.setState({aidat})}/>
+
+              
 
               
 
               <View style={styles.highlight}>
-                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]}>
+                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.hesapla.bind(this)}>
                   <Text style={styles.loginText}>Hesapla</Text>
                 </TouchableHighlight>
               </View>
@@ -118,6 +151,9 @@ import axios from 'axios';
 }
 
 const styles = StyleSheet.create({
+  textInput:{
+    fontSize: 20
+  },
   portfolioStyle:{
     marginTop: 30
   },
