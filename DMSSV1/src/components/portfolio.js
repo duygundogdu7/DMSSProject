@@ -56,6 +56,7 @@ import axios from 'axios';
   }
 
   hesapla(){
+    //Burada bir tane GET methodu olacak. Parametre olarak da bolge,aidat vs. göndereceğiz.
     console.log(this.state.m2)
   }
 
