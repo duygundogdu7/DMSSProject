@@ -8,6 +8,7 @@ from bson import json_util, ObjectId
 import operator
 import random
 import uuid
+import http
 
 
 app = Flask(__name__)
@@ -269,8 +270,9 @@ class User(Resource):
         user = self.users.find_one({"email": data["email"], "password": data["password"]})
         if user is not None:
             user["id"] = str(user["_id"])
-            return (jsonify(res="1",isManager=user["is_manager"],userID=user["_id"]))
-        return (jsonify(res="0"))
+            return '',http.HTTPStatus.OK
+        print(user)
+        return '',http.HTTPStatus.NO_CONTENT
       
     def delete(self, user_id):
         self.users.delete_one({"_id": user_id})
@@ -293,20 +295,8 @@ class FileUpload(Resource):
 
         return (jsonify(user=newList))
     def post(self):
-        try:
-            data = request.get_json()
-            print(data)
-            fileInfo = {
-                "region": data['region'],
-                "type": data['type'],
-            }
-            db.FileInfo.insert_one(fileInfo)
-            #TODO: get data["file"] decode and write to db
-            print(fileInfo)
-            return (jsonify(res="1")) 
-        except Exception as e:
-            print(e)
-            return (jsonify(res="0"))
+        data = request.get_json()
+        print(data)
         
 api.add_resource(FileUpload,  '/file',  methods=['POST','GET'])
 
@@ -320,7 +310,11 @@ class AnalysisResults(Resource):
         for res in results:
             del res["_id"]
         print(results)
-        return (jsonify(results=results))
+        arr = []
+        #TODO: dont send concat
+        for res in results:
+            arr.append("Bölge: " + res["region"] + " KNN: " + str(res["knn"]) + " Decision Tree: " + str(res["tree"]))
+        return (jsonify(results=arr))
 
     def post(self):
         data = request.get_json()
@@ -336,17 +330,57 @@ class Regions(Resource):
     def get(self):
         regions = self.regions.find({})
         regions = list(regions)
+        print(regions)
         for res in regions:
             del res["_id"]
         print(regions)
         return (jsonify(regions=regions))
 
     def post(self):
-        data = request.get_json()
-        print(data)
+        try:
+            data = request.get_json()
+            print(data)
+            file_info = {
+                "region": data['region'],
+                "type": data['type']
+            }
+            db.FileInfo.insert_one(file_info)
+            print(file_info)
+            return (jsonify(res="1")) 
+        except Exception as e:
+            print(e)
+            return (jsonify(res="0"))
         
 
-api.add_resource(Regions,  '/regions',  methods=['GET'])
+api.add_resource(Regions,  '/regions',  methods=['GET','POST'])
+
+class UpdateDataset(Resource):
+
+    def post(self):
+        try:
+            data = request.get_json()
+            print(data)
+            record = {
+                "yetki": data['yetki'],
+                "yapili": data['yapili'],
+                "esyali": data['esyali'],
+                "fiyat": data['fiyat'],
+                "bolum": data['bolum'],
+                "m2": data['m2'],
+                "katSayisi": data['katSayisi'],
+                "bulKat": data['bulKat'],
+                "aidat": data['aidat'],
+                "region": data['region'],
+                "type": data['type']
+            }
+            db.Records.insert_one(record)
+            print(record)
+            return (jsonify(res="1")) 
+        except Exception as e:
+            print(e)
+            return (jsonify(res="0"))
+
+api.add_resource(UpdateDataset,  '/updateDataset',  methods=['POST'])
 
 if __name__ == '__main__':
      app.run(host='0.0.0.0', port='8086')
