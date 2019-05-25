@@ -7,6 +7,8 @@ import Register from './components/register';
 import NewTask from './components/newTask';
 import Task from './components/task';
 import MyComponentMan from './components/myComponentMan';
+import BeginPage from './components/beginPage';
+import NewPwd from './components/newPwd';
 
 
 const ReactRouter = () => {
@@ -20,6 +22,9 @@ const ReactRouter = () => {
                 <Scene key="TaskDetail" title="Görev Detayları" component={TaskDetail} hideNavBar={false} panHandlers={null} ></Scene>
                 <Scene key="NewTask" title="Yeni Görev" component={NewTask} hideNavBar={false} panHandlers={null} ></Scene>
                 <Scene key="Task" title="Görevlerim" component={Task} hideNavBar={false} panHandlers={null} ></Scene>
+                <Scene key="BeginPage" component={BeginPage} hideNavBar={true} panHandlers={null} ></Scene> 
+                <Scene key="NewPwd" component={NewPwd} hideNavBar={true} panHandlers={null} ></Scene> 
+
             </Scene>
         </Router>
     );

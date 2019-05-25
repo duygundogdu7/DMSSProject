@@ -83,6 +83,10 @@ class LoginView extends Component {
     Actions.Register();
   }
 
+  onNewPwdClicked(){
+    Actions.NewPwd();
+  }
+
   render() {
     return (
 
@@ -109,7 +113,7 @@ class LoginView extends Component {
           <Text style={styles.loginText}>Giriş Yap</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('restore_password')}>
+        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onNewPwdClicked.bind(this)}>
             <Text>Şifrenizi mi unuttunuz?</Text>
         </TouchableHighlight>
 
