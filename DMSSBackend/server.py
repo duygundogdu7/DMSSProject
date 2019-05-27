@@ -9,6 +9,10 @@ import operator
 import random
 import uuid
 import http
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 
 app = Flask(__name__)
@@ -383,6 +387,30 @@ class UpdateDataset(Resource):
             return (jsonify(res="0"))
 
 api.add_resource(UpdateDataset,  '/updateDataset',  methods=['POST'])
+
+class Analyze(Resource):
+    def __init__(self):
+        self.records = db.Emp
+
+    def get(self):
+        type = request.args.get('type')
+        region = request.args.get('region')
+        records = self.records.find({type: type, region: region})
+        records = list(records)
+        df = pd.DataFrame(records) 
+        df = df.rename(columns={'Fiyat': 'class'})
+        X = df.drop(['class'],axis=1)
+        y = df['class']
+        X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+        scaler = MinMaxScaler()
+        X_train_scaled = scaler.fit_transform(X_train)
+        X_test_scaled = scaler.transform(X_test)
+        DTC = DecisionTreeClassifier(max_depth=None).fit(X_train_scaled, y_train)
+        y_predicted = DTC.predict(new_data)
+
+        
+
+api.add_resource(Analyze,  '/analyze',  methods=['GET'])
 
 if __name__ == '__main__':
      app.run(host='0.0.0.0', port='8086')
