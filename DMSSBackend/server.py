@@ -277,8 +277,13 @@ class User(Resource):
         if user is not None:
             user["id"] = str(user["_id"])
             #return make_response(jsonify(isManager=user["is_manager"],userID=["_id"]),200)
+<<<<<<< HEAD
             return (jsonify(res="1",isManager=user["is_manager"],userID=["_id"])
            print(user)
+=======
+            return (jsonify(res="1",isManager=user["is_manager"],userID=["_id"]))
+        print(user)
+>>>>>>> 9b0c74ed55f47ee2f9406e935b155ea55a3de596
         #return make_response('',204)
         return (jsonify(res="0"))
       

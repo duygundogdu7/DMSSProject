@@ -12,19 +12,9 @@ import {fetchAllManagerTasks} from '../actions'
 
 class Approval extends Component {
   _onItemClicked = (item) =>{
-    Actions.TaskDetail({
+    Actions.ApprovalDetail({
       task: item
     });
-  }
-
-  onButtonClicked(){
-    Actions.TaskDetail({
-      task: item
-    });
-    }
-  
-  onNewTaskClicked(){
-  
   }
   componentDidMount(){
     this.props.fetchAllManagerTasks(this.props.id);
