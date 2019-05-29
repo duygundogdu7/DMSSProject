@@ -225,8 +225,11 @@ class Profile(Resource):
         user_id = request.args.get('user_id')
         user = self.users.find_one({"_id": user_id})
         print(user)
-        manager = self.users.find_one({"_id": user["manager_id"]})
-        manager = manager["name"]
+        if not user["is_manager"]:
+            manager = self.users.find_one({"_id": user["manager_id"]})
+            manager = manager["name"]
+        else:
+            manager = user["name"]
         friends = self.users.find({"team_id": user["team_id"]})
         friends = list(friends)
         newList = sorted(friends, key=lambda k: k['score'], reverse=True) 
