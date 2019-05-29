@@ -11,7 +11,8 @@ import {
   View,
   Image,
   TouchableOpacity,
-  TouchableHighlight
+  TouchableHighlight,
+  TextInput
 } from 'react-native';
 
 class Profile extends Component {
