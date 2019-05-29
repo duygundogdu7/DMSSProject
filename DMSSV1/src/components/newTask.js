@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Input,Button } from 'react-native-elements';
-import { Text, StyleSheet, View, TouchableHighlight ,TextInput} from 'react-native';
+import { Text, StyleSheet, View, TouchableHighlight ,TextInput, Picker} from 'react-native';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import DatePicker from 'react-native-datepicker';
-import Picker from 'react-native-picker';
 
 
 
