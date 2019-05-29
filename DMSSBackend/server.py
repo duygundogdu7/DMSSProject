@@ -13,6 +13,9 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+import base64
+import csv
+import pandas as pd
 
 
 app = Flask(__name__)
@@ -125,10 +128,10 @@ class UpdateTask(Resource):
             data = request.get_json()
             print(data)
             db.Tasks.delete_one({"_id": ObjectId(data['id'])})
-            return (jsonify(res="1")) 
+            return '',http.HTTPStatus.OK
         except Exception as e:
             print(e)
-            return (jsonify(res="0"))
+            return '',http.HTTPStatus.NO_CONTENT
 
            
 api.add_resource(UpdateTask,  '/updateTask',  methods=['POST','DELETE'])
@@ -142,10 +145,10 @@ class CompleteTask(Resource):
             data = request.get_json()
             print(data)
             db.Tasks.update_one({"_id": ObjectId(data['id'])},{"$set": {"is_complete":True}})
-            return (jsonify(res="1")) 
+            return '',http.HTTPStatus.OK
         except Exception as e:
             print(e)
-            return (jsonify(res="0"))
+            return '',http.HTTPStatus.NO_CONTENT
 
            
 api.add_resource(CompleteTask,  '/completeTask',  methods=['POST'])
@@ -159,10 +162,10 @@ class ApproveTask(Resource):
             data = request.get_json()
             print(data)
             db.Tasks.update_one({"_id": ObjectId(data['id'])},{"$set": {"is_approved":True}})
-            return (jsonify(res="1")) 
+            return '',http.HTTPStatus.OK
         except Exception as e:
             print(e)
-            return (jsonify(res="0"))
+            return '',http.HTTPStatus.NO_CONTENT
 
            
 api.add_resource(ApproveTask,  '/approveTask',  methods=['POST'])
@@ -191,11 +194,10 @@ class Task(Resource):
             }
             db.Tasks.insert_one(task)
             print(task)
-            return (jsonify(res="1")) 
+            return '',http.HTTPStatus.OK
         except Exception as e:
             print(e)
-            return (jsonify(res="0"))
-
+            return '',http.HTTPStatus.NO_CONTENT
            
 api.add_resource(Task,  '/task',  methods=['GET','POST'])
 
@@ -253,10 +255,10 @@ class Register(Resource):
             }
             db.Users.insert_one(user)
             print(user)
-            return (jsonify(res="1")) 
+            return '',http.HTTPStatus.OK
         except Exception as e:
             print(e)
-            return (jsonify(res="0"))
+            return '',http.HTTPStatus.NO_CONTENT
 
 api.add_resource(Register,  '/register',  methods=['POST'])
 
@@ -274,11 +276,9 @@ class User(Resource):
         user = self.users.find_one({"email": data["email"], "password": data["password"]})
         if user is not None:
             user["id"] = str(user["_id"])
-            # return '',http.HTTPStatus.OK
-            return (jsonify(res="1",isManager=user["is_manager"],userID=["_id"]))
+            return '',http.HTTPStatus.OK
         print(user)
-        #return '',http.HTTPStatus.NO_CONTENT
-        return (jsonify(res="0"))
+        return '',http.HTTPStatus.NO_CONTENT
       
     def delete(self, user_id):
         self.users.delete_one({"_id": user_id})
@@ -291,20 +291,23 @@ class FileUpload(Resource):
     def __init__(self):
         self.users = db.Users
         
-    def get(self):
-        users = self.users.find({})
-        newList = sorted(users, key=lambda k: k['score'], reverse=True) 
-        for res in newList:
-            del res["_id"]
-            if res["is_manager"]:
-                newList.remove(res)
-
-        return (jsonify(user=newList))
     def post(self):
         data = request.get_json()
         print(data)
+        data = data['file']
+        data = data.split("data:text/plain;base64,")
+        dd = data[1]
+        print("parsed:",dd)
+        print("parse done")
+        text =  base64.b64decode(dd).decode('UTF-8')
+        f = open("temp_file.csv", "w")
+        f.write(text)
+        f.close()
+        df = pd.read_csv("temp_file.csv") 
+        records_ = df.to_dict(orient = 'records')
+        db.Emp.insert_many(records_ )
         
-api.add_resource(FileUpload,  '/file',  methods=['POST','GET'])
+api.add_resource(FileUpload,  '/file',  methods=['POST'])
 
 class AnalysisResults(Resource):
     def __init__(self):
@@ -352,10 +355,10 @@ class Regions(Resource):
             }
             db.FileInfo.insert_one(file_info)
             print(file_info)
-            return (jsonify(res="1")) 
+            return '',http.HTTPStatus.OK
         except Exception as e:
             print(e)
-            return (jsonify(res="0"))
+            return '',http.HTTPStatus.NO_CONTENT 
         
 
 api.add_resource(Regions,  '/regions',  methods=['GET','POST'])
@@ -381,10 +384,10 @@ class UpdateDataset(Resource):
             }
             db.Records.insert_one(record)
             print(record)
-            return (jsonify(res="1")) 
+            return '',http.HTTPStatus.OK
         except Exception as e:
             print(e)
-            return (jsonify(res="0"))
+            return '',http.HTTPStatus.NO_CONTENT 
 
 api.add_resource(UpdateDataset,  '/updateDataset',  methods=['POST'])
 
@@ -392,6 +395,7 @@ class Analyze(Resource):
     def __init__(self):
         self.records = db.Emp
 
+    '''
     def get(self):
         type = request.args.get('type')
         region = request.args.get('region')
@@ -407,7 +411,7 @@ class Analyze(Resource):
         X_test_scaled = scaler.transform(X_test)
         DTC = DecisionTreeClassifier(max_depth=None).fit(X_train_scaled, y_train)
         y_predicted = DTC.predict(new_data)
-
+    '''
         
 
 api.add_resource(Analyze,  '/analyze',  methods=['GET'])
