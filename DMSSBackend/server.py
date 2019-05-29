@@ -295,8 +295,7 @@ class FileUpload(Resource):
         data = request.get_json()
         print(data)
         data = data['file']
-        data = data.split("data:text/plain;base64,")
-        dd = data[1]
+        dd = data.strip('data:text/plain;base64,')
         print("parsed:",dd)
         print("parse done")
         text =  base64.b64decode(dd).decode('UTF-8')
