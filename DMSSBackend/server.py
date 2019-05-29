@@ -105,6 +105,7 @@ class ManagerTaskList(Resource):
         for res in results:
             res["id"] = str(res["_id"])
             del res["_id"]
+        print(results)
         return  (jsonify(tasks=results))
            
 api.add_resource(ManagerTaskList,  '/managerTaskList',  methods=['GET'])
