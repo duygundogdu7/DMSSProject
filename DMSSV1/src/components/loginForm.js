@@ -46,9 +46,8 @@ class LoginView extends Component {
             password: this.state.password,
         }
        }).then((response) => 
-
-      {console.log(response)
-      this.setState({
+      {this.setState({
+      loginResponse: response.data["res"],
       userID: response.data["userID"],
       isManager: response.data["isManager"]
        })  
@@ -60,9 +59,9 @@ class LoginView extends Component {
       //console.log("ID")
       //console.log(id)
       //this.props.sendID(this.state.userID)
-      if(this.state.loginResponse == 1 && this.state.isManager == false)
+      if(response.status == 200 && this.state.isManager == false)
         Actions.MyComponent();
-      else if(this.state.loginResponse == 1 && this.state.isManager == true)
+      else if(response.status == 200 && this.state.isManager == true)
         Actions.MyComponentMan();
       //else if(this.state.loginResponse == 1 && this.setState.isManager == 'true')
       //  Actions.MyComponentMan();
