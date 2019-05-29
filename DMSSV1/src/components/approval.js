@@ -39,7 +39,7 @@ class Approval extends Component {
           <View>
             <Text style={styles.textWrapper}>ONAYLANILMASI GEREKENLER</Text>
             <FlatList
-            data={tasks}
+            data={manTasks}
             renderItem={this.renderItem}
             />         
         </View>

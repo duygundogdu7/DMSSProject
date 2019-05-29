@@ -97,16 +97,24 @@ api.add_resource(TaskList,  '/taskList',  methods=['GET'])
 class ManagerTaskList(Resource):
     def __init__(self):
         self.tasks = db.Tasks
+        self.users = db.Users
 
     def get(self):
         user_id = request.args.get('user_id')
-        tasks_of_user = self.tasks.find({"manager_id": user_id, "is_complete":True, "is_approved":False})
-        results = list(tasks_of_user)
-        for res in results:
+        print(user_id)
+        ress = []
+        users =  self.users.find({"manager_id": user_id})
+        for user in users:
+            tasks_of_user = self.tasks.find({"user_id": user["_id"], "is_complete":True, "is_approved":False})
+            results = list(tasks_of_user)
+            ress = ress + results
+        for res in ress:
+            print(res)
             res["id"] = str(res["_id"])
             del res["_id"]
-        print(results)
-        return  (jsonify(tasks=results))
+        
+        print(ress)
+        return  (jsonify(tasks=ress))
            
 api.add_resource(ManagerTaskList,  '/managerTaskList',  methods=['GET'])
 
