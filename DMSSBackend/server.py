@@ -107,7 +107,7 @@ class ManagerTaskList(Resource):
             del res["_id"]
         return  (jsonify(tasks=results))
            
-api.add_resource(ManagerTaskList,  '/taskList',  methods=['GET'])
+api.add_resource(ManagerTaskList,  '/managerTaskList',  methods=['GET'])
 
 class UpdateTask(Resource):
     def __init__(self):
