@@ -5,6 +5,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import DatePicker from 'react-native-datepicker';
+import Picker from 'react-native-picker';
 
 
 
