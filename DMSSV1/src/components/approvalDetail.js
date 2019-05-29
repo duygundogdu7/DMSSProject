@@ -6,6 +6,8 @@ import {approveTask} from '../actions'
 import { Actions } from 'react-native-router-flux';
 
 
+
+
 class TaskDetail extends Component {
     state ={
       title:'',
