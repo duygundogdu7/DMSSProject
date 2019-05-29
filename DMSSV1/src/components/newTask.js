@@ -32,19 +32,21 @@ onButtonClicked(){
     }
    }).then((response) => 
   {this.setState({
-  addResponse: response.data["res"]
-})})
-  console.log(this.state.addResponse);
-  if(this.state.addResponse == "1" && this.props.manager == false)
-    Actions.MyComponent();
-  else if (this.state.addResponse == "1" && this.props.manager == true)
-  Actions.MyComponentMan();
-  else{
-    this.setState({
-      error: 'Görev eklenirken hata oluştu.',
-      loading: false
-    })
+  //addResponse: response.data["res"]
+})
+if(response.status == 200 && this.props.manager == false)
+Actions.MyComponent();
+else if (response.status == 200 && this.props.manager == true)
+Actions.MyComponentMan();
+else{
+this.setState({
+  error: 'Görev eklenirken hata oluştu.',
+  loading: false
+})
 }
+})
+  //console.log(this.state.addResponse);
+  
 }
 
   render() {
