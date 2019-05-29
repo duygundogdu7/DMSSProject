@@ -8,7 +8,7 @@ import { Actions } from 'react-native-router-flux';
 
 
 
-class TaskDetail extends Component {
+class ApprovalDetail extends Component {
     state ={
       title:'',
       date: '',
@@ -125,4 +125,4 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   changeTask,deleteTask,completeTask
-})(TaskDetail);
+})(ApprovalDetail);
