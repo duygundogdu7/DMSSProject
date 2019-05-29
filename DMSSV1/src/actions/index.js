@@ -4,6 +4,7 @@ export const GET_PROFILE = 'get_profile';
 export const FETCH_SCORE_TABLE = 'fetch_score_table';
 export const CHANGE_TASK = 'change_task';
 export const DELETE_TASK = 'delete_task';
+export const MANAGER_TASK = 'manager_task'
 
 export const SEND_MANAGER = 'sendManager';
 export const SEND_ID = 'sendID';
