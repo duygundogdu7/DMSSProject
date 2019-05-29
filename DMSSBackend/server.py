@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from flask_restful import Resource, Api, reqparse
 import json
 from pymongo import MongoClient
@@ -276,9 +276,9 @@ class User(Resource):
         user = self.users.find_one({"email": data["email"], "password": data["password"]})
         if user is not None:
             user["id"] = str(user["_id"])
-            return (jsonify(isManager=user["is_manager"],userID=["_id"])),http.HTTPStatus.OK
+            return make_response(jsonify(isManager=user["is_manager"],userID=["_id"]),200)
         print(user)
-        return '',http.HTTPStatus.NO_CONTENT
+        return make_response('',204)
       
     def delete(self, user_id):
         self.users.delete_one({"_id": user_id})
