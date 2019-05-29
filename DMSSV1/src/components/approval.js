@@ -33,7 +33,7 @@ class Approval extends Component {
       )
 
   render() {
-      const { tasks } = this.props;
+      const { manTasks } = this.props;
     return( 
       <View>
           <View>
@@ -49,13 +49,13 @@ class Approval extends Component {
 }
 
 const mapStateToProps = state => {
-  var tasks = []
-  for (var property in state.tasks.data) {
-    tasks = state.tasks.data[property]
+  var manTasks = []
+  for (var property in state.manTasks.data) {
+    manTasks = state.manTasks.data[property]
   }
 
   return {
-    tasks,
+    manTasks,
     id:state.id
   }
 
