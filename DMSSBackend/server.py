@@ -278,7 +278,7 @@ class User(Resource):
             user["id"] = str(user["_id"])
             #return make_response(jsonify(isManager=user["is_manager"],userID=["_id"]),200)
             return (jsonify(res="1",isManager=user["is_manager"],userID=["_id"])
-        print(user)
+           print(user)
         #return make_response('',204)
         return (jsonify(res="0"))
       

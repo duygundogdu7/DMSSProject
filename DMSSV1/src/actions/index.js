@@ -5,6 +5,7 @@ export const FETCH_SCORE_TABLE = 'fetch_score_table';
 export const CHANGE_TASK = 'change_task';
 export const DELETE_TASK = 'delete_task';
 export const MANAGER_TASK = 'manager_task';
+export const APPROVE_TASK = 'approve_task';
 
 export const SEND_MANAGER = 'sendManager';
 export const SEND_ID = 'sendID';
@@ -15,8 +16,51 @@ const updateTaskURL = 'http://192.168.43.165:8086/updateTask';
 const taskListURL = 'http://192.168.43.165:8086/taskList';
 const profileURL = 'http://192.168.43.165:8086/profile';
 const scoreTableURL = 'http://192.168.43.165:8086/scoreTable';
+const managerTaskURL = 'http://192.168.43.165:8086/managerTaskList';
+const approveTaskURL = 'http://192.168.43.165:8086/approveTask';
 
 
+export const approveTask = (task) => {
+  console.log("approveTask throwed")
+  return async (dispatch) => {
+    try {
+      console.log("actiona gelen");
+      console.log(task);
+      const response = await  axios.post(approveTaskURL, { data: {  id: task.id } });
+      console.log("action resp");
+      console.log(response);
+      dispatch({
+        type: APPROVE_TASK,
+        payload: response
+      });
+    }
+    catch (error) {
+      throw (error);
+    }
+  };
+};
+
+export const fetchAllManagerTasks = (id) => {
+  console.log("fetchManagerTask throwed")
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(managerTaskURL, {
+        params: {
+          user_id: id
+        }
+      });
+      console.log("action resp");
+      console.log(response);
+      dispatch({
+        type: MANAGER_TASK,
+        payload: response
+      });
+    }
+    catch (error) {
+      throw (error);
+    }
+  };
+};
 
 export const changeTask = (task) => {
   console.log("changeTask throwed")
