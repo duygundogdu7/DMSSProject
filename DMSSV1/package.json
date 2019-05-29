@@ -11,6 +11,7 @@
     "lodash": "^4.17.11",
     "react": "16.6.3",
     "react-native": "0.58.6",
+    "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^1.1.0",
     "react-native-material-bottom-navigation": "^1.0.2",
     "react-native-paper": "^2.15.2",

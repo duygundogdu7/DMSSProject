@@ -46,8 +46,9 @@ class LoginView extends Component {
             password: this.state.password,
         }
        }).then((response) => 
-      {this.setState({
-      loginResponse: response.data["res"],
+
+      {console.log(response)
+      this.setState({
       userID: response.data["userID"],
       isManager: response.data["isManager"]
        })  

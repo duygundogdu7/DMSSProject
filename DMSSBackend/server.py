@@ -276,7 +276,7 @@ class User(Resource):
         user = self.users.find_one({"email": data["email"], "password": data["password"]})
         if user is not None:
             user["id"] = str(user["_id"])
-            return '',http.HTTPStatus.OK
+            return (jsonify(isManager=user["is_manager"],userID=["_id"])),http.HTTPStatus.OK
         print(user)
         return '',http.HTTPStatus.NO_CONTENT
       
