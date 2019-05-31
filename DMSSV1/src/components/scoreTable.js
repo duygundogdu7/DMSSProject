@@ -14,10 +14,22 @@ class ScoreRoute extends Component {
 
     renderItem = ({ item }) => (
         <ListItem
-          title={item.name}
-          subtitle={item.artist}
+          title={
+            <View>
+                <Text style={styles.titleWrapper}>{item.name}</Text>
+            </View>
+          }
+          subtitle={
+            <View>
+                <Text style={styles.subtitleWrapper}>{item.artist}</Text>
+            </View>
+          }
           leftAvatar={{ source: {uri: "https://img.icons8.com/color/48/000000/christmas-star.png"}}}
-          rightElement={item.score + "puan"}
+          rightElement={
+            <View>
+                <Text style={styles.subtitleWrapper}>{item.score + "puan"}</Text>
+            </View>
+          }
 
         />
       )
@@ -54,10 +66,16 @@ const styles = StyleSheet.create({
   textWrapper: {
      marginTop: 20,
      marginBottom: 20,
-     fontSize: 20,
+     fontSize: 24,
      textAlign: 'center',
      fontWeight: 'bold'
    },
+   titleWrapper: {
+    fontSize: 18
+},
+subtitleWrapper: {
+    fontSize: 16
+}
 })
 
 export default connect(mapStateToProps, {fetchScoreTable})(ScoreRoute);
