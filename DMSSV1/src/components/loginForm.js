@@ -108,11 +108,11 @@ class LoginView extends Component {
         </TouchableHighlight>
 
         <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onNewPwdClicked.bind(this)}>
-            <Text>Şifrenizi mi unuttunuz?</Text>
+            <Text style={{fontSize: 16}}>Şifrenizi mi unuttunuz?</Text>
         </TouchableHighlight>
 
         <TouchableHighlight style={styles.buttonContainer} onPress={this.onRegisterClicked.bind(this)}>
-            <Text>Kaydol</Text>
+            <Text style={{fontSize: 16}}>Kaydol</Text>
         </TouchableHighlight>
       </View>
     
@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
       marginLeft:16,
       borderBottomColor: '#FFFFFF',
       flex:1,
+      fontSize: 16
   },
   inputIcon:{
     width:30,
@@ -171,6 +172,7 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: 'white',
+    fontSize: 16
   }
 });
 
