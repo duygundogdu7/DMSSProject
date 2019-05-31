@@ -60,12 +60,30 @@ class TaskDetail extends Component {
                       })
                 }}
                 value={this.state.title}/>
-                <Input text='Görev'
-                onChangeText={(text) => {
-                      this.setState({
-                          date: text
-                      })
-                }}
+                 <DatePicker 
+                  style={{width:200}}
+                  date={this.state.date}
+                  mode="date"
+                  placeholder="select date"
+                  format="DD.MM.YYYY"
+                  minDate="01.05.2016"
+                  maxDate="03.03.2020"
+                  confirmBtnText="Confirm"
+                  cancelBtnText="Cancel"
+                  customStyles={{
+                    dateIcon: {
+                      position: 'absolute',
+                      left: 0,
+                      top: 4,
+                      marginLeft: 0,
+                      marginTop: 5
+                    },
+                    dateInput: {
+                      marginLeft: 36
+                    }
+                  }}
+                  onDateChange={(date) => {this.setState({date:date})}}
+                />
                 value={this.state.date}/>
                 <Input text='Görev'
                 onChangeText={(text) => {
