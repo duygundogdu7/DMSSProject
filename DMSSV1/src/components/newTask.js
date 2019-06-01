@@ -92,7 +92,7 @@ this.setState({
          
          
          <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onButtonClicked.bind(this)}>
-            <Text style={styles.loginText}>Görev ekle</Text>
+            <Text style={styles.loginText}>Görev Ekle</Text>
           </TouchableHighlight>
       </View>
     );
