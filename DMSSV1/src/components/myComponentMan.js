@@ -25,8 +25,8 @@ export default class MyComponent extends React.Component {
     onay: Approval,
     gorev: Task,
     puan: ScoreRoute,
-    sayfam: Profile,
     portfoy: Portfolio,
+    sayfam: Profile,
   });
 
   render() {
