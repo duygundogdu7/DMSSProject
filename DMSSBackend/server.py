@@ -13,6 +13,10 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_score
+from sklearn.preprocessing import MinMaxScaler
 import base64
 import csv
 import pandas as pd
@@ -411,7 +415,7 @@ class Analyze(Resource):
     def __init__(self):
         self.records = db.Emp
 
-    '''
+
     def get(self):
         type = request.args.get('type')
         region = request.args.get('region')
@@ -426,8 +430,20 @@ class Analyze(Resource):
         X_train_scaled = scaler.fit_transform(X_train)
         X_test_scaled = scaler.transform(X_test)
         DTC = DecisionTreeClassifier(max_depth=None).fit(X_train_scaled, y_train)
+        new_data = {
+                "yapili":request.args.get('yapili'),
+                "esyali":request.args.get('esyali'),
+                "m2": request.args.get('m2'),
+                "katSayisi": request.args.get('katSayisi'),
+                "bulKat": request.args.get('bulKat'),
+                "aidat": request.args.get('aidat'),
+                "region": request.args.get('region'),
+                "type": request.args.get('type')
+            }
         y_predicted = DTC.predict(new_data)
-    '''
+        print(y_predicted)
+        return jsonify(result=y_predicted)
+    
         
 
 api.add_resource(Analyze,  '/analyze',  methods=['GET'])
