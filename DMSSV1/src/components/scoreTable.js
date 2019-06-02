@@ -24,10 +24,10 @@ class ScoreRoute extends Component {
                 <Text style={styles.subtitleWrapper}>{item.artist}</Text>
             </View>
           }
-          leftAvatar={{ source: {uri: "https://img.icons8.com/color/48/000000/christmas-star.png"}}}
+          leftAvatar={{ source: {uri: item.imageURL}}}
           rightElement={
             <View>
-                <Text style={styles.subtitleWrapper}>{item.score + "puan"}</Text>
+                <Text style={styles.subtitleWrapper}>{item.score + " puan"}</Text>
             </View>
           }
 

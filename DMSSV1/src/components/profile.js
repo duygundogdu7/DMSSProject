@@ -53,7 +53,7 @@ class Profile extends Component {
           <ScrollView>
         <View style={styles.container}>
           <View style={styles.header}></View>
-          <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
+          <Image style={styles.avatar} source={{uri: profile.imageURL}}/>
           <View style={styles.body}>
             <View style={styles.bodyContent}>
               <Text style={styles.name}>{profile.name}</Text>

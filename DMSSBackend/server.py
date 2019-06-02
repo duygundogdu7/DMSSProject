@@ -246,7 +246,7 @@ class Profile(Resource):
             del friend["_id"]
             if friend["is_manager"]:
                 newList.remove(friend)
-        return (jsonify(score=user['score'], friends=newList, manager=manager, name=user['name'], id=user["_id"]))
+        return (jsonify(score=user['score'], friends=newList, manager=manager, name=user['name'], id=user["_id"], imageURL=user['imageURL']))
 
 api.add_resource(Profile,  '/profile' ,  methods=['GET'])
 
@@ -263,7 +263,8 @@ class Register(Resource):
                 "email": data['email'],
                 "password": data['password'],
                 "score": "0",
-                "admin": False
+                "admin": False,
+                "imageURL":  data['imageURL']
             }
             db.Users.insert_one(user)
             print(user)
@@ -289,7 +290,7 @@ class User(Resource):
         if user is not None:
             user["id"] = str(user["_id"])
             #return make_response(jsonify(isManager=user["is_manager"],userID=["_id"]),200)
-            return jsonify(res="1",isManager=user["is_manager"],userID=user["_id"])
+            return jsonify(res="1",isManager=user["is_manager"],userID=user["id"])
         
         else:
             print(user)

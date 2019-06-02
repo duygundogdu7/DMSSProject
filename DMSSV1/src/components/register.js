@@ -12,9 +12,17 @@ import {
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
 import ImagePicker from 'react-native-image-picker';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 
-
+function uploadFile(file) {
+  console.log("UPLOAD FILE", file)
+  return RNFetchBlob.fetch('POST', 'https://api.cloudinary.com/v1_1/' + 'dedbcikez' + '/image/upload?upload_preset=' + 'yuhlmri1', {
+      'Content-Type': 'multipart/form-data'
+  }, [
+          { name: 'file', filename: file.fileName, data: RNFetchBlob.wrap(file.uri) }
+      ])
+}
 export default class LoginView extends Component {
 
   state = {
@@ -26,6 +34,7 @@ export default class LoginView extends Component {
     error: '',
     loading:false,
     avatarSource: null,
+    uploadingImg: false,
   }
   
   constructor(props) {
@@ -54,14 +63,18 @@ export default class LoginView extends Component {
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
-        let source = { uri: response.uri };
+                this.setState({
+                    uploadingImg: true
+                });
+                uploadFile(response)
+                    .then(response => response.json())
+                    .then(result => {
+                        this.setState({
+                            avatarSource: { uri: result.secure_url },
+                            uploadingImg: false
+                        });
+                    })
 
-        // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-        this.setState({
-          avatarSource: source,
-        });
       }
     });
   }
@@ -75,7 +88,7 @@ export default class LoginView extends Component {
           surname: this.state.surname,
           email: this.state.email,
           password: this.state.password,
-          avatarSource: this.state.avatarSource
+          imageURL: this.state.avatarSource.uri
       }
      }).then((response) => 
     {this.setState({
