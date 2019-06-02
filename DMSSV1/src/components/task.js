@@ -34,10 +34,23 @@ class Task extends Component {
     renderItem = ({ item }) => (
       <TouchableOpacity onPress={() => this._onItemClicked(item)}>
         <ListItem
-          title={item.title}
-          subtitle={item.date}
+          title={
+            <View>
+                <Text style={styles.titleWrapper}>{item.title}</Text>
+            </View>
+            
+          }
+          subtitle={
+            <View>
+                <Text style={styles.subtitleWrapper}>{item.date}</Text>
+            </View>
+          }
           leftAvatar={{ source: {uri: "https://img.icons8.com/dusk/64/000000/task.png"}}}
-          rightElement={item.type}
+          rightElement={
+            <View>
+                <Text style={styles.subtitleWrapper}>{item.type}</Text>
+            </View>
+          }
         />
         </TouchableOpacity>
       )
@@ -84,7 +97,7 @@ const styles = StyleSheet.create({
   textWrapper: {
      marginTop: 20,
      marginBottom: 20,
-     fontSize: 20,
+     fontSize: 24,
      textAlign: 'center',
      fontWeight: 'bold'
    },
@@ -103,6 +116,12 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: 'white',
+  },
+  titleWrapper: {
+    fontSize: 18
+  },
+  subtitleWrapper: {
+    fontSize: 16
   }
 })
 

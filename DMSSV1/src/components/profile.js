@@ -26,9 +26,22 @@ class Profile extends Component {
 
   renderItem = ({ item }) => (
     <ListItem
-      title={item.name}
-      subtitle={item.isbn}
-      rightElement = {item.score}
+      title={
+        <View>
+            <Text style={styles.titleWrapper}>{item.name}</Text>
+        </View>
+        
+      }
+      subtitle={
+        <View>
+            <Text style={styles.subtitleWrapper}>{item.isbn}</Text>
+        </View>
+      }
+      rightElement = {
+        <View>
+            <Text style={styles.subtitleWrapper}>{item.score}</Text>
+        </View>
+      }
     />
   )
 
@@ -125,12 +138,12 @@ const styles = StyleSheet.create({
     fontWeight: "600"
   },
   info:{
-    fontSize:16,
+    fontSize:18,
     color: "#00b5ec",
     marginTop:10
   },
   description:{
-    fontSize:20,
+    fontSize:24,
     color: "#696969",
     marginTop:20,
     textAlign: 'center',
@@ -163,6 +176,12 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: 'white',
+  },
+  titleWrapper: {
+    fontSize: 18
+  },
+  subtitleWrapper: {
+    fontSize: 16
   }
 })
 

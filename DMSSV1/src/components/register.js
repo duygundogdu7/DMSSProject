@@ -178,6 +178,7 @@ const styles = StyleSheet.create({
       marginLeft:16,
       borderBottomColor: '#FFFFFF',
       flex:1,
+      fontSize: 16
   },
   inputIcon:{
     width:30,
