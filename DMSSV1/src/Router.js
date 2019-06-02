@@ -9,7 +9,7 @@ import Task from './components/task';
 import MyComponentMan from './components/myComponentMan';
 import BeginPage from './components/beginPage';
 import NewPwd from './components/newPwd';
-
+import ApprovalDetail from './components/approvalDetail';
 
 const ReactRouter = () => {
     return(
@@ -24,7 +24,7 @@ const ReactRouter = () => {
                 <Scene key="Task" title="Görevlerim" component={Task} hideNavBar={false} panHandlers={null} ></Scene>
                 <Scene key="BeginPage" component={BeginPage} hideNavBar={true} panHandlers={null} ></Scene> 
                 <Scene key="NewPwd" component={NewPwd} hideNavBar={true} panHandlers={null} ></Scene> 
-
+                <Scene key="ApprovalDetail" component={ApprovalDetail} hideNavBar={true} panHandlers={null} ></Scene> 
             </Scene>
         </Router>
     );

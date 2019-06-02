@@ -38,28 +38,8 @@ class ApprovalDetail extends Component {
     return (
       <View>
        
-      <Input text='Görev'
-                onChangeText={(text) => {
-                      this.setState({
-                          title: text
-                      })
-                }}
-                value={this.state.title}/>
-                <Input text='Görev'
-                onChangeText={(text) => {
-                      this.setState({
-                          date: text
-                      })
-                }}
-                value={this.state.date}/>
-                <Input text='Görev'
-                onChangeText={(text) => {
-                      this.setState({
-                          title: type
-                      })
-                }}
-                value={this.state.type}/>
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onSaveClicked.bind(this)}>
+
+        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onDeleteClicked.bind(this)}>
             <Text style={styles.loginText}>Görevi Onayla</Text>
           </TouchableHighlight>
 
@@ -124,5 +104,5 @@ const mapStateToProps = state => {
 
 
 export default connect(mapStateToProps, {
-  changeTask,deleteTask,completeTask
+  approveTask
 })(ApprovalDetail);

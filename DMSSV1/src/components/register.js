@@ -6,38 +6,76 @@ import {
   TextInput,
   TouchableHighlight,
   Image,
-  Alert
+  PixelRatio,
+  TouchableOpacity,
 } from 'react-native';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
+import ImagePicker from 'react-native-image-picker';
 
 
 
 export default class LoginView extends Component {
 
+  state = {
+    name:'',
+    surname:'',
+    email:'',
+    password:'',
+    registerResponse:'',
+    error: '',
+    loading:false,
+    avatarSource: null,
+  }
+  
   constructor(props) {
     super(props);
-    state = {
-      name:'',
-      surname:'',
-      email:'',
-      password:'',
-      registerResponse:'',
-      error: '',
-      loading:false,
-    }
-  }
+    this.selectPhotoTapped = this.selectPhotoTapped.bind(this);
 
+      
+  }
+  selectPhotoTapped() {
+    const options = {
+      quality: 1.0,
+      maxWidth: 500,
+      maxHeight: 500,
+      storageOptions: {
+        skipBackup: true,
+      },
+    };
+
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled photo picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        let source = { uri: response.uri };
+
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          avatarSource: source,
+        });
+      }
+    });
+  }
   onRegisterPressed(){
     this.setState({error: '', loading:true})
     axios({
       method: 'post',
-      url: 'http://192.168.43.165:8086/register',
+      url: 'http://192.168.0.12:8086/register',
       data: {
           name: this.state.name,
           surname: this.state.surname,
           email: this.state.email,
           password: this.state.password,
+          avatarSource: this.state.avatarSource
       }
      }).then((response) => 
     {this.setState({
@@ -93,11 +131,22 @@ export default class LoginView extends Component {
               underlineColorAndroid='transparent'
               onChangeText={(password) => this.setState({password})}/>
         </View>
+        <View style={styles.container}>
+        <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+     
+            {this.state.avatarSource === null ? (
+              <Text>Select a Photo</Text>
+            ) : (
+              <Image style={styles.avatar} source={this.state.avatarSource} />
+            )}
+        </TouchableOpacity>
 
+ 
+      </View>
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onRegisterPressed.bind(this)}>
           <Text style={styles.loginText}>Kaydol</Text>
         </TouchableHighlight>
-
+       
         
       </View>
     );
@@ -110,6 +159,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#DCDCDC',
+    marginTop: 50,
   },
   inputContainer: {
       borderBottomColor: '#F5FCFF',
@@ -120,7 +170,8 @@ const styles = StyleSheet.create({
       height:45,
       marginBottom:20,
       flexDirection: 'row',
-      alignItems:'center'
+      alignItems:'center',
+      
   },
   inputs:{
       height:45,
@@ -139,7 +190,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom:20,
     width:250,
     borderRadius:30,
   },
@@ -148,5 +198,17 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: 'white',
-  }
+  },
+  avatarContainer: {
+    borderColor: '#9B9B9B',
+    borderWidth: 1 / PixelRatio.get(),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  avatar: {
+    borderRadius: 75,
+    width: 150,
+    height: 150,
+  },
+
 });
