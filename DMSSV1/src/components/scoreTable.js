@@ -60,12 +60,13 @@ class ScoreRoute extends Component {
       const { scoreTable } = this.props;
     return(
         <View>
-          <Text>{this.state.ranking}.</Text>
           <Text style={styles.textWrapper}>HAFTALIK PUAN TABLOSU</Text>
             <FlatList
             data={scoreTable}
              renderItem={this.renderItem}
-            />          
+            /> 
+        <Text style={this.styles.subtitleWrapper}>Senin sıralaman: {this.state.ranking}.</Text>
+         
         </View>
     )
   }
