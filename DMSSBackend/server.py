@@ -453,15 +453,16 @@ class Ranking(Resource):
          self.users = db.Users
 
     def get(self):
-        data = request.get_json()
+        id = request.args.get('id')
         users = self.users.find({})
         newList = sorted(users, key=lambda k: k['score'], reverse=True)
         i = 0 
         for res in newList:
-            del res["_id"]
-            if(res["id"] == data['id']):
+            if(res["_id"] == id):
                 break
             i = i + 1
+            del res["_id"]
+        print(i)
         return (jsonify(rank=i))
       
 api.add_resource(Ranking,  '/ranking',  methods=['GET'])

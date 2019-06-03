@@ -3,7 +3,7 @@ import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
 import { connect, Provider } from 'react-redux';
 import { ListItem } from 'react-native-elements';
 import {fetchScoreTable} from '../actions'
-
+import axios from 'axios';
 class ScoreRoute extends Component {
 
   state = {
@@ -15,6 +15,8 @@ class ScoreRoute extends Component {
     //console.log(this.props.id);
 
     this.props.fetchScoreTable();	
+    console.log("idn")
+    console.log(this.props.id)
     axios({
       method: 'get',
       url: 'http://192.168.43.165:8086/ranking',
@@ -22,11 +24,12 @@ class ScoreRoute extends Component {
           id: this.props.id
       }
      }).then((response) =>
-    { console.log(response)
+    { console.log("SIRALAMAN: ")
+      console.log(response.data.rank)
       this.setState({
-        ranking: response
-     })  
-  })
+        ranking: response.data.rank
+     }) 
+  }).catch(error => {console.log(error)})
 }
 
     renderItem = ({ item }) => (
@@ -57,7 +60,7 @@ class ScoreRoute extends Component {
       const { scoreTable } = this.props;
     return(
         <View>
-          <Text>You are {this.state.ranking}.</Text>
+          <Text>{this.state.ranking}.</Text>
           <Text style={styles.textWrapper}>HAFTALIK PUAN TABLOSU</Text>
             <FlatList
             data={scoreTable}

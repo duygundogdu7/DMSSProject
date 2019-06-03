@@ -34,7 +34,7 @@ class LoginView extends Component {
 
   onLoginClicked(){
     console.log("On Login clicked.");
-    if(this.state.email == " " || this.state.password == " "){
+    if(this.state.email == "" || this.state.password == ""){
       this.setState({
         error: 'Giriş yapılamadı lütfen boşlukları doldurunuz.',
         loading: true
@@ -60,7 +60,8 @@ class LoginView extends Component {
             password: this.state.password,
         }
        }).then((response) => 
-      {this.setState({
+      {console.log("LOGIN:", this.state)
+        this.setState({
       loginResponse: response.data["res"],
       userID: response.data["userID"],
       isManager: response.data["isManager"]
