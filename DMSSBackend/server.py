@@ -459,9 +459,12 @@ class Ranking(Resource):
         i = 0 
         for res in newList:
             if(res["_id"] == id):
+                del res["_id"]
                 break
-            i = i + 1
+            else:
+                i = i + 1
             del res["_id"]
+        
         print(i)
         return (jsonify(rank=i))
       
