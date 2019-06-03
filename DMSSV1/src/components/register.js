@@ -96,7 +96,7 @@ export default class LoginView extends Component {
     }
     axios({
       method: 'post',
-      url: 'http://192.168.43.165:8086/register',
+      url: 'http://172.20.10.9:8086/register',
       data: {
           name: this.state.name,
           surname: this.state.surname,
