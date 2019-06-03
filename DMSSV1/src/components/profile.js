@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {getProfile} from '../actions'	
 import { Actions } from 'react-native-router-flux';
+import { Card } from 'react-native-elements';
 
 import {
   StyleSheet,
@@ -51,24 +52,23 @@ class Profile extends Component {
 
       <View>
           <ScrollView>
-        <View style={styles.container}>
           <View style={styles.header}></View>
           <Image style={styles.avatar} source={{uri: profile.imageURL}}/>
           <View style={styles.body}>
             <View style={styles.bodyContent}>
               <Text style={styles.name}>{profile.name}</Text>
               <Text style={styles.info}>Takım Liderin: {profile.manager}</Text>
-              <Text style={styles.description}>BU HAFTAKİ TAKIMIM</Text>
               </View>
-          </View>
         </View>
         
+        <Card title="Bu Haftaki Takımın">
         <View style={styles.flatlistStyle}>      
           <FlatList
           data={profile.friends}
           renderItem={this.renderItem}
         />     
         </View>
+        </Card>
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onButtonClicked.bind(this)}>
           <Text style={styles.loginText}>Çıkış Yap</Text>
         </TouchableHighlight>
@@ -91,12 +91,8 @@ const mapStateToProps = state => {
 
 const styles = StyleSheet.create({
   textWrapper: {
-     marginTop: 20,
      fontSize: 16,
      marginLeft: 15
-   },
-   flatlistStyle:{
-     
    },
    errorText: {
      color: 'red',
@@ -106,7 +102,7 @@ const styles = StyleSheet.create({
    },
    header:{
     backgroundColor: "#00b5ec",
-    height:200,
+    height:100,
   },
   avatar: {
     width: 130,
@@ -114,23 +110,24 @@ const styles = StyleSheet.create({
     borderRadius: 63,
     borderWidth: 4,
     borderColor: "white",
-    marginBottom:10,
+    marginBottom:100,
     alignSelf:'center',
+    marginTop:20,
     position: 'absolute',
-    marginTop:130
+    marginLeft: 60,
   },
   name:{
     fontSize:22,
     color:"#FFFFFF",
     fontWeight:'600',
+    marginTop: 100,
   },
   body:{
-    marginTop:40,
   },
   bodyContent: {
     flex: 1,
     alignItems: 'center',
-    padding:30,
+    marginTop: 50,
   },
   name:{
     fontSize:28,
@@ -159,18 +156,9 @@ const styles = StyleSheet.create({
     width:250,
     borderRadius:30,
     backgroundColor: "#00BFFF",
+    marginLeft: 60,
   },
-  buttonContainer: {
-    marginTop: 20,
-    height:45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom:20,
-    width:250,
-    borderRadius:30,
-    marginLeft: 80
-  },
+  
   loginButton: {
     backgroundColor: "#00b5ec",
   },
