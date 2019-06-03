@@ -115,7 +115,7 @@ export default class LoginView extends Component {
       }
      }).then((response) => 
     {this.setState({
-    registerResponse: response.data["res"]
+    registerResponse: response.status
   })})
     console.log(this.state.registerResponse);
     if(this.state.registerResponse == "1")
