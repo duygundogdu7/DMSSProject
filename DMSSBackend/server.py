@@ -269,6 +269,8 @@ class Register(Resource):
                 "password": data['password'],
                 "score": "0",
                 "admin": False,
+                "is_manager": False,
+                "team_id": "",
                 "imageURL":  data['imageURL']
             }
             db.Users.insert_one(user)
