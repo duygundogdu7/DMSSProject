@@ -32,6 +32,7 @@ class Task extends Component {
 
 
     renderItem = ({ item }) => (
+      item ? (
       <TouchableOpacity onPress={() => this._onItemClicked(item)}>
         <ListItem
           title={
@@ -53,6 +54,9 @@ class Task extends Component {
           }
         />
         </TouchableOpacity>
+      ) : (
+        <Text>You have no tasks.</Text>
+      )
       )
 
   render() {
