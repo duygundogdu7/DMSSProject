@@ -18,7 +18,8 @@ import axios from 'axios';
       m2: '',
       katSayisi: '',
       bulunanKat: '',
-      aidat: ''
+      aidat: '',
+      answer: ''
     }
   }
 
@@ -57,7 +58,24 @@ import axios from 'axios';
 
   hesapla(){
     //Burada bir tane GET methodu olacak. Parametre olarak da bolge,aidat vs. göndereceğiz.
-    console.log(this.state.m2)
+    axios({
+      method: 'get',
+      url: 'http://192.168.0.12:8086/analyze',
+      data: {
+        "region": this.state.bolge,
+        "type": this.state.durum,
+        "yapili":this.state.yapili,
+        "esyali":this.state.esyali,
+        "m2": this.state.m2,
+        "katSayisi": this.state.katSayisi,
+        "bulKat": this.state.bulunanKat,
+        "aidat": this.state.aidat,
+        
+      }
+     }).then((response) => 
+     //Burada dairemizin fiyatının yazması lazım.
+    { console.log(response)
+     })  
   }
 
   render() {
