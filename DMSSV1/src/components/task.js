@@ -58,7 +58,7 @@ class Task extends Component {
   render() {
       const { tasks } = this.props;
     return( 
-      <View>
+      <View style={styles.container}>
           <View>
             <Text style={styles.textWrapper}>YAPILMASI GEREKENLER</Text>
             <FlatList
@@ -90,6 +90,10 @@ const mapStateToProps = state => {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#FFFFFF',
+    height: 1000
+  },
   viewContainer: {
     marginTop: 20,
     justifyContent: 'center'
@@ -99,7 +103,8 @@ const styles = StyleSheet.create({
      marginBottom: 20,
      fontSize: 24,
      textAlign: 'center',
-     fontWeight: 'bold'
+     fontWeight: 'bold',
+     color: '#000000'
    },
    buttonContainer: {
     height:45,

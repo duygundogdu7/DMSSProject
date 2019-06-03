@@ -33,7 +33,7 @@ class ScoreRoute extends Component {
 }
 
     renderItem = ({ item }) => (
-        <ListItem
+        <ListItem 
           title={
             <View>
                 <Text style={styles.titleWrapper}>{item.name}</Text>
@@ -47,7 +47,7 @@ class ScoreRoute extends Component {
           leftAvatar={{ source: {uri: item.imageURL}}}
           rightElement={
             <View>
-                <Text style={styles.subtitleWrapper}>{item.score + " puan"}</Text>
+                <Text style={styles.subtitleWrapper}>{item.score + " PUAN"}</Text>
             </View>
           }
 
@@ -59,13 +59,14 @@ class ScoreRoute extends Component {
     console.log(this.props)
       const { scoreTable } = this.props;
     return(
-        <View>
+        <View style={styles.container}>
           <Text style={styles.textWrapper}>HAFTALIK PUAN TABLOSU</Text>
-            <FlatList
+          <Text style={styles.rankingWrapper}>Bu hafta {this.state.ranking}. sıradasınız!</Text>
+          <FlatList
             data={scoreTable}
              renderItem={this.renderItem}
             /> 
-        <Text style={this.styles.subtitleWrapper}>Senin sıralaman: {this.state.ranking}.</Text>
+       
          
         </View>
     )
@@ -85,18 +86,36 @@ const mapStateToProps = state => {
 
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#FFFFFF',
+    height: 1000
+  },
   textWrapper: {
      marginTop: 20,
      marginBottom: 20,
      fontSize: 24,
      textAlign: 'center',
-     fontWeight: 'bold'
+     fontWeight: 'bold',
+     color: '#000000'
    },
    titleWrapper: {
-    fontSize: 18
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#000000'
 },
 subtitleWrapper: {
-    fontSize: 16
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000000'
+
+},
+rankingWrapper: {
+  fontSize: 18,
+  textAlign:'center',
+  color: '#00b5ec',
+  fontWeight:'bold',
+  fontFamily: 'sans-serif',
+  marginBottom: 10,
 }
 })
 
