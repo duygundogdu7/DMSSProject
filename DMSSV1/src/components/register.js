@@ -87,6 +87,8 @@ export default class LoginView extends Component {
         error: 'Lütfen boşlukları doldurunuz.',
         loading: true
       })
+      Alert.alert("Lütfen boşlukları doldurunuz.");
+
       return
     }
     if(this.state.email.split('@')[1] != "kw.com"){
@@ -94,6 +96,8 @@ export default class LoginView extends Component {
         error: 'Keller Williams emailiniz ile kaydolunuz.',
         loading: true
       })
+      Alert.alert("Keller Williams emailiniz ile kaydolunuz.");
+
       return
     }
     if(this.state.password != this.state.passwordAgain){
@@ -101,6 +105,8 @@ export default class LoginView extends Component {
         error: 'Parolanız aynı değil.',
         loading: true
       })
+      Alert.alert("Parolanız aynı değil.");
+
       return
     }
     if(this.state.avatarSource.uri == null){
