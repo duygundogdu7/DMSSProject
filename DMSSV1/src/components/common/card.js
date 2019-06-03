@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     margin: 10,
     borderWidth: 1,
     borderRadius: 2,
-    borderColor: '#dddddd',
+    borderColor: '#FFFFFF',
     justifyContent: 'center',
   },
   buttonWrapper: {
