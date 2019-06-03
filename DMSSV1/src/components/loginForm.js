@@ -43,7 +43,7 @@ class LoginView extends Component {
     }
     else if(this.state.email.split('@')[1] != "kw.com"){
       this.setState({
-        error: 'Keller Williams emailiniz ile kaydolun.',
+        error: 'Keller Williams emailiniz ile giriş yapınız.',
         loading: true
       })
       return
