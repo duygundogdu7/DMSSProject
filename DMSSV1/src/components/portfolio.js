@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, Picker, FlatList, TouchableHighlight,ScrollView, StyleSheet, TextInput } from 'react-native';
-import { Input,Button } from 'react-native-elements';
 import axios from 'axios';
+import { Card } from 'react-native-elements';
+
 
  class Portfolio extends Component {
   
@@ -80,53 +81,53 @@ import axios from 'axios';
 
   render() {
     return (
-      <View>
-        <ScrollView>
+      <View style={styles.container}>
+        <ScrollView >
+          <Card title="PORTFÖY HESAPLAMA ARACI" >
+          <View style={{backgroundColor: '#E0FFFF'}}>
           <View style={styles.portfolioStyle}>
             <View style={styles.portfolioStyle}>
-              <Text style={styles.textStyle}>Bölge:</Text>
               <Picker
               selectedValue={this.state.bolge}
               style={{height: 70, width: 200}}
               onValueChange={(itemValue, itemIndex) =>  {
                 this.setState({bolge: itemValue})
               }}>
+              <Picker.Item label="Bölge Seçiniz" value='0'/>
 
               {this.loadRegions()}
               </Picker>
-              <Text style={styles.textStyle}>Durum:</Text>
               <Picker
               selectedValue={this.state.type}
               style={{height: 70, width: 200}}
               onValueChange={(itemValue, itemIndex) =>  {
                 this.setState({type: itemValue})
               }}>
-
+               <Picker.Item label="Durum Seçiniz" value='0'/>
               {this.loadTypes()}
               </Picker>
-              <Text style={styles.textStyle}>Yapılı:</Text>
               <Picker
               selectedValue={this.state.yapili}
               style={{height: 70, width: 200}}
               onValueChange={(itemValue, itemIndex) =>  this.setState({yapili: itemValue})}>
+             <Picker.Item label="Yapılı mı?" value='0'/>
               <Picker.Item label="Evet" value="evet" />
               <Picker.Item label="Hayır" value="hayir" />
-              <Picker.Item label="Boş" value="bos" />
               </Picker>
 
-              <Text style={styles.textStyle}>Eşyalı:</Text>
               <Picker
               selectedValue={this.state.esyali}
               style={{height: 70, width: 200}}
               onValueChange={(itemValue, itemIndex) =>  this.setState({esyali: itemValue})}>
+              <Picker.Item label="Eşyalı mı?" value='0'/>
               <Picker.Item label="Evet" value="evet" />
               <Picker.Item label="Hayır" value="hayir" />
-              <Picker.Item label="Boş" value="bos" />
               </Picker>
 
               <TextInput 
               style={styles.textInput}
               placeholder="m2"
+              placeholderTextColor="black"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
               onChangeText={(m2) => this.setState({m2})}/>
@@ -134,13 +135,15 @@ import axios from 'axios';
               <TextInput 
               style={styles.textInput}
               placeholder="Kat Sayısı"
+              placeholderTextColor="black"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
               onChangeText={(katSayisi) => this.setState({katSayisi})}/>
 
               <TextInput 
               style={styles.textInput}
-              placeholder="Bulunan Kat"
+              placeholder="Bulunduğu Kat"
+              placeholderTextColor="black"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
               onChangeText={(bulunanKat) => this.setState({bulunanKat})}/>
@@ -148,14 +151,10 @@ import axios from 'axios';
               <TextInput 
               style={styles.textInput}
               placeholder="Aidat"
+              placeholderTextColor="black"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
               onChangeText={(aidat) => this.setState({aidat})}/>
-
-              
-
-              
-
               <View style={styles.highlight}>
                 <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.hesapla.bind(this)}>
                   <Text style={styles.loginText}>Hesapla</Text>
@@ -163,6 +162,8 @@ import axios from 'axios';
               </View>
             </View>
           </View>
+          </View>
+          </Card>
        </ScrollView>
     </View>
     )
@@ -170,11 +171,20 @@ import axios from 'axios';
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#FFFFFF',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   textInput:{
-    fontSize: 20
+    height: 70,
+    color: 'black',
+    borderColor: 'black',
+    borderWidth: 0.5,
   },
   portfolioStyle:{
-    marginTop: 30
+    marginTop: 5
   },
   highlight:{
     marginTop: 20,
@@ -186,7 +196,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom:20,
-    width:250,
+    marginRight: 60,
     borderRadius:30,
   },
   loginButton: {
