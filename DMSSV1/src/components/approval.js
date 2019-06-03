@@ -81,11 +81,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   textWrapper: {
-     marginTop: 20,
-     marginBottom: 20,
-     fontSize: 20,
-     textAlign: 'center',
-     fontWeight: 'bold'
+    marginTop: 20,
+    marginBottom: 20,
+    fontSize: 24,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#000000'
    },
    buttonContainer: {
     height:45,

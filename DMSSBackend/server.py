@@ -344,9 +344,9 @@ class AnalysisResults(Resource):
         print(results)
         arr = []
         #TODO: dont send concat
-        for res in results:
-            arr.append("Bölge: " + res["region"] + " KNN: " + str(res["knn"]) + " Decision Tree: " + str(res["tree"]))
-        return (jsonify(results=arr))
+        #for res in results:
+        #    arr.append("Bölge: " + res["region"] + " KNN: " + str(res["knn"]) + " Decision Tree: " + str(res["tree"]))
+        return (jsonify(results=results))
 
     def post(self):
         data = request.get_json()
@@ -373,8 +373,7 @@ class Regions(Resource):
             data = request.get_json()
             print(data)
             file_info = {
-                "region": data['region'],
-                "type": data['type']
+                "region": data['region']
             }
             db.FileInfo.insert_one(file_info)
             print(file_info)

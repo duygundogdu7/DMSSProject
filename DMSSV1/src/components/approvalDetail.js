@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input,Button } from 'react-native-elements';
+import { Input,Card } from 'react-native-elements';
 import { Text, StyleSheet, View, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import {approveTask} from '../actions'
@@ -15,8 +15,14 @@ class ApprovalDetail extends Component {
       type: '',
       id:''
     }
-    onDeleteClicked(){
+    onYesClicked(){
       this.props.approveTask(task={id: this.state.id })
+      if(this.props.manager == false)
+        Actions.MyComponent();
+      else  if(this.props.manager == true)
+        Actions.MyComponentMan();
+    }
+    onNoClicked(){
       if(this.props.manager == false)
         Actions.MyComponent();
       else  if(this.props.manager == true)
@@ -37,12 +43,15 @@ class ApprovalDetail extends Component {
     console.log(this.props.manager)
     return (
       <View>
-       
-
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onDeleteClicked.bind(this)}>
-            <Text style={styles.loginText}>Görevi Onayla</Text>
+        <Card>
+        <Text style={styles.info}>Bu görevi onaylıyor musunuz?</Text>
+        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onYesClicked.bind(this)}>
+            <Text style={styles.loginText}>Evet</Text>
           </TouchableHighlight>
-
+          <TouchableHighlight style={[styles.buttonContainer, styles.loginButtonNo]} onPress={this.onNoClicked.bind(this)}>
+            <Text style={styles.loginText}>Hayır</Text>
+          </TouchableHighlight>
+          </Card>
       </View>
       
     );
@@ -61,6 +70,12 @@ const styles = StyleSheet.create({
      textAlign: 'center',
      fontWeight: 'bold'
    },
+   info:{
+    fontSize:18,
+    color: "#000000",
+    marginTop:10,
+    marginLeft: 60,
+  },
    buttonContainer: {
     marginTop: 20,
     height:45,
@@ -68,12 +83,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom:20,
-    width:250,
+    width:100,
     borderRadius:30,
-    marginLeft: 80
+    marginLeft: 100,
   },
   loginButton: {
-    backgroundColor: "#00b5ec",
+    backgroundColor: "#00e600",
+  },
+  loginButtonNo: {
+    backgroundColor: "#cc0828",
   },
   loginText: {
     color: 'white',
