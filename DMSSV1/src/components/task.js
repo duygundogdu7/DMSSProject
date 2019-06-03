@@ -58,8 +58,9 @@ class Task extends Component {
   render() {
       const { tasks } = this.props;
     return( 
-      <View style={styles.container}>
-        <ScrollView>
+      <ScrollView>
+        <View style={styles.container}>
+        
         <View>
             <Text style={styles.textWrapper}>YAPILMASI GEREKENLER</Text>
             <FlatList
@@ -71,11 +72,10 @@ class Task extends Component {
           <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onNewTaskClicked.bind(this)}>
             <Text style={styles.loginText}>YENİ GÖREV EKLE</Text>
           </TouchableHighlight>
-        </View>
-
-        </ScrollView>
-          
+        </View>          
       </View>
+      </ScrollView>
+      
     )
   }
 }
