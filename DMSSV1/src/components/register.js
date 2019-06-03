@@ -80,6 +80,20 @@ export default class LoginView extends Component {
   }
   onRegisterPressed(){
     this.setState({error: '', loading:true})
+    if(this.state.email == " " || this.state.password == " " || this.state.name == " " || this.state.surname == " "){
+      this.setState({
+        error: 'Lütfen boşlukları doldurunuz.',
+        loading: true
+      })
+      return
+    }
+    else if(this.state.email.split('@')[1] != "kw.com"){
+      this.setState({
+        error: 'Keller Williams emailiniz ile kaydolunuz.',
+        loading: true
+      })
+      return
+    }
     axios({
       method: 'post',
       url: 'http://172.20.10.9:8086/register',
@@ -154,7 +168,7 @@ export default class LoginView extends Component {
             )}
         </TouchableOpacity>
 
- 
+          <Text>{this.state.error}</Text>
       </View>
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onRegisterPressed.bind(this)}>
           <Text style={styles.loginText}>Kaydol</Text>

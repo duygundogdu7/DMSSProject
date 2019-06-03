@@ -34,6 +34,20 @@ class LoginView extends Component {
 
   onLoginClicked(){
     console.log("On Login clicked.");
+    if(this.state.email == " " || this.state.password == " "){
+      this.setState({
+        error: 'Giriş yapılamadı lütfen boşlukları doldurunuz.',
+        loading: true
+      })
+      return
+    }
+    else if(this.state.email.split('@')[1] != "kw.com"){
+      this.setState({
+        error: 'Keller Williams emailiniz ile giriş yapınız.',
+        loading: true
+      })
+      return
+    }
     this.setState({
       error: '',
       loading: true
@@ -102,6 +116,8 @@ class LoginView extends Component {
               underlineColorAndroid='transparent'
               onChangeText={(password) => this.setState({password})}/>
         </View>
+
+        <View>{this.state.error}</View>
 
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onLoginClicked.bind(this)}>
           <Text style={styles.loginText}>Giriş Yap</Text>
