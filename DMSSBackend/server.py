@@ -230,6 +230,7 @@ class ScoreTable(Resource):
       
 api.add_resource(ScoreTable,  '/scoreTable',  methods=['GET'])
 
+
 class Profile(Resource):
     def __init__(self):
         self.users = db.Users
@@ -444,9 +445,26 @@ class Analyze(Resource):
         print(y_predicted)
         return jsonify(result=y_predicted)
     
-        
-
+    
 api.add_resource(Analyze,  '/analyze',  methods=['GET'])
+
+class Ranking(Resource):
+    def __init__(self):
+         self.users = db.Users
+
+    def get(self):
+        data = request.get_json()
+        users = self.users.find({})
+        newList = sorted(users, key=lambda k: k['score'], reverse=True)
+        i = 0 
+        for res in newList:
+            del res["_id"]
+            if(res["id"] == data['id']):
+                break
+            i = i + 1
+        return (jsonify(rank=i))
+      
+api.add_resource(Ranking,  '/ranking',  methods=['GET'])
 
 if __name__ == '__main__':
      app.run(host='0.0.0.0', port='8086')

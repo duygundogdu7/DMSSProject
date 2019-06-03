@@ -5,12 +5,29 @@ import { ListItem } from 'react-native-elements';
 import {fetchScoreTable} from '../actions'
 
 class ScoreRoute extends Component {
+
+  state = {
+    ranking: '',
+  }
+
   componentDidMount(){	
     //console.log("KULLANICININ ID'Si");
     //console.log(this.props.id);
 
     this.props.fetchScoreTable();	
- }
+    axios({
+      method: 'get',
+      url: 'http://192.168.43.165:8086/ranking',
+      data: {
+          id: this.props.id
+      }
+     }).then((response) =>
+    { console.log(response)
+      this.setState({
+        ranking: response
+     })  
+  })
+}
 
     renderItem = ({ item }) => (
         <ListItem
@@ -40,6 +57,7 @@ class ScoreRoute extends Component {
       const { scoreTable } = this.props;
     return(
         <View>
+          <Text>You are {this.state.ranking}.</Text>
           <Text style={styles.textWrapper}>HAFTALIK PUAN TABLOSU</Text>
             <FlatList
             data={scoreTable}

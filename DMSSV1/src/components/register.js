@@ -125,6 +125,16 @@ export default class LoginView extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.container}>
+        <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+     
+            {this.state.avatarSource === null ? (
+              <Text>Select a Photo</Text>
+            ) : (
+              <Image style={styles.avatar} source={this.state.avatarSource} />
+            )}
+        </TouchableOpacity>
+      </View>
       <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
@@ -158,18 +168,7 @@ export default class LoginView extends Component {
               underlineColorAndroid='transparent'
               onChangeText={(password) => this.setState({password})}/>
         </View>
-        <View style={styles.container}>
-        <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-     
-            {this.state.avatarSource === null ? (
-              <Text>Select a Photo</Text>
-            ) : (
-              <Image style={styles.avatar} source={this.state.avatarSource} />
-            )}
-        </TouchableOpacity>
-
-          <Text>{this.state.error}</Text>
-      </View>
+        
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onRegisterPressed.bind(this)}>
           <Text style={styles.loginText}>Kaydol</Text>
         </TouchableHighlight>
