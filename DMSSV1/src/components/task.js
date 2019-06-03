@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, Button, FlatList, 
         StyleSheet, TouchableHighlight,
         TouchableWithoutFeedback,
-        TouchableOpacity } from 'react-native';
+        TouchableOpacity,ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
@@ -59,7 +59,8 @@ class Task extends Component {
       const { tasks } = this.props;
     return( 
       <View>
-          <View>
+        <ScrollView>
+        <View>
             <Text style={styles.textWrapper}>YAPILMASI GEREKENLER</Text>
             <FlatList
             data={tasks}
@@ -71,6 +72,9 @@ class Task extends Component {
             <Text style={styles.loginText}>YENİ GÖREV EKLE</Text>
           </TouchableHighlight>
         </View>
+
+        </ScrollView>
+          
       </View>
     )
   }
