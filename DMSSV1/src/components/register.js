@@ -103,6 +103,11 @@ export default class LoginView extends Component {
       })
       return
     }
+    if(this.state.avatarSource.uri == null){
+      this.setState({
+        avatarSource : { uri: "https://res.cloudinary.com/dedbcikez/image/upload/v1559558494/default_fehmuo.jpg" }
+      })
+    }
     axios({
       method: 'post',
       url: 'http://192.168.43.165:8086/register',
