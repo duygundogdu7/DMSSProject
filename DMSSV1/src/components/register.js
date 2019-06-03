@@ -8,6 +8,7 @@ import {
   Image,
   PixelRatio,
   TouchableOpacity,
+  ScrollView
 } from 'react-native';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
@@ -30,6 +31,7 @@ export default class LoginView extends Component {
     surname:'',
     email:'',
     password:'',
+    passwordAgain: '',
     registerResponse:'',
     error: '',
     loading:false,
@@ -87,9 +89,16 @@ export default class LoginView extends Component {
       })
       return
     }
-    else if(this.state.email.split('@')[1] != "kw.com"){
+    if(this.state.email.split('@')[1] != "kw.com"){
       this.setState({
         error: 'Keller Williams emailiniz ile kaydolunuz.',
+        loading: true
+      })
+      return
+    }
+    if(this.state.password != this.state.passwordAgain){
+      this.setState({
+        error: 'Parolanız aynı değil.',
         loading: true
       })
       return
@@ -125,7 +134,8 @@ export default class LoginView extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.container}>
+        <ScrollView>
+        <View style={styles.inputContainer}>
         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
      
             {this.state.avatarSource === null ? (
@@ -168,12 +178,20 @@ export default class LoginView extends Component {
               underlineColorAndroid='transparent'
               onChangeText={(password) => this.setState({password})}/>
         </View>
+
+        <View style={styles.inputContainer}>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
+          <TextInput style={styles.inputs}
+              placeholder="Şifre"
+              secureTextEntry={true}
+              underlineColorAndroid='transparent'
+              onChangeText={(password) => this.setState({passwordAgain:password})}/>
+        </View>
         
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onRegisterPressed.bind(this)}>
           <Text style={styles.loginText}>Kaydol</Text>
         </TouchableHighlight>
-       
-        
+        </ScrollView> 
       </View>
     );
   }
