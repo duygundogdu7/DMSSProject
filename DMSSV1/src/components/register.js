@@ -8,7 +8,8 @@ import {
   Image,
   PixelRatio,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  Alert
 } from 'react-native';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
