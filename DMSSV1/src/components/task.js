@@ -55,7 +55,7 @@ class Task extends Component {
         />
         </TouchableOpacity>
       ) : (
-        <Text>You have no tasks.</Text>
+        <Text>Hiç görevin bulunmamaktadır.</Text>
       )
       )
 
