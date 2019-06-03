@@ -103,6 +103,11 @@ export default class LoginView extends Component {
       })
       return
     }
+    if(this.state.avatarSource.uri == null){
+      this.setState({
+        avatarSource : { uri: "https://res.cloudinary.com/dedbcikez/image/upload/v1559558494/default_fehmuo.jpg" }
+      })
+    }
     axios({
       method: 'post',
       url: 'http://172.20.10.9:8086/register',
@@ -135,7 +140,7 @@ export default class LoginView extends Component {
     return (
       <View style={styles.container}>
         <ScrollView>
-        <View style={styles.inputContainer}>
+        <View style={styles.avatarContainer}>
         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
      
             {this.state.avatarSource === null ? (
