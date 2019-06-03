@@ -110,7 +110,7 @@ export default class LoginView extends Component {
     }
     axios({
       method: 'post',
-      url: 'http://172.20.10.9:8086/register',
+      url: 'http://192.168.43.165:8086/register',
       data: {
           name: this.state.name,
           surname: this.state.surname,
@@ -127,7 +127,7 @@ export default class LoginView extends Component {
       Actions.Login();
     else{
       this.setState({
-        error: 'Register failed',
+        error: 'Kayıt olurken hata oluştu!',
         loading: false
       })
      
@@ -144,7 +144,7 @@ export default class LoginView extends Component {
         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
      
             {this.state.avatarSource === null ? (
-              <Text>Select a Photo</Text>
+              <Text>Profil Resminizi Seçiniz</Text>
             ) : (
               <Image style={styles.avatar} source={this.state.avatarSource} />
             )}
@@ -153,7 +153,7 @@ export default class LoginView extends Component {
       <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Ad"
+              placeholder="Adınız"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
               onChangeText={(name) => this.setState({name})}/>
@@ -161,7 +161,7 @@ export default class LoginView extends Component {
       <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Soyad"
+              placeholder="Soyadınız"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
               onChangeText={(surname) => this.setState({surname})}/>
@@ -169,7 +169,7 @@ export default class LoginView extends Component {
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Email"
+              placeholder="Emailiniz"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
               onChangeText={(email) => this.setState({email})}/>
@@ -178,7 +178,7 @@ export default class LoginView extends Component {
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Şifre"
+              placeholder="Şifreniz"
               secureTextEntry={true}
               underlineColorAndroid='transparent'
               onChangeText={(password) => this.setState({password})}/>
@@ -187,14 +187,14 @@ export default class LoginView extends Component {
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Şifre"
+              placeholder="Şifrenizi Tekrar Giriniz"
               secureTextEntry={true}
               underlineColorAndroid='transparent'
               onChangeText={(password) => this.setState({passwordAgain:password})}/>
         </View>
         
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onRegisterPressed.bind(this)}>
-          <Text style={styles.loginText}>Kaydol</Text>
+          <Text style={styles.loginText}>Kayıt Ol</Text>
         </TouchableHighlight>
         </ScrollView> 
       </View>
@@ -207,11 +207,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DCDCDC',
-    marginTop: 50,
+    backgroundColor: '#FFFFFF',
   },
   inputContainer: {
-      borderBottomColor: '#F5FCFF',
+      borderBottomColor: '#000000',
       backgroundColor: '#FFFFFF',
       borderRadius:30,
       borderBottomWidth: 1,
@@ -250,10 +249,16 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   avatarContainer: {
-    borderColor: '#9B9B9B',
-    borderWidth: 1 / PixelRatio.get(),
+    borderColor: '#00b5ec',
     justifyContent: 'center',
     alignItems: 'center',
+    height: 150,
+    width: 150,
+    marginBottom: 20,
+    marginTop: 20,
+    marginLeft: 50,
+    borderRadius:75,
+    borderWidth: 1,
   },
   avatar: {
     borderRadius: 75,

@@ -23,7 +23,7 @@ onButtonClicked(){
   let id = this.props.id
   axios({
     method: 'post',
-    url: 'http://172.20.10.9:8086/task',
+    url: 'http://192.168.43.165:8086/task',
     data: {
         title: this.state.title,
         date: this.state.date,

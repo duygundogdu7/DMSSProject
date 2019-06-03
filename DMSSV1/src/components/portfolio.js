@@ -25,7 +25,7 @@ import axios from 'axios';
 
   componentDidMount(){
     //Burada URL farklı olacak.
-    axios.get("http://172.20.10.9:8086/regions", { 
+    axios.get("http://192.168.43.165:8086/regions", { 
       params: {}
     }).then(result =>{
       console.log("Bölgelerimiz")

@@ -54,7 +54,7 @@ class LoginView extends Component {
     })
       axios({
         method: 'post',
-        url: 'http://172.20.10.9:8086/user',
+        url: 'http://192.168.43.165:8086/user',
         data: {
             email: this.state.email,
             password: this.state.password,
@@ -117,18 +117,17 @@ class LoginView extends Component {
               onChangeText={(password) => this.setState({password})}/>
         </View>
 
-        <View>{this.state.error}</View>
 
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onLoginClicked.bind(this)}>
           <Text style={styles.loginText}>Giriş Yap</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onNewPwdClicked.bind(this)}>
+        <TouchableHighlight style={styles.textContainer} onPress={() => this.onNewPwdClicked.bind(this)}>
             <Text style={{fontSize: 16}}>Şifrenizi mi unuttunuz?</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={this.onRegisterClicked.bind(this)}>
-            <Text style={{fontSize: 16}}>Kaydol</Text>
+        <TouchableHighlight style={styles.textContainer} onPress={this.onRegisterClicked.bind(this)}>
+            <Text style={{fontSize: 16}}>Hesabınız Yok Mu?</Text>
         </TouchableHighlight>
       </View>
     
@@ -148,10 +147,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#FFFFFF',
   },
   inputContainer: {
-      borderBottomColor: '#F5FCFF',
+      borderBottomColor: '#000000',
       backgroundColor: '#FFFFFF',
       borderRadius:30,
       borderBottomWidth: 1,
@@ -179,9 +178,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom:20,
-    width:250,
+    marginTop:20,
+    marginBottom:30,
+    width:150,
     borderRadius:30,
+  },
+  textContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
+    width:150,
+    borderRadius:30
   },
   loginButton: {
     backgroundColor: "#00b5ec",
