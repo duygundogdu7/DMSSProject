@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input,Button } from 'react-native-elements';
+import { Input,Card } from 'react-native-elements';
 import { Text, StyleSheet, View, TouchableHighlight,Picker } from 'react-native';
 import { connect } from 'react-redux';
 import {changeTask,deleteTask,completeTask} from '../actions'
@@ -53,7 +53,7 @@ class TaskDetail extends Component {
     console.log(this.props.manager)
     return (
       <View>
-       
+       <Card>
       <Input text='Görev'
                 onChangeText={(text) => {
                       this.setState({
@@ -63,7 +63,7 @@ class TaskDetail extends Component {
                 value={this.state.title}/>
                 <Text style={{fontSize:18, marginLeft:10, marginTop:10}}>Tarih:</Text>
                  <DatePicker 
-                  style={{width:200}}
+                  style={{width:200, marginLeft:20}}
                   date={this.state.date}
                   mode="date"
                   placeholder="select date"
@@ -87,24 +87,25 @@ class TaskDetail extends Component {
                   onDateChange={(date) => {this.setState({date:date})}}
                 />
                 
-                <Text style={{fontSize:18, marginLeft:10, marginTop:10}}>Önem Derecesi:</Text>
               <Picker
               selectedValue={this.state.type}
-              style={{height: 70, width: 200}}
+              style={{height: 70, width: 200, marginLeft: 20}}
               onValueChange={(itemValue, itemIndex) =>  this.setState({type: itemValue})}>
+              <Picker.Item label="Önem Derecesini Seçiniz" value="0" />
               <Picker.Item label="Önemli" value="Önemli" />
               <Picker.Item label="Çok Önemli" value="Çok Önemli" />
               </Picker>   
 
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onSaveClicked.bind(this)}>
-            <Text style={styles.loginText}>Görevi Güncelle</Text>
+            <Text style={styles.loginText}>Güncelle</Text>
           </TouchableHighlight>
-          <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onCompleteClicked.bind(this)}>
+          <TouchableHighlight style={[styles.buttonContainer, styles.loginButton3]} onPress={this.onCompleteClicked.bind(this)}>
             <Text style={styles.loginText}>Bu Görevi Tamamla</Text>
           </TouchableHighlight>
-        <TouchableHighlight style={[styles.buttonContainer2, styles.loginButton2]} onPress={this.onDeleteClicked.bind(this)}>
+        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton2]} onPress={this.onDeleteClicked.bind(this)}>
           <Text style={styles.loginText2}>Bu Görevi Sil</Text>
        </TouchableHighlight> 
+       </Card>
       </View>
       
     );
@@ -129,10 +130,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom:20,
-    width:250,
     borderRadius:30,
-    marginLeft: 80
+    width:150,
+    marginLeft: 70
   },
   loginButton: {
     backgroundColor: "#00b5ec",
@@ -140,18 +140,11 @@ const styles = StyleSheet.create({
   loginText: {
     color: 'white',
   },
-  buttonContainer2: {
-    height:45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom:20,
-    width:250,
-    borderRadius:30,
-    marginLeft: 80
-  },
   loginButton2: {
     backgroundColor: "#cc0828",
+  },
+  loginButton3: {
+    backgroundColor: "#00e600",
   },
   loginText2: {
     color: 'white',
