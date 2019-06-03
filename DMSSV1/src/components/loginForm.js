@@ -39,6 +39,8 @@ class LoginView extends Component {
         error: 'Giriş yapılamadı lütfen boşlukları doldurunuz.',
         loading: true
       })
+      Alert.alert("Giriş yapılamadı lütfen boşlukları doldurunuz.");
+
       return
     }
     else if(this.state.email.split('@')[1] != "kw.com"){
@@ -46,6 +48,8 @@ class LoginView extends Component {
         error: 'Keller Williams emailiniz ile giriş yapınız.',
         loading: true
       })
+      Alert.alert("Keller Williams emailiniz ile giriş yapınız.");
+
       return
     }
     this.setState({
@@ -118,7 +122,7 @@ class LoginView extends Component {
               onChangeText={(password) => this.setState({password})}/>
         </View>
 
-
+        
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onLoginClicked.bind(this)}>
           <Text style={styles.loginText}>Giriş Yap</Text>
         </TouchableHighlight>
