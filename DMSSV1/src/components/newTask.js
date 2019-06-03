@@ -85,8 +85,8 @@ this.setState({
               selectedValue={this.state.type}
               style={{height: 70, width: 200}}
               onValueChange={(itemValue, itemIndex) =>  this.setState({type: itemValue})}>
-              <Picker.Item label="Önemli" value="onemli" />
-              <Picker.Item label="Çok Önemli" value="cok_onemli" />
+              <Picker.Item label="Önemli" value="Önemli" />
+              <Picker.Item label="Çok Önemli" value="Çok Önemli" />
               </Picker>       
          
          
