@@ -23,10 +23,21 @@ const component2 = () => <Text>Fiyat Belirleme</Text>
       aidat: '',
       answer: '',
       selectedIndex: 0,
+      status:false
     }
     this.updateIndex = this.updateIndex.bind(this)
   }
-
+  hesapla = () =>{
+ 
+    if(this.state.status == true)
+    {
+      this.setState({status: false})
+    }
+    else
+    {
+      this.setState({status: true})
+    }
+  }
   componentDidMount(){
     //Burada URL farklı olacak.
     axios.get("http://192.168.1.26:8086/regions", { 
@@ -60,9 +71,6 @@ const component2 = () => <Text>Fiyat Belirleme</Text>
     ))
   }
 
-  hesapla(){
-  
-  }
   updateIndex (selectedIndex) {
     this.setState({selectedIndex})
   }
@@ -164,7 +172,8 @@ const component2 = () => <Text>Fiyat Belirleme</Text>
                 </TouchableHighlight>
               </View>
             
-             
+            {        this.state.status ? <Text style= {{ fontSize: 25, color: "#000", textAlign: 'center' }}> 375000 </Text> : null
+}
            
           </Card>
        </ScrollView>

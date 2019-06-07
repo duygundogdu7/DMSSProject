@@ -71,7 +71,7 @@ class Task extends Component {
       <ScrollView>
         <View style={styles.container}>
         <Card >
-        <Image style={styles.avatar} source={{uri:tasks.imageURL}}/>
+        <Image  style={styles.avatar}  source={require('./gift.jpeg')} />
 
         <Text style={styles.rankingWrapper2}>Merhaba {tasks.name}!</Text>
         <Text style={styles.rankingWrapper}>Bu hafta {tasks.score} puanla {tasks.rank}. sıradasınız!</Text>
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     fontFamily: 'sans-serif',
     marginBottom: 10,
-    marginTop: 120,
+    marginTop: 200,
   },
   loginButton: {
     backgroundColor: "#00b5ec",
@@ -170,15 +170,11 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 63,
-    borderWidth: 4,
-    borderColor: "white",
-    marginBottom:100,
     alignSelf:'center',
     position: 'absolute',
-    marginLeft: 60,
+    borderRadius: 30,
+    borderWidth: 4,
+    borderColor: "white"
   },
 })
 
