@@ -471,17 +471,17 @@ class Ranking(Resource):
         id = request.args.get('id')
         users = self.users.find({})
         newList = sorted(users, key=lambda k: k['score'], reverse=True)
-        i = 0 
+        i = 1
+        rank = 1
         for res in newList:
-            if(res["_id"] == id):
-                del res["_id"]
-                break
+            if res["_id"] == id:
+                rank = i
             else:
                 i = i + 1
             del res["_id"]
         
-        print(i)
-        return (jsonify(rank=i))
+        print(rank)
+        return (jsonify(rank=rank))
       
 api.add_resource(Ranking,  '/ranking',  methods=['GET'])
 
