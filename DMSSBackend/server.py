@@ -508,6 +508,7 @@ class HomePage(Resource):
     def get(self):
         id = request.args.get('id')
         user = self.users.find_one({"_id":  ObjectId(id)})
+        print(user)
         users = self.users.find({})
         newList = sorted(users, key=lambda k: k['score'], reverse=True)
         i = 1
