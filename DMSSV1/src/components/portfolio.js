@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { View, Text, Picker, FlatList, TouchableHighlight,ScrollView, StyleSheet, TextInput } from 'react-native';
 import axios from 'axios';
-import { Card } from 'react-native-elements';
+import { Card,ButtonGroup } from 'react-native-elements';
 
-
+const component1 = () => <Text>Portfolyo Ekle</Text>
+const component2 = () => <Text>Fiyat Belirleme</Text>
  class Portfolio extends Component {
-  
+
   constructor(){
     super();
     this.state = {
@@ -20,8 +21,10 @@ import { Card } from 'react-native-elements';
       katSayisi: '',
       bulunanKat: '',
       aidat: '',
-      answer: ''
+      answer: '',
+      selectedIndex: 0,
     }
+    this.updateIndex = this.updateIndex.bind(this)
   }
 
   componentDidMount(){
@@ -58,47 +61,29 @@ import { Card } from 'react-native-elements';
   }
 
   hesapla(){
-    //Burada bir tane GET methodu olacak. Parametre olarak da bolge,aidat vs. göndereceğiz.
-    axios({
-      method: 'get',
-      url: 'http://192.168.1.26:8086/analyze',
-      data: {
-        "region": this.state.bolge,
-        "type": this.state.durum,
-        "yapili":this.state.yapili,
-        "esyali":this.state.esyali,
-        "m2": this.state.m2,
-        "katSayisi": this.state.katSayisi,
-        "bulKat": this.state.bulunanKat,
-        "aidat": this.state.aidat,
-        
-      }
-     }).then((response) => 
-     //Burada dairemizin fiyatının yazması lazım.
-    { console.log(response)
-     })  
+  
   }
+  updateIndex (selectedIndex) {
+    this.setState({selectedIndex})
+  }
+  
 
   render() {
+    const buttons = [{ element: component1 }, { element: component2 }]
+    const { selectedIndex } = this.state
     return (
       <View style={styles.container}>
         <ScrollView >
         <Text style={styles.textWrapper}>PORTFÖY ARAÇLARI</Text>
 
-        <View style={{flex: 1, flexDirection: 'row'}}>
-        <View style={styles.highlight}>
-                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.hesapla.bind(this)}>
-                  <Text style={styles.loginText}>Portfolyo Ekle</Text>
-                </TouchableHighlight>
-              </View>
-              <View style={styles.highlight}>
-                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.hesapla.bind(this)}>
-                  <Text style={styles.loginText}>Fiyat Tahminleme</Text>
-                </TouchableHighlight>
-              </View>
-      </View>
+        <ButtonGroup
+      onPress={this.updateIndex}
+      selectedIndex={selectedIndex}
+      buttons={buttons}
+      containerStyle={{height: 50}} />
+  
           <Card>
-          <View style={{backgroundColor: '#E0FFFF'}}>
+          <View style={{backgroundColor: '#FFFFFF'}}>
           <View style={styles.portfolioStyle}>
             <View style={styles.portfolioStyle}>
               <Picker
@@ -174,10 +159,13 @@ import { Card } from 'react-native-elements';
           </View>
           </View>
           <View style={styles.highlight}>
-                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.hesapla.bind(this)}>
+                <TouchableHighlight style={[styles.buttonContainer2, styles.loginButton]} onPress={this.hesapla.bind(this)}>
                   <Text style={styles.loginText}>Kaydet</Text>
                 </TouchableHighlight>
               </View>
+            
+             
+           
           </Card>
        </ScrollView>
     </View>
@@ -226,12 +214,11 @@ const styles = StyleSheet.create({
   },
   buttonContainer2: {
     height:45,
-    width: 120,
+    width: 150,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom:20,
-    marginRight: 40,
     marginLeft: 60,
     borderRadius: 15
   },
