@@ -127,6 +127,7 @@ class ManagerTaskList(Resource):
             print(user)
             tasks_of_user = self.tasks.find({"user_id": str(user["_id"]), "is_complete":True, "is_approved":False})
             results = list(tasks_of_user)
+            tasks_of_user["imageURL"] = user["imageURL"]
             ress = ress + results
             print(results)
         for res in ress:
@@ -431,6 +432,45 @@ class Regions(Resource):
         
 
 api.add_resource(Regions,  '/regions',  methods=['GET','POST'])
+
+class Regs(Resource):
+    def __init__(self):
+        self.regions = db.FileInfo
+        
+    def get(self):
+        regions = self.regions.find({})
+        regions = list(regions)
+        print(regions)
+        regs = []
+        for res in regions:
+            dic = {"value": res["region"], "label": res["region"]}
+            regs.append(dic)
+        print(regs)
+        return (jsonify(regions=regs))
+
+
+    
+api.add_resource(Regs,  '/regs',  methods=['GET'])
+
+
+
+class Gift(Resource):
+    def __init__(self):
+        self.regions = db.FileInfo
+        
+    def get(self):
+        regions = self.regions.find({})
+        regions = list(regions)
+        print(regions)
+        regs = []
+        for res in regions:
+            regs.append(res["region"])
+        print(regs)
+        return (jsonify(regions=regs))
+
+
+    
+api.add_resource(Gift,  '/gift',  methods=['GET'])
 
 class UpdateDataset(Resource):
 
