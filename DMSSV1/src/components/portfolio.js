@@ -26,7 +26,7 @@ import { Card } from 'react-native-elements';
 
   componentDidMount(){
     //Burada URL farklı olacak.
-    axios.get("http://192.168.43.165:8086/regions", { 
+    axios.get("http://192.168.1.26:8086/regions", { 
       params: {}
     }).then(result =>{
       console.log("Bölgelerimiz")
@@ -61,7 +61,7 @@ import { Card } from 'react-native-elements';
     //Burada bir tane GET methodu olacak. Parametre olarak da bolge,aidat vs. göndereceğiz.
     axios({
       method: 'get',
-      url: 'http://192.168.43.165:8086/analyze',
+      url: 'http://192.168.1.26:8086/analyze',
       data: {
         "region": this.state.bolge,
         "type": this.state.durum,

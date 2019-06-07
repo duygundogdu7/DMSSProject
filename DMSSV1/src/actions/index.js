@@ -11,13 +11,13 @@ export const SEND_MANAGER = 'sendManager';
 export const SEND_ID = 'sendID';
 
 
-const completeTaskUrl = 'http://192.168.43.165:8086/completeTask';
-const updateTaskURL = 'http://192.168.43.165:8086/updateTask';
-const taskListURL = 'http://192.168.43.165:8086/taskList';
-const profileURL = 'http://192.168.43.165:8086/profile';
-const scoreTableURL = 'http://192.168.43.165:8086/scoreTable';
-const managerTaskURL = 'http://192.168.43.165:8086/managerTaskList';
-const approveTaskURL = 'http://192.168.43.165:8086/approveTask';
+const completeTaskUrl = 'http://192.168.1.26:8086/completeTask';
+const updateTaskURL = 'http://192.168.1.26:8086/updateTask';
+const taskListURL = 'http://192.168.1.26:8086/taskList';
+const profileURL = 'http://192.168.1.26:8086/profile';
+const scoreTableURL = 'http://192.168.1.26:8086/scoreTable';
+const managerTaskURL = 'http://192.168.1.26:8086/managerTaskList';
+const approveTaskURL = 'http://192.168.1.26:8086/approveTask';
 
 
 export const approveTask = (task) => {
