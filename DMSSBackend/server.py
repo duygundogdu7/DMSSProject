@@ -97,6 +97,20 @@ class TaskList(Resource):
            
 api.add_resource(TaskList,  '/taskList',  methods=['GET'])
 
+class DoneTaskList(Resource):
+    def __init__(self):
+        self.tasks = db.Tasks
+
+    def get(self):
+        user_id = request.args.get('user_id')
+        tasks_of_user = self.tasks.find({"user_id": user_id, "is_complete":True})
+        results = list(tasks_of_user)
+        for res in results:
+            res["id"] = str(res["_id"])
+            del res["_id"]
+        return  (jsonify(tasks=results))
+           
+api.add_resource(DoneTaskList,  '/doneTaskList',  methods=['GET'])
 
 class ManagerTaskList(Resource):
     def __init__(self):
@@ -181,7 +195,10 @@ class ApproveTask(Resource):
             task =  db.Tasks.find_one({"_id":idcik})
             print("TASK:", task)
             db.Tasks.update_one({"_id": idcik},{"$set": {"is_approved":True}})
-            db.Users.update_one({"_id": task['user_id']},{"$inc":{"score":10}})
+            user = db.Users.find_one({"_id": ObjectId(task['user_id'])})
+            print(user)
+            print(task["user_id"])
+            db.Users.update_one({"_id":  ObjectId(task['user_id'])},{"$inc":{"score":10}})
             return '',http.HTTPStatus.OK
         except Exception as e:
             print("TASK",e)
@@ -283,7 +300,7 @@ class Register(Resource):
                 "surname": data['surname'],
                 "email": data['email'],
                 "password": data['password'],
-                "score": "0",
+                "score": 0,
                 "admin": False,
                 "is_manager": False,
                 "team_id": "",
@@ -489,8 +506,12 @@ class Ranking(Resource):
         newList = sorted(users, key=lambda k: k['score'], reverse=True)
         i = 1
         rank = 1
+        
         for res in newList:
-            if res["_id"] == id:
+            print("id",id)
+            print(type(res["_id"]))
+            if res["_id"] == ObjectId(id):
+                print(res)
                 rank = i
             else:
                 i = i + 1
