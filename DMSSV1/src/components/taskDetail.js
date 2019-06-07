@@ -33,8 +33,8 @@ class TaskDetail extends Component {
 
     }
     onCompleteClicked(){
-      this._confettiView.startConfetti();
       this.props.completeTask(task={id: this.state.id })
+      this._confettiView.startConfetti();
       Actions.ConfettiPage();
       /*if(this.props.manager == false)
         Actions.MyComponent();

@@ -85,15 +85,34 @@ api.add_resource(CreateTeams,  '/create',  methods=['GET'])
 class TaskList(Resource):
     def __init__(self):
         self.tasks = db.Tasks
+        self.users = db.Users
 
     def get(self):
         user_id = request.args.get('user_id')
         tasks_of_user = self.tasks.find({"user_id": user_id, "is_complete":False})
+        user = self.users.find_one({"_id": ObjectId(user_id)})
         results = list(tasks_of_user)
         for res in results:
             res["id"] = str(res["_id"])
             del res["_id"]
-        return  (jsonify(tasks=results))
+        print(user)
+        users = self.users.find({})
+        newList = sorted(users, key=lambda k: k['score'], reverse=True)
+        i = 1
+        rank = 1
+        first = newList[0]["score"]
+        print(first)
+        count = (first - user["score"]) /10
+        print(count)
+        for res in newList:
+            if res["_id"] == user["_id"]:
+                print(res)
+                rank = i
+            else:
+                i = i + 1
+            del res["_id"]
+        tasks={"results":results,"name":user["name"],"score":user["score"], "rank":rank, "count":count, "imageURL": user["imageURL"]}
+        return  (jsonify(tasks=tasks))
            
 api.add_resource(TaskList,  '/taskList',  methods=['GET'])
 
@@ -125,10 +144,12 @@ class ManagerTaskList(Resource):
         print(users)
         for user in users:
             print(user)
-            tasks_of_user = self.tasks.find({"user_id": str(user["_id"]), "is_complete":True, "is_approved":False})
+            tasks_of_user = self.tasks.find({"user_id": user["_id"], "is_complete":True, "is_approved":False})
+            for task in tasks_of_user:
+                task["imageURL"] = user["imageURL"]
             results = list(tasks_of_user)
-            tasks_of_user["imageURL"] = user["imageURL"]
             ress = ress + results
+            print("RESULTS")
             print(results)
         for res in ress:
             print(res)
@@ -548,8 +569,6 @@ class Ranking(Resource):
         rank = 1
         
         for res in newList:
-            print("id",id)
-            print(type(res["_id"]))
             if res["_id"] == ObjectId(id):
                 print(res)
                 rank = i

@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { View, Text, Button, FlatList, 
         StyleSheet, TouchableHighlight,
         TouchableWithoutFeedback,
-        TouchableOpacity,ScrollView } from 'react-native';
+        TouchableOpacity,ScrollView ,Image} from 'react-native';
 import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import {fetchAllTasks} from '../actions'
+import { Card } from 'react-native-elements';
 
 
 
@@ -62,24 +63,35 @@ class Task extends Component {
 
   render() {
       const { tasks } = this.props;
-      const { info } = this.props;
       console.log("KİMİN INFOSU BU")
-      console.log(this.props)
+      console.log("INFO",this.props)
+      console.log("tasks",tasks.results)
+      console.log("name",tasks.name)
     return( 
       <ScrollView>
         <View style={styles.container}>
+        <Card >
+        <Image style={styles.avatar} source={{uri:tasks.imageURL}}/>
+
+        <Text style={styles.rankingWrapper2}>Merhaba {tasks.name}!</Text>
+        <Text style={styles.rankingWrapper}>Bu hafta {tasks.score} puanla {tasks.rank}. sıradasınız!</Text>
+        <Text style={styles.rankingWrapper}>Birinci olmak için {tasks.count} görev daha tamamlamalısın.</Text>
+        </Card>
+      <Card>
         <View>
             <Text style={styles.textWrapper}>YAPILMASI GEREKENLER</Text>
             <FlatList
-            data={tasks}
+            data={tasks.results}
              renderItem={this.renderItem}
             />         
         </View>
+        
         <View style={styles.viewContainer}>
           <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onNewTaskClicked.bind(this)}>
             <Text style={styles.loginText}>YENİ GÖREV EKLE</Text>
           </TouchableHighlight>
-        </View>          
+        </View>  
+      </Card>        
       </View>
       </ScrollView>
       
@@ -88,12 +100,13 @@ class Task extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log("taska geld,", state.tasks.data)
   var tasks = []
   for (var property in state.tasks.data) {
     tasks = state.tasks.data[property]
   }
 
-
+  console.log("gittin",tasks)
   return {
     tasks,
     id:state.id
@@ -126,7 +139,23 @@ const styles = StyleSheet.create({
     marginBottom:20,
     width:250,
     borderRadius:30,
-    marginLeft: 60
+    marginLeft: 35
+  },
+  rankingWrapper: {
+    fontSize: 18,
+    textAlign:'center',
+    color: '#000000',
+    fontFamily: 'sans-serif',
+    marginBottom: 10,
+  },
+  rankingWrapper2: {
+    fontSize: 22,
+    textAlign:'center',
+    color: '#00b5ec',
+    fontWeight:'bold',
+    fontFamily: 'sans-serif',
+    marginBottom: 10,
+    marginTop: 120,
   },
   loginButton: {
     backgroundColor: "#00b5ec",
@@ -139,7 +168,18 @@ const styles = StyleSheet.create({
   },
   subtitleWrapper: {
     fontSize: 16
-  }
+  },
+  avatar: {
+    width: 130,
+    height: 130,
+    borderRadius: 63,
+    borderWidth: 4,
+    borderColor: "white",
+    marginBottom:100,
+    alignSelf:'center',
+    position: 'absolute',
+    marginLeft: 60,
+  },
 })
 
 export default connect(mapStateToProps, {

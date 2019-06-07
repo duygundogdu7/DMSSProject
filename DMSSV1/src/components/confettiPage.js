@@ -24,7 +24,7 @@ class ConfettiPage extends Component {
     return (
       <View>
         <Confetti ref={(node) => this._confettiView = node} />
-        
+        <Text>Tebrikler yeni bir görev tamamladınız! Takım lideriniz onayladıktan sonra 10 puan kazanacaksınız!</Text>
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton3]} onPress={this.onCompleteClicked.bind(this)}>
             <Text style={styles.loginText}>Geri Dön</Text>
           </TouchableHighlight>

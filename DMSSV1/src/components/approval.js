@@ -35,7 +35,6 @@ class Approval extends Component {
                 <Text style={styles.subtitleWrapper}>{item.date}</Text>
             </View>
           }
-          leftAvatar={{ source: {uri: "https://img.icons8.com/dusk/64/000000/task.png"}}}
           rightElement={
             <View>
                 <Text style={styles.subtitleWrapper}>{item.type}</Text>

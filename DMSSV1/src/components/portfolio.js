@@ -83,7 +83,21 @@ import { Card } from 'react-native-elements';
     return (
       <View style={styles.container}>
         <ScrollView >
-          <Card title="PORTFÖY HESAPLAMA ARACI" >
+        <Text style={styles.textWrapper}>PORTFÖY ARAÇLARI</Text>
+
+        <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={styles.highlight}>
+                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.hesapla.bind(this)}>
+                  <Text style={styles.loginText}>Portfolyo Ekle</Text>
+                </TouchableHighlight>
+              </View>
+              <View style={styles.highlight}>
+                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.hesapla.bind(this)}>
+                  <Text style={styles.loginText}>Fiyat Tahminleme</Text>
+                </TouchableHighlight>
+              </View>
+      </View>
+          <Card>
           <View style={{backgroundColor: '#E0FFFF'}}>
           <View style={styles.portfolioStyle}>
             <View style={styles.portfolioStyle}>
@@ -155,19 +169,15 @@ import { Card } from 'react-native-elements';
               keyboardType="email-address"
               underlineColorAndroid='transparent'
               onChangeText={(aidat) => this.setState({aidat})}/>
-              <View style={styles.highlight}>
-                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.hesapla.bind(this)}>
-                  <Text style={styles.loginText}>PortfoyEkle</Text>
-                </TouchableHighlight>
-              </View>
-              <View style={styles.highlight}>
-                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.hesapla.bind(this)}>
-                  <Text style={styles.loginText}>Hesapla</Text>
-                </TouchableHighlight>
-              </View>
+             
             </View>
           </View>
           </View>
+          <View style={styles.highlight}>
+                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.hesapla.bind(this)}>
+                  <Text style={styles.loginText}>Kaydet</Text>
+                </TouchableHighlight>
+              </View>
           </Card>
        </ScrollView>
     </View>
@@ -182,6 +192,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  textWrapper: {
+    marginTop: 20,
+    marginBottom: 20,
+    fontSize: 24,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#000000'
+  },
   textInput:{
     height: 70,
     color: 'black',
@@ -193,16 +211,29 @@ const styles = StyleSheet.create({
   },
   highlight:{
     marginTop: 20,
-    marginLeft: 80
+    marginLeft: 20
   },
   buttonContainer: {
     height:45,
+    width: 120,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom:20,
-    marginRight: 10,
-    borderRadius:30,
+    marginRight: 40,
+    marginLeft: 25,
+    borderRadius: 15
+  },
+  buttonContainer2: {
+    height:45,
+    width: 120,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:20,
+    marginRight: 40,
+    marginLeft: 60,
+    borderRadius: 15
   },
   loginButton: {
     backgroundColor: "#00b5ec",
