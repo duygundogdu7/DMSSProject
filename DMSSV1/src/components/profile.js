@@ -33,11 +33,6 @@ class Profile extends Component {
         </View>
         
       }
-      subtitle={
-        <View>
-            <Text style={styles.subtitleWrapper}>{item.isbn}</Text>
-        </View>
-      }
       rightElement = {
         <View>
             <Text style={styles.subtitleWrapper}>{item.score}</Text>
@@ -48,6 +43,7 @@ class Profile extends Component {
 
   render() {
     const { profile } = this.props;
+    console.log("PROFILE:" ,profile)
     return(
 
       <View>

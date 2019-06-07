@@ -19,7 +19,7 @@ class ScoreRoute extends Component {
     console.log(this.props.id)
     axios({
       method: 'get',
-      url: 'http://192.168.0.12:8086/ranking',
+      url: 'http://192.168.43.165:8086/ranking',
       data: {
           id: this.props.id
       }

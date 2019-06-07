@@ -117,7 +117,7 @@ export default class LoginView extends Component {
     }
     axios({
       method: 'post',
-      url: 'http://192.168.0.12:8086/register',
+      url: 'http://192.168.43.165:8086/register',
       data: {
           name: this.state.name,
           surname: this.state.surname,
@@ -127,18 +127,19 @@ export default class LoginView extends Component {
       }
      }).then((response) => 
     {this.setState({
-    registerResponse: response.status
-  })})
-    console.log(this.state.registerResponse);
-    if(this.state.registerResponse == "1")
-      Actions.Login();
-    else{
-      this.setState({
-        error: 'Kayıt olurken hata oluştu!',
-        loading: false
-      })
-     
-    }
+    registerResponse:  response.data["res"]
+  })
+  if(this.state.registerResponse == "1")
+  Actions.Login();
+else{
+  this.setState({
+    error: 'Kayıt olurken hata oluştu!',
+    loading: false
+  })
+ 
+}}
+  )
+    
 
 
   }

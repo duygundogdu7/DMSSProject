@@ -174,7 +174,9 @@ class ApproveTask(Resource):
         try:
             data = request.get_json()
             print(data)
+            task =  db.Tasks.find({"_id": data['id']})
             db.Tasks.update_one({"_id": ObjectId(data['id'])},{"$set": {"is_approved":True}})
+            db.Users.update_one({"_id": ObjectId(task.user_id)},{"$set": {"$inc":{"score":10}}})
             return '',http.HTTPStatus.OK
         except Exception as e:
             print(e)
@@ -237,21 +239,24 @@ class Profile(Resource):
 
     def get(self):
         user_id = request.args.get('user_id')
-        user = self.users.find_one({"_id": user_id})
-        print(user)
+        user = self.users.find_one({"_id":  ObjectId(user_id)})
         if not user["is_manager"]:
-            manager = self.users.find_one({"_id": user["manager_id"]})
+            manager = self.users.find_one({"_id": ObjectId(user["manager_id"])})
             manager = manager["name"]
         else:
             manager = user["name"]
         friends = self.users.find({"team_id": user["team_id"]})
         friends = list(friends)
         newList = sorted(friends, key=lambda k: k['score'], reverse=True) 
+        print("new",newList)
+        names= []
         for friend in newList:
-            del friend["_id"]
+            dic = {"name": str(friend["name"] + " " + friend["surname"]), "score": friend["score"]}
+            names.append(dic)
             if friend["is_manager"]:
                 newList.remove(friend)
-        return (jsonify(score=user['score'], friends=newList, manager=manager, name=user['name'], id=user["_id"], imageURL=user['imageURL']))
+        print(names)
+        return (jsonify(score=user['score'], friends=names, manager=manager, name=user['name'], imageURL=user['imageURL']))
 
 api.add_resource(Profile,  '/profile' ,  methods=['GET'])
 
@@ -275,10 +280,10 @@ class Register(Resource):
             }
             db.Users.insert_one(user)
             print(user)
-            return '',http.HTTPStatus.OK
+            return jsonify(res="1")
         except Exception as e:
             print(e)
-            return '',http.HTTPStatus.NO_CONTENT
+            return jsonify(res="0")
 
 api.add_resource(Register,  '/register',  methods=['POST'])
 
