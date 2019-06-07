@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
+import { View, Text, Button, FlatList, StyleSheet,ScrollView } from 'react-native';
 import { connect, Provider } from 'react-redux';
 import { ListItem } from 'react-native-elements';
 import {fetchScoreTable} from '../actions'
@@ -59,7 +59,9 @@ class ScoreRoute extends Component {
     console.log(this.props)
       const { scoreTable } = this.props;
     return(
+      <ScrollView>
         <View style={styles.container}>
+        
           <Text style={styles.textWrapper}>HAFTALIK PUAN TABLOSU</Text>
           <Text style={styles.rankingWrapper}>Bu hafta {this.state.ranking}. sıradasınız!</Text>
           <FlatList
@@ -67,8 +69,8 @@ class ScoreRoute extends Component {
              renderItem={this.renderItem}
             /> 
        
-         
         </View>
+        </ScrollView>
     )
   }
 }

@@ -71,6 +71,7 @@ class LoginView extends Component {
       isManager: response.data["isManager"]
        })  
       // Buraya store a atılacak verileri yazacağız.
+      console.log("MANAGER ID'Sİ: ", response.data["userID"] )
       this.props.sendID(response.data["userID"])
       this.props.sendManager(response.data["isManager"])
 

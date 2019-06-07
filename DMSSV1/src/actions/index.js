@@ -26,7 +26,7 @@ export const approveTask = (task) => {
     try {
       console.log("actiona gelen");
       console.log(task);
-      const response = await  axios.post(approveTaskURL, { data: {  id: task.id } });
+      const response = await  axios.post(approveTaskURL, { id: task });
       console.log("action resp");
       console.log(response);
       dispatch({

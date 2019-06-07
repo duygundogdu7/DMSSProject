@@ -107,11 +107,14 @@ class ManagerTaskList(Resource):
         user_id = request.args.get('user_id')
         print(user_id)
         ress = []
-        users =  self.users.find({"manager_id": user_id})
+        users =  self.users.find({"manager_id": ObjectId(user_id)})
+        print(users)
         for user in users:
-            tasks_of_user = self.tasks.find({"user_id": user["_id"], "is_complete":True, "is_approved":False})
+            print(user)
+            tasks_of_user = self.tasks.find({"user_id": str(user["_id"]), "is_complete":True, "is_approved":False})
             results = list(tasks_of_user)
             ress = ress + results
+            print(results)
         for res in ress:
             print(res)
             res["id"] = str(res["_id"])
@@ -173,13 +176,15 @@ class ApproveTask(Resource):
     def post(self):
         try:
             data = request.get_json()
-            print(data)
-            task =  db.Tasks.find({"_id": data['id']})
-            db.Tasks.update_one({"_id": ObjectId(data['id'])},{"$set": {"is_approved":True}})
-            db.Users.update_one({"_id": ObjectId(task.user_id)},{"$set": {"$inc":{"score":10}}})
+            print(data["id"])
+            idcik =  ObjectId(data['id']['id'])
+            task =  db.Tasks.find_one({"_id":idcik})
+            print("TASK:", task)
+            db.Tasks.update_one({"_id": idcik},{"$set": {"is_approved":True}})
+            db.Users.update_one({"_id": task['user_id']},{"$inc":{"score":10}})
             return '',http.HTTPStatus.OK
         except Exception as e:
-            print(e)
+            print("TASK",e)
             return '',http.HTTPStatus.NO_CONTENT
 
            
@@ -223,12 +228,14 @@ class ScoreTable(Resource):
     def get(self):
         users = self.users.find({})
         newList = sorted(users, key=lambda k: k['score'], reverse=True) 
+        names = []
         for res in newList:
-            del res["_id"]
             if res["is_manager"]:
-                newList.remove(res)
-
-        return (jsonify(scoreTable=newList))
+                continue
+            else:
+                dic = {"name": str(res["name"] + " " + res["surname"]), "score": res["score"]}
+                names.append(dic)
+        return (jsonify(scoreTable=names))
       
 api.add_resource(ScoreTable,  '/scoreTable',  methods=['GET'])
 
@@ -242,21 +249,25 @@ class Profile(Resource):
         user = self.users.find_one({"_id":  ObjectId(user_id)})
         if not user["is_manager"]:
             manager = self.users.find_one({"_id": ObjectId(user["manager_id"])})
-            manager = manager["name"]
+            manager = manager["name"] + " " + manager["surname"]
         else:
-            manager = user["name"]
+            manager = user["name"] + " " + user["surname"]
         friends = self.users.find({"team_id": user["team_id"]})
         friends = list(friends)
         newList = sorted(friends, key=lambda k: k['score'], reverse=True) 
         print("new",newList)
         names= []
+
         for friend in newList:
-            dic = {"name": str(friend["name"] + " " + friend["surname"]), "score": friend["score"]}
-            names.append(dic)
             if friend["is_manager"]:
-                newList.remove(friend)
+                continue
+            else:
+                dic = {"name": str(friend["name"] + " " + friend["surname"]), "score": friend["score"]}
+                names.append(dic)
+            
         print(names)
-        return (jsonify(score=user['score'], friends=names, manager=manager, name=user['name'], imageURL=user['imageURL']))
+        name = user['name'] + " " + user["surname"]
+        return (jsonify(score=user['score'], friends=names, manager=manager, name=name, imageURL=user['imageURL']))
 
 api.add_resource(Profile,  '/profile' ,  methods=['GET'])
 

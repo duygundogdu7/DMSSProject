@@ -16,6 +16,7 @@ class ApprovalDetail extends Component {
       id:''
     }
     onYesClicked(){
+      console.log("APPPPPPROVE", this.state.id)
       this.props.approveTask(task={id: this.state.id })
       if(this.props.manager == false)
         Actions.MyComponent();
