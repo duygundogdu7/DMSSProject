@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { TextInput } from 'react-native';
+import { TextInput,StyleSheet,View,TouchableHighlight,Text } from 'react-native';
 import Confetti from 'react-native-confetti';
+import {connect} from 'react-redux'
+import { Actions } from 'react-native-router-flux';
 
 class ConfettiPage extends Component {
  
- componentWillMount(){
+ componentDidMount(){
+  if(this._confettiView) {
     this._confettiView.startConfetti();
+ }
  }
 
  onCompleteClicked(){
@@ -19,7 +23,8 @@ class ConfettiPage extends Component {
   render() {
     return (
       <View>
-        <Confetti ref={(node) => this._confettiView = node}/>
+        <Confetti ref={(node) => this._confettiView = node} />
+        
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton3]} onPress={this.onCompleteClicked.bind(this)}>
             <Text style={styles.loginText}>Geri Dön</Text>
           </TouchableHighlight>
