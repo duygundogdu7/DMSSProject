@@ -10,9 +10,9 @@ export default class MyComponent extends React.Component {
   state = {
     index: 0,
     routes: [
-      { key: 'gorev', title: 'Görev', icon: 'content-paste' },
+      { key: 'gorev', title: 'Görev', icon: 'home' },
       { key: 'puan', title: 'Puan', icon: 'format-list-numbered' },
-      { key: 'portfoy', title: 'Portfoy', icon: 'home' },
+      { key: 'portfoy', title: 'Portfoy', icon: 'content-paste' },
       { key: 'sayfam', title: 'Sayfam', icon: 'person' },
     ],
   };

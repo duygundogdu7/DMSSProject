@@ -12,10 +12,10 @@ export default class MyComponent extends React.Component {
     index: 0,
     routes: [
       { key: 'onay', title: 'Onay', icon: 'check' },
-      { key: 'gorev', title: 'Görev', icon: 'content-paste' },
+      { key: 'gorev', title: 'Görev', icon: 'home' },
       { key: 'puan', title: 'Puan', icon: 'format-list-numbered' },
       { key: 'sayfam', title: 'Sayfam', icon: 'person' },
-      { key: 'portfoy', title: 'Portfoy', icon: 'home' },
+      { key: 'portfoy', title: 'Portfoy', icon: 'content-paste' },
     ],
   };
 
