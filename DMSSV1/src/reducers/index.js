@@ -5,7 +5,6 @@ import ScoreReducer from './scoreReducer';
 import ManagerReducer from './managerReducer';
 import ManagerTaskListReducer from './manTaskListReducer';
 import IDReducer from './idReducer';
-import InfoReducer from './infoReducer';
 
 
 export default combineReducers({
@@ -15,5 +14,4 @@ export default combineReducers({
     scoreTable: ScoreReducer,
     manager: ManagerReducer,
     id: IDReducer,
-    info: InfoReducer
 });

@@ -6,7 +6,7 @@ import { View, Text, Button, FlatList,
 import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
-import {fetchAllTasks, getInfos} from '../actions'
+import {fetchAllTasks} from '../actions'
 
 
 
@@ -28,7 +28,6 @@ class Task extends Component {
   }
   componentDidMount(){
     this.props.fetchAllTasks(this.props.id);
-    this.props.getInfos(this.props.id);
     
   }
 
@@ -94,14 +93,9 @@ const mapStateToProps = state => {
     tasks = state.tasks.data[property]
   }
 
-  var info = []
-  for (var property in state.info.data){
-    info = state.info.data[property]
-  }
 
   return {
     tasks,
-    info,
     id:state.id
   }
 
@@ -149,7 +143,7 @@ const styles = StyleSheet.create({
 })
 
 export default connect(mapStateToProps, {
-  fetchAllTasks,getInfos
+  fetchAllTasks
 })(Task)
 
 

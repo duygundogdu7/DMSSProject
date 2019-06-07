@@ -19,29 +19,7 @@ const profileURL = 'http://192.168.1.26:8086/profile';
 const scoreTableURL = 'http://192.168.1.26:8086/scoreTable';
 const managerTaskURL = 'http://192.168.1.26:8086/managerTaskList';
 const approveTaskURL = 'http://192.168.1.26:8086/approveTask';
-const getInfoURL = 'http://192.168.1.26:8086/homepage'
 
-export const getInfos = (id) => {
-  console.log("getInfos throwed")
-  return async (dispatch) => {
-    try {
-      const response = await axios.get(getInfoURL, {
-        params: {
-          user_id: id
-        }
-      });
-      console.log("action resp");
-      console.log(response);
-      dispatch({
-        type: GET_INFO,
-        payload: response
-      });
-    }
-    catch (error) {
-      throw (error);
-    }
-  };
-};
 
 export const approveTask = (task) => {
   console.log("approveTask throwed")
