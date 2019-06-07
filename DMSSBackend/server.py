@@ -311,6 +311,25 @@ class User(Resource):
         
 api.add_resource(User,  '/user/<user_id>' ,'/user', '/',  methods=['GET', 'POST'])
 
+class WebUser(Resource):
+    def __init__(self):
+        self.users = db.Users
+
+    def post(self):
+        data = request.get_json()
+        user = self.users.find_one({"email": data["email"], "password": data["password"]})
+        if user is not None:
+            user["id"] = str(user["_id"])
+            return make_response(jsonify(isManager=user["is_manager"],userID=["_id"]),200)
+            
+        else:
+            print(user)
+            return make_response('',204)
+
+
+        
+api.add_resource(WebUser,  '/webUser',  methods=['POST'])
+
 class FileUpload(Resource):
     def __init__(self):
         self.users = db.Users
@@ -341,11 +360,6 @@ class AnalysisResults(Resource):
         results = list(results)
         for res in results:
             del res["_id"]
-        print(results)
-        arr = []
-        #TODO: dont send concat
-        #for res in results:
-        #    arr.append("Bölge: " + res["region"] + " KNN: " + str(res["knn"]) + " Decision Tree: " + str(res["tree"]))
         return (jsonify(results=results))
 
     def post(self):
