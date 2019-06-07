@@ -522,6 +522,29 @@ class Ranking(Resource):
       
 api.add_resource(Ranking,  '/ranking',  methods=['GET'])
 
+class HomePage(Resource):
+    def __init__(self):
+        self.users = db.Users
+    
+    def get(self):
+        id = request.args.get('id')
+        user = self.users.find_one({"_id":  ObjectId(id)})
+        users = self.users.find({})
+        newList = sorted(users, key=lambda k: k['score'], reverse=True)
+        i = 1
+        rank = 1
+        for res in newList:
+            if res["_id"] == id:
+                rank = i
+            else:
+                i = i + 1
+            del res["_id"]
+        name = user['name'] + " " + user["surname"]
+        return (jsonify(name=name, score=user['score'], rank=rank))
+
+api.add_resource(HomePage,  '/homepage',  methods=['GET'])
+
+
 if __name__ == '__main__':
      app.run(host='0.0.0.0', port='8086')
 

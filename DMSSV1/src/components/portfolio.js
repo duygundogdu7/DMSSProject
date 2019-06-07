@@ -157,6 +157,11 @@ import { Card } from 'react-native-elements';
               onChangeText={(aidat) => this.setState({aidat})}/>
               <View style={styles.highlight}>
                 <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.hesapla.bind(this)}>
+                  <Text style={styles.loginText}>PortfoyEkle</Text>
+                </TouchableHighlight>
+              </View>
+              <View style={styles.highlight}>
+                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.hesapla.bind(this)}>
                   <Text style={styles.loginText}>Hesapla</Text>
                 </TouchableHighlight>
               </View>
@@ -196,7 +201,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom:20,
-    marginRight: 60,
+    marginRight: 10,
     borderRadius:30,
   },
   loginButton: {

@@ -6,7 +6,7 @@ import { View, Text, Button, FlatList,
 import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
-import {fetchAllTasks} from '../actions'
+import {fetchAllTasks, getInfos} from '../actions'
 
 
 
@@ -28,6 +28,8 @@ class Task extends Component {
   }
   componentDidMount(){
     this.props.fetchAllTasks(this.props.id);
+    this.props.getInfos(this.props.id);
+    
   }
 
 
@@ -61,10 +63,12 @@ class Task extends Component {
 
   render() {
       const { tasks } = this.props;
+      const { info } = this.props;
+      console.log("KİMİN INFOSU BU")
+      console.log(this.props)
     return( 
       <ScrollView>
         <View style={styles.container}>
-        
         <View>
             <Text style={styles.textWrapper}>YAPILMASI GEREKENLER</Text>
             <FlatList
@@ -90,8 +94,14 @@ const mapStateToProps = state => {
     tasks = state.tasks.data[property]
   }
 
+  var info = []
+  for (var property in state.info.data){
+    info = state.info.data[property]
+  }
+
   return {
     tasks,
+    info,
     id:state.id
   }
 
@@ -139,7 +149,7 @@ const styles = StyleSheet.create({
 })
 
 export default connect(mapStateToProps, {
-  fetchAllTasks
+  fetchAllTasks,getInfos
 })(Task)
 
 
