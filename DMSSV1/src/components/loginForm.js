@@ -15,6 +15,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import {sendManager} from '../actions';
 import {sendID} from '../actions';
+import Confetti from 'react-native-confetti';
 
 
 class LoginView extends Component {
@@ -105,6 +106,7 @@ class LoginView extends Component {
     return (
 
       <View style={styles.container}>
+        <Image source={require('../images/kw_logo_mini.png')} />
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}

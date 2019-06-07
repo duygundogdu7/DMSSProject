@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import {changeTask,deleteTask,completeTask} from '../actions'
 import { Actions } from 'react-native-router-flux';
 import DatePicker from 'react-native-datepicker';
+import Confetti from 'react-native-confetti';
 
 
 
@@ -32,11 +33,13 @@ class TaskDetail extends Component {
 
     }
     onCompleteClicked(){
+      this._confettiView.startConfetti();
       this.props.completeTask(task={id: this.state.id })
-      if(this.props.manager == false)
+      /*if(this.props.manager == false)
         Actions.MyComponent();
       else  if(this.props.manager == true)
         Actions.MyComponentMan();
+        */
     }
     componentWillMount(){
       const {task} = this.props;
@@ -53,7 +56,9 @@ class TaskDetail extends Component {
     console.log(this.props.manager)
     return (
       <View>
+
        <Card>
+       <Confetti ref={(node) => this._confettiView = node}/>
       <Input text='Görev'
                 onChangeText={(text) => {
                       this.setState({

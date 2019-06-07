@@ -10,6 +10,7 @@ import MyComponentMan from './components/myComponentMan';
 import BeginPage from './components/beginPage';
 import NewPwd from './components/newPwd';
 import ApprovalDetail from './components/approvalDetail';
+import ConfettiPage from './components/confettiPage'
 
 const ReactRouter = () => {
     return(
@@ -25,6 +26,7 @@ const ReactRouter = () => {
                 <Scene key="BeginPage" component={BeginPage} hideNavBar={true} panHandlers={null} ></Scene> 
                 <Scene key="NewPwd" component={NewPwd} hideNavBar={true} panHandlers={null} ></Scene> 
                 <Scene key="ApprovalDetail" component={ApprovalDetail} hideNavBar={true} panHandlers={null} ></Scene> 
+                <Scene key="ConfettiPage" component={ConfettiPage} hideNavBar={true} panHandlers={null} ></Scene> 
             </Scene>
         </Router>
     );
