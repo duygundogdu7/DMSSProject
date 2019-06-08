@@ -79,7 +79,7 @@ class Task extends Component {
         </Card>
       <Card>
         <View>
-            <Text style={styles.textWrapper}>YAPILMASI GEREKENLER</Text>
+            <Text style={styles.textWrapper}>BEKLEYEN GÖREV LİSTESİ</Text>
             <FlatList
             data={tasks.results}
              renderItem={this.renderItem}

@@ -11,7 +11,7 @@ export default class MyComponent extends React.Component {
     index: 0,
     routes: [
       { key: 'gorev', title: 'Görev', icon: 'home' },
-      { key: 'puan', title: 'Puan', icon: 'format-list-numbered' },
+      { key: 'puan', title: 'Puan', icon: 'insert-chart' },
       { key: 'portfoy', title: 'Portfoy', icon: 'content-paste' },
       { key: 'sayfam', title: 'Sayfam', icon: 'person' },
     ],

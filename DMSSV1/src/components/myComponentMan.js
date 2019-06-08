@@ -11,11 +11,11 @@ export default class MyComponent extends React.Component {
   state = {
     index: 0,
     routes: [
-      { key: 'onay', title: 'Onay', icon: 'check' },
-      { key: 'gorev', title: 'Görev', icon: 'home' },
-      { key: 'puan', title: 'Puan', icon: 'format-list-numbered' },
-      { key: 'sayfam', title: 'Sayfam', icon: 'person' },
+      { key: 'onay', title: 'Onay', icon: 'home' },
+      { key: 'gorev', title: 'Görev', icon: 'format-list-numbered' },
+      { key: 'puan', title: 'Puan', icon: 'insert-chart' },
       { key: 'portfoy', title: 'Portfoy', icon: 'content-paste' },
+      { key: 'sayfam', title: 'Sayfam', icon: 'person' },
     ],
   };
 
@@ -25,8 +25,8 @@ export default class MyComponent extends React.Component {
     onay: Approval,
     gorev: Task,
     puan: ScoreRoute,
-    portfoy: Portfolio,
     sayfam: Profile,
+    portfoy: Portfolio,
   });
 
   render() {

@@ -142,15 +142,16 @@ class ManagerTaskList(Resource):
         ress = []
         users =  self.users.find({"manager_id": ObjectId(user_id)})
         print(users)
+       
         for user in users:
             print(user)
-            tasks_of_user = self.tasks.find({"user_id": user["_id"], "is_complete":True, "is_approved":False})
+            tasks_of_user = self.tasks.find({"user_id": str(user["_id"]), "is_complete":True, "is_approved":False})
+            newTask = []
             for task in tasks_of_user:
-                task["imageURL"] = user["imageURL"]
-            results = list(tasks_of_user)
+                task.update( {'imageURL' :  user["imageURL"]} )
+                newTask.append(task)
+            results = list(newTask)
             ress = ress + results
-            print("RESULTS")
-            print(results)
         for res in ress:
             print(res)
             res["id"] = str(res["_id"])
@@ -272,7 +273,7 @@ class ScoreTable(Resource):
             if res["is_manager"]:
                 continue
             else:
-                dic = {"name": str(res["name"] + " " + res["surname"]), "score": res["score"]}
+                dic = {"name": str(res["name"] + " " + res["surname"]), "score": res["score"], "imageURL": res["imageURL"]}
                 names.append(dic)
         return (jsonify(scoreTable=names))
       
@@ -567,16 +568,15 @@ class Ranking(Resource):
         newList = sorted(users, key=lambda k: k['score'], reverse=True)
         i = 1
         rank = 1
-        
+        print(id)
+        print(type(id))
         for res in newList:
-            if res["_id"] == ObjectId(id):
+            if res["_id"] == id:
                 print(res)
                 rank = i
             else:
                 i = i + 1
             del res["_id"]
-        
-        print(rank)
         return (jsonify(rank=rank))
       
 api.add_resource(Ranking,  '/ranking',  methods=['GET'])

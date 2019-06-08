@@ -30,6 +30,7 @@ class Approval extends Component {
             </View>
             
           }
+          leftAvatar={{ source: {uri: item.imageURL}}}
           subtitle={
             <View>
                 <Text style={styles.subtitleWrapper}>{item.date}</Text>
@@ -50,7 +51,7 @@ class Approval extends Component {
     return( 
       <View>
           <View>
-            <Text style={styles.textWrapper}>ONAYLANILMASI GEREKENLER</Text>
+            <Text style={styles.textWrapper}>ONAY BEKLEYEN AKTİVİTELER</Text>
             <FlatList
             data={manTasks}
             renderItem={this.renderItem}

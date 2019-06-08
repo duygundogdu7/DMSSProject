@@ -24,9 +24,9 @@ class ConfettiPage extends Component {
     return (
       <View>
         <Confetti ref={(node) => this._confettiView = node} />
-        <Text>Tebrikler yeni bir görev tamamladınız! Takım lideriniz onayladıktan sonra 10 puan kazanacaksınız!</Text>
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton3]} onPress={this.onCompleteClicked.bind(this)}>
-            <Text style={styles.loginText}>Geri Dön</Text>
+        <Text style={styles.textWrapper}>Tebrikler yeni bir görev tamamladınız! Takım lideriniz onayladıktan sonra 10 puan kazanacaksınız!</Text>
+        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onCompleteClicked.bind(this)}>
+            <Text style={styles.loginText}>Görev Listene Dön!</Text>
           </TouchableHighlight>
       </View>
     );
@@ -39,21 +39,22 @@ const styles = StyleSheet.create({
       justifyContent: 'center'
     },
     textWrapper: {
-       marginTop: 20,
-       marginBottom: 20,
-       fontSize: 20,
-       textAlign: 'center',
-       fontWeight: 'bold'
-     },
+      marginTop: 150,
+      marginBottom: 20,
+      fontSize: 24,
+      textAlign: 'center',
+      fontWeight: 'bold',
+      color: '#000000'
+    },
      buttonContainer: {
-      marginTop: 20,
+      marginTop: 50,
       height:45,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius:30,
       width:150,
-      marginLeft: 70
+      marginLeft: 110
     },
     loginButton: {
       backgroundColor: "#00b5ec",
@@ -61,15 +62,6 @@ const styles = StyleSheet.create({
     loginText: {
       color: 'white',
     },
-    loginButton2: {
-      backgroundColor: "#cc0828",
-    },
-    loginButton3: {
-      backgroundColor: "#00e600",
-    },
-    loginText2: {
-      color: 'white',
-    }
   })
   
 

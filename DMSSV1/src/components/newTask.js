@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input,Button } from 'react-native-elements';
+import { Input,Card } from 'react-native-elements';
 import { Text, StyleSheet, View, TouchableHighlight ,TextInput, Picker} from 'react-native';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -54,13 +54,19 @@ this.setState({
     console.log(this.props.manager)
     return (
       <View>
-        <TextInput placeholder="Görev adı" onChangeText={(title) => this.setState({title})}/> 
-        <Text style={{fontSize:18, marginLeft:10, marginTop:10}}>Tarih:</Text>
+        <Card>
+        <TextInput 
+        style={styles.textInput}
+              placeholder="Aktivite Detayı"
+              placeholderTextColor="black"
+              keyboardType="email-address"
+              underlineColorAndroid='transparent'
+              onChangeText={(title) => this.setState({title})}/>
       <DatePicker 
-        style={{width:200}}
+        style={{width:300}}
         date={this.state.date}
         mode="date"
-        placeholder="select date"
+        placeholder="Tarih seçiniz.."
         format="DD.MM.YYYY"
         minDate="01.05.2016"
         maxDate="03.03.2020"
@@ -80,20 +86,21 @@ this.setState({
         }}
         onDateChange={(date) => {this.setState({date:date})}}
       />
-      <Text style={{fontSize:18, marginLeft:10, marginTop:10}}>Önem Derecesi:</Text>
+               
               <Picker
-              selectedValue={this.state.type}
+              selectedValue={this.state.yapili}
               style={{height: 70, width: 200}}
               onValueChange={(itemValue, itemIndex) =>  this.setState({type: itemValue})}>
-              <Picker.Item label="Önemli" value="Önemli" />
+             <Picker.Item label="Önem derecesi" value='0'/>
+             <Picker.Item label="Önemli" value="Önemli" />
               <Picker.Item label="Çok Önemli" value="Çok Önemli" />
-              </Picker>       
-         
+              </Picker>
          
          
          <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.onButtonClicked.bind(this)}>
             <Text style={styles.loginText}>Görev Ekle</Text>
           </TouchableHighlight>
+          </Card>
       </View>
     );
   }
@@ -111,6 +118,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'center'
   },
+  textInput:{
+    height: 40,
+    color: 'black',
+    borderColor: 'black',
+    borderWidth: 0.5,
+    marginBottom: 20,
+  },
   textWrapper: {
      marginTop: 20,
      marginBottom: 20,
@@ -125,9 +139,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom:20,
-    width:250,
+    width:200,
     borderRadius:30,
-    marginLeft: 80
+    marginLeft: 30
   },
   loginButton: {
     backgroundColor: "#00b5ec",

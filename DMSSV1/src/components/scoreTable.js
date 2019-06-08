@@ -15,21 +15,7 @@ class ScoreRoute extends Component {
     //console.log(this.props.id);
 
     this.props.fetchScoreTable();	
-    console.log("idn")
-    console.log(this.props.id)
-    axios({
-      method: 'get',
-      url: 'http://192.168.1.26:8086/ranking',
-      data: {
-          id: this.props.id
-      }
-     }).then((response) =>
-    { console.log("SIRALAMAN: ")
-      console.log(response.data.rank)
-      this.setState({
-        ranking: response.data.rank
-     }) 
-  }).catch(error => {console.log(error)})
+   
 }
 
     renderItem = ({ item }) => (
@@ -63,7 +49,6 @@ class ScoreRoute extends Component {
         <View style={styles.container}>
         
           <Text style={styles.textWrapper}>HAFTALIK PUAN TABLOSU</Text>
-          <Text style={styles.rankingWrapper}>Bu hafta {this.state.ranking}. sıradasınız!</Text>
           <FlatList
             data={scoreTable}
              renderItem={this.renderItem}
